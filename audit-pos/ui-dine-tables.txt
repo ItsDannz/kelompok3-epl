@@ -1,0 +1,115 @@
+Browser tab: 1, Title: "Meja Dine-In - Laravel", URL: "http://127.0.0.1:8000/dashboard/dine-tables".
+1 AXWebArea Meja Dine-In - Laravel, URL: 127.0.0.1:8000/dashboard/dine-tables
+	2 container app
+		3 container
+			4 text T Toko Anda
+			5 text OVERVIEW
+			6 link Description: Dashboard, Value: 127.0.0.1:8000/dashboard
+			7 text MASTER DATA
+			8 link Description: Categories, Value: 127.0.0.1:8000/dashboard/categories
+			9 link Description: Products, Value: 127.0.0.1:8000/dashboard/products
+			10 link Description: Customers, Value: 127.0.0.1:8000/dashboard/customers
+			11 link Description: Suppliers, Value: 127.0.0.1:8000/dashboard/suppliers
+			12 text SALES
+			13 link Description: Transactions, Value: 127.0.0.1:8000/dashboard/transactions
+			14 link Description: Transaction History, Value: 127.0.0.1:8000/dashboard/transactions/history
+			15 link Description: Sales Returns, Value: 127.0.0.1:8000/dashboard/sales-returns
+			16 link Description: Receivables, Value: 127.0.0.1:8000/dashboard/receivables
+			17 link Description: Aging & Reminders, Value: 127.0.0.1:8000/dashboard/aging
+			18 text APPROVAL
+			19 link Description: Discount Approval, Value: 127.0.0.1:8000/dashboard/discount-approvals
+			20 text INVENTORY
+			21 link Description: Stock Opname, Value: 127.0.0.1:8000/dashboard/stock-opnames
+			22 link Description: Stock Mutations, Value: 127.0.0.1:8000/dashboard/stock-mutations
+			23 link Description: Stock Transfers, Value: 127.0.0.1:8000/dashboard/stock-transfers
+			24 text PROCUREMENT
+			25 link Description: Purchase Orders, Value: 127.0.0.1:8000/dashboard/purchase-orders
+			26 link Description: Goods Receiving, Value: 127.0.0.1:8000/dashboard/goods-receivings
+			27 link Description: Supplier Returns, Value: 127.0.0.1:8000/dashboard/supplier-returns
+			28 link Description: Supplier Payables, Value: 127.0.0.1:8000/dashboard/payables
+			29 text CRM & PRICING
+			30 link Description: Members, Value: 127.0.0.1:8000/dashboard/members
+			31 link Description: Price Promos, Value: 127.0.0.1:8000/dashboard/pricing-rules
+			32 link Description: Customer Vouchers, Value: 127.0.0.1:8000/dashboard/customer-vouchers
+			33 link Description: Customer Segments, Value: 127.0.0.1:8000/dashboard/customer-segments
+			34 link Description: CRM Campaigns, Value: 127.0.0.1:8000/dashboard/crm-campaigns
+			35 link Description: CRM Reminders, Value: 127.0.0.1:8000/dashboard/crm-reminders
+			36 text DINE-IN
+			37 link Description: Dine-In Areas, Value: 127.0.0.1:8000/dashboard/dine-areas
+			38 link Description: Dine-In Tables, Value: 127.0.0.1:8000/dashboard/dine-tables
+			39 link Description: Dine-In Orders, Value: 127.0.0.1:8000/dashboard/dine-orders
+			40 text REPORTS
+			41 link Description: Sales Report, Value: 127.0.0.1:8000/dashboard/reports/sales
+			42 link Description: Profit Report, Value: 127.0.0.1:8000/dashboard/reports/profits
+			43 link Description: Advanced Insights, Value: 127.0.0.1:8000/dashboard/reports/insights
+			44 text OPERATIONS & CONTROL
+			45 link Description: Cashier Shifts, Value: 127.0.0.1:8000/dashboard/cashier-shifts
+			46 link Description: Audit Logs, Value: 127.0.0.1:8000/dashboard/audit-logs
+			47 text USER MANAGEMENT
+			48 link Description: Permissions, Value: 127.0.0.1:8000/dashboard/permissions
+			49 link Description: Access Groups, Value: 127.0.0.1:8000/dashboard/roles
+			50 button Users
+				51 image
+				52 text Users
+				53 image
+			54 text SETTINGS
+			55 link Description: Payment Gateway, Value: 127.0.0.1:8000/dashboard/settings/payments
+			56 link Description: Store Profile, Value: 127.0.0.1:8000/dashboard/settings/store
+			57 link Description: Bank Accounts, Value: 127.0.0.1:8000/dashboard/settings/bank-accounts
+			58 link Description: Loyalty, Value: 127.0.0.1:8000/dashboard/settings/loyalty
+			59 link Description: Sales Target, Value: 127.0.0.1:8000/dashboard/settings/target
+			60 link Description: Price Lists, Value: 127.0.0.1:8000/dashboard/settings/price-lists
+			61 link Description: Warehouses / Branches, Value: 127.0.0.1:8000/dashboard/settings/warehouses
+			62 link Description: Outlet, Value: 127.0.0.1:8000/dashboard/settings/outlets
+			63 link Description: Units, Value: 127.0.0.1:8000/dashboard/settings/units
+			64 link Description: WhatsApp, Value: 127.0.0.1:8000/dashboard/settings/whatsapp
+			65 text Point of Sales  v3.0.3
+		66 container
+			67 button Toggle Sidebar
+				68 image
+			69 heading Dine-In Tables, Value: 1
+				70 text Dine-In Tables
+			71 container
+				72 image
+				73 pop up button (disabled, collapsed, settable) Value: MAL - Outlet Malabar, Secondary Actions: Expand
+					74 menu
+						75 (disabled) MAL - Outlet Malabar
+						76 (disabled) PUSAT - Gudang Pusat
+						77 (disabled) PUT - Outlet Puter
+						78 (disabled) TKB - Outlet Taman Kencana
+			79 button Guided Tour
+				80 image
+			81 pop up button (collapsed) Description: Change Language, ID: headlessui-menu-button-_r_2_, Secondary Actions: Expand
+				82 image
+			83 button Dark Mode
+				84 image
+			85 pop up button (collapsed) 2, ID: headlessui-menu-button-_r_5_, Secondary Actions: Expand
+				86 text 2
+				87 image
+			88 pop up button (collapsed) A, ID: headlessui-menu-button-_r_8_, Secondary Actions: Expand
+			89 heading Meja Dine-In, Value: 1
+				90 text Meja Dine-In
+			91 container
+				92 text 3  meja ditampilkan
+			93 button Daftar
+			94 button Tambah Meja
+				95 image
+				96 text Tambah Meja
+			97 container Filter area meja
+				98 checkbox Semua, Value: 1
+				99 checkbox Area Utama, Value: 0
+				100 checkbox Area Teras, Value: 0
+			101 container Filter status meja
+				102 checkbox Semua status, Value: 1
+				103 checkbox Aktif, Value: 0
+				104 checkbox Nonaktif, Value: 0
+			105 image
+				106 checkbox Description: Meja 1, aktif, Value: 0
+					107 text Meja 1
+				108 checkbox Description: Meja 2, aktif, Value: 0
+					109 text Meja 2
+				110 checkbox Description: Meja 3, aktif, Value: 0
+					111 text Meja 3
+			112 text Pilih meja untuk melihat aksi. Seret meja untuk memindahkan atau atur posisi melalui Edit.
+
+The focused UI element is 1 AXWebArea Meja Dine-In - Laravel, URL: 127.0.0.1:8000/dashboard/dine-tables

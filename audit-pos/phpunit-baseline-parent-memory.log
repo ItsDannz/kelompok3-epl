@@ -1,0 +1,410 @@
+
+   PASS  Tests\Unit\ExampleTest
+  ✓ that true is true
+
+   PASS  Tests\Feature\Api\ApiAuthorizationTest
+  ✓ token without master data ability gets 403                           0.39s  
+  ✓ read ability cannot write                                            0.02s  
+  ✓ register token cannot delete master data                             0.02s  
+  ✓ token with full abilities can write                                  0.04s  
+  ✓ token without pos access cannot reach pos endpoints                  0.02s  
+  ✓ register style token cannot checkout                                 0.02s  
+  ✓ token with pos access passes ability gate                            0.02s  
+
+   PASS  Tests\Feature\Api\AuthApiTest
+  ✓ login returns token with permissions                                 0.03s  
+  ✓ login with wrong password returns 422                                0.02s  
+  ✓ me requires authentication                                           0.02s  
+  ✓ me returns user profile                                              0.02s  
+  ✓ logout revokes token                                                 0.02s  
+  ✓ register is disabled by default                                      0.02s  
+
+   PASS  Tests\Feature\Api\MasterDataApiTest
+  ✓ customers index paginates and searches                               0.05s  
+  ✓ customers store validates unique phone                               0.02s  
+  ✓ customers update and delete                                          0.02s  
+  ✓ categories crud                                                      0.02s  
+  ✓ categories duplicate name rejected                                   0.02s  
+  ✓ warehouses crud                                                      0.02s  
+  ✓ warehouses duplicate code rejected                                   0.01s  
+  ✓ suppliers crud                                                       0.02s  
+
+   PASS  Tests\Feature\Api\PaymentWebhookTest
+  ✓ midtrans webhook updates transaction status when signature is valid  0.04s  
+  ✓ midtrans webhook rejects invalid signature                           0.02s  
+  ✓ xendit webhook updates transaction status when token is valid        0.02s  
+  ✓ xendit webhook rejects invalid callback token                        0.02s  
+  ✓ midtrans webhook updates only matching split tender                  0.02s  
+
+   PASS  Tests\Feature\Api\PosApiCashValidationTest
+  ✓ cash zero is rejected                                                0.03s  
+  ✓ cash below total is rejected                                         0.03s  
+  ✓ cash equal total succeeds                                            0.03s  
+  ✓ cash above total succeeds with change                                0.03s  
+
+   PASS  Tests\Feature\Api\PosApiTest
+  ✓ shift returns null when no active shift                              0.02s  
+  ✓ open shift creates shift                                             0.02s  
+  ✓ scan returns product with stock                                      0.02s  
+  ✓ scan returns 404 for unknown barcode                                 0.02s  
+  ✓ add to cart and cart summary                                         0.03s  
+  ✓ add to cart rejects insufficient stock                               0.02s  
+  ✓ update cart qty                                                      0.02s  
+  ✓ hold resume flow                                                     0.03s  
+  ✓ checkout cash transaction                                            0.03s  
+  ✓ checkout pay later creates receivable                                0.04s  
+  ✓ checkout requires active shift                                       0.02s  
+  ✓ checkout empty cart rejected                                         0.02s  
+  ✓ transaction history and detail                                       0.04s  
+
+   PASS  Tests\Feature\Api\PosTransactionConcurrencyTest
+  ✓ sync creates transaction with server side pricing                    0.04s  
+  ✓ sync is idempotent by client uuid                                    0.03s  
+  ✓ sync fails without active shift and keeps no data                    0.02s  
+  ✓ sync requires authentication                                         0.01s  
+  ✓ sync validates payload structure                                     0.10s  
+  ✓ sync sets client uuid during transaction creation                    0.03s  
+  ✓ duplicate sync does not create extra tender or receivable            0.03s  
+  ✓ reused client uuid with different payload returns conflict           0.03s  
+  ✓ duplicate sync without pay later does not create receivable          0.03s  
+  ✓ sync applies voucher and persists order type and note                0.04s  
+  ✓ sync marks voucher used on synced transaction                        0.04s  
+  ✓ sync rejects voucher of different customer without transaction       0.02s  
+  ✓ sync persists shipping cost in server total                          0.03s  
+  ✓ sync persists bank transfer with outlet bank account                 0.04s  
+  ✓ sync rejects unsupported gateway for offline                         0.02s  
+  ✓ sync pay later creates receivable with due date                      0.04s  
+  ✓ sync ignores client grand total and prices                           0.03s  
+  ✓ sync does not consume live cart                                      0.03s  
+  ✓ unique violation on client uuid resolves as duplicate                0.02s  
+  ✓ unique violation with different fingerprint resolves as conflict     0.02s  
+  ✓ client uuid unique index blocks double insert                        0.07s  
+
+   PASS  Tests\Feature\Api\PosTransactionSyncTest
+  ✓ sync creates transaction with server side pricing                    0.05s  
+  ✓ sync is idempotent by client uuid                                    0.03s  
+  ✓ sync fails without active shift and keeps no data                    0.02s  
+  ✓ sync requires authentication                                         0.01s  
+  ✓ sync validates payload structure                                     0.02s  
+  ✓ sync sets client uuid during transaction creation                    0.03s  
+  ✓ duplicate sync does not create extra tender or receivable            0.03s  
+  ✓ reused client uuid with different payload returns conflict           0.03s  
+  ✓ duplicate sync without pay later does not create receivable          0.03s  
+  ✓ sync applies voucher and persists order type and note                0.04s  
+  ✓ sync marks voucher used on synced transaction                        0.03s  
+  ✓ sync rejects voucher of different customer without transaction       0.02s  
+  ✓ sync persists shipping cost in server total                          0.03s  
+  ✓ sync persists bank transfer with outlet bank account                 0.03s  
+  ✓ sync rejects unsupported gateway for offline                         0.02s  
+  ✓ sync pay later creates receivable with due date                      0.04s  
+  ✓ sync ignores client grand total and prices                           0.03s  
+  ✓ sync does not consume live cart                                      0.03s  
+
+   PASS  Tests\Feature\Api\ProductApiTest
+  ✓ products requires auth                                               0.02s  
+  ✓ products index paginates                                             0.02s  
+  ✓ products search filters                                              0.02s  
+  ✓ products store creates                                               0.02s  
+  ✓ products store validation duplicate barcode                          0.02s  
+  ✓ products update partial                                              0.02s  
+  ✓ products show 404 for missing                                        0.01s  
+  ✓ products destroy returns 204                                         0.01s  
+
+   PASS  Tests\Feature\Api\SplitPaymentApiTest
+  ✓ api checkout returns tenders and parent summary                      0.03s  
+
+   PASS  Tests\Feature\Api\V1AdminApiTest
+  ✓ permissions index lists permissions                                  0.02s  
+  ✓ roles index lists roles                                              0.02s  
+  ✓ role store requires step up                                          0.02s  
+  ✓ role store creates role after confirmation                           0.02s  
+  ✓ role update and destroy                                              0.02s  
+  ✓ role update blocks super admin                                       0.02s  
+  ✓ users index lists users                                              0.02s  
+  ✓ user store creates user                                              0.02s  
+  ✓ user destroy blocks self delete                                      0.02s  
+  ✓ units crud                                                           0.02s  
+  ✓ unit destroy rejected when used by product                           0.02s  
+  ✓ outlets index returns accessible outlets                             0.02s  
+  ✓ outlet store creates outlet and branch warehouse                     0.02s  
+  ✓ outlet destroy rejected for pusat                                    0.02s  
+  ✓ bank accounts index lists accounts                                   0.02s  
+  ✓ bank account crud and toggle                                         0.03s  
+  ✓ bank account mutation requires step up                               0.02s  
+  ✓ price list crud and items                                            0.03s  
+  ✓ payment settings show and update                                     0.02s  
+  ✓ payment settings rejects enabled gateway without keys                0.02s  
+  ✓ target settings show and update                                      0.02s  
+  ✓ store profile show and update                                        0.03s  
+  ✓ printer settings show and update                                     0.02s  
+  ✓ loyalty settings show and update rejects unordered tiers             0.02s  
+  ✓ loyalty settings update succeeds with ordered tiers                  0.02s  
+  ✓ whatsapp settings show                                               0.02s  
+  ✓ whatsapp update                                                      0.02s  
+  ✓ pricing rules index and create data                                  0.02s  
+  ✓ pricing rule crud                                                    0.03s  
+  ✓ pricing rule preview                                                 0.02s  
+  ✓ pricing rules requires access ability                                0.02s  
+  ✓ units requires access ability                                        0.02s  
+  ✓ permissions requires access ability                                  0.01s  
+  ✓ audit logs index lists logs                                          0.02s  
+  ✓ audit logs show returns log                                          0.02s  
+  ✓ audit logs requires access ability                                   0.02s  
+  ✓ sales report                                                         0.02s  
+  ✓ profit report                                                        0.02s  
+  ✓ insights report                                                      0.02s  
+  ✓ reports require access ability                                       0.02s  
+
+   PASS  Tests\Feature\Api\V1CrmApiTest
+  ✓ members index lists customers                                        0.03s  
+  ✓ member store creates customer                                        0.02s  
+  ✓ member store requires customers create ability                       0.02s  
+  ✓ member show returns details                                          0.02s  
+  ✓ member update changes address                                        0.02s  
+  ✓ voucher store generates code when missing                            0.02s  
+  ✓ voucher update changes value                                         0.02s  
+  ✓ voucher destroy deletes                                              0.02s  
+  ✓ voucher destroy requires delete ability                              0.01s  
+  ✓ segment crud flow                                                    0.02s  
+  ✓ segment add and remove member                                        0.02s  
+  ✓ segment member add rejected for auto segment                         0.02s  
+  ✓ campaign store as draft                                              0.02s  
+  ✓ campaign store processes immediately when not draft                  0.02s  
+  ✓ campaign process then cancel                                         0.02s  
+  ✓ campaign index requires access ability                               0.01s  
+  ✓ reminders index lists reminders                                      0.02s  
+  ✓ reminders index requires access ability                              0.01s  
+
+   PASS  Tests\Feature\Api\V1DashboardApiTest
+  ✓ transactions index returns paginated envelope                        0.03s  
+  ✓ transactions index rejects without ability                           0.02s  
+  ✓ transaction show returns detail                                      0.02s  
+  ✓ transaction show 404 for unknown invoice                             0.02s  
+  ✓ transaction status returns payment status                            0.02s  
+  ✓ transaction qr 404 when no qr string                                 0.02s  
+  ✓ transaction qr returns svg payload                                   0.04s  
+  ✓ confirm payment requires step up                                     0.02s  
+  ✓ confirm payment succeeds after password confirmation                 0.02s  
+  ✓ confirm payment rejects non bank transfer                            0.02s  
+  ✓ cashier shifts index returns shifts                                  0.03s  
+  ✓ cashier shifts store opens shift                                     0.02s  
+  ✓ cashier shifts show returns detail                                   0.02s  
+  ✓ cashier shifts close requires step up                                0.02s  
+  ✓ cashier shifts add cash movement                                     0.02s  
+  ✓ sales returns index requires ability                                 0.02s  
+  ✓ sales returns index returns empty                                    0.02s  
+  ✓ discount approvals pending returns empty                             0.02s  
+  ✓ discount approvals approve updates status                            0.02s  
+  ✓ discount approvals deny readds discount                              0.02s  
+  ✓ pricing preview requires active shift                                0.02s  
+
+   WARN  Tests\Feature\Api\V1DineInApiTest
+  ✓ dine areas index                                                     0.02s  
+  ✓ dine area store                                                      0.02s  
+  ✓ dine area update                                                     0.02s  
+  ✓ dine area destroy rejects when has tables                            0.02s  
+  ✓ dine area destroy succeeds when empty                                0.02s  
+  ✓ dine area store requires create ability                              0.01s  
+  ✓ dine tables index                                                    0.02s  
+  ✓ dine table store                                                     0.02s  
+  ✓ dine table update                                                    0.02s  
+  ✓ dine table destroy                                                   0.02s  
+  - dine table qr returns png → imagick extension not installed; PNG QR… 0.05s  
+  ✓ dine table store requires create ability                             0.02s  
+  ✓ dine orders index lists active orders                                0.02s  
+  ✓ dine order accept requires open shift                                0.02s  
+  ✓ dine order reject                                                    0.02s  
+  ✓ dine order reject requires process ability                           0.02s  
+  ✓ dine orders index requires access ability                            0.02s  
+  ✓ dine order accept with open shift creates transaction                0.02s  
+
+   PASS  Tests\Feature\Api\V1FinanceApiTest
+  ✓ receivables index lists receivables                                  0.02s  
+  ✓ receivables index filters by status                                  0.02s  
+  ✓ receivable show returns details                                      0.02s  
+  ✓ receivable pay marks as paid                                         0.02s  
+  ✓ receivable pay rejects amount over remaining                         0.02s  
+  ✓ receivable pay partial keeps partial status                          0.02s  
+  ✓ receivable pay requires receivables pay ability                      0.02s  
+  ✓ receivables index requires access ability                            0.02s  
+  ✓ receivable collection notes update                                   0.02s  
+  ✓ receivables aging returns buckets                                    0.02s  
+  ✓ receivables customer statement                                       0.02s  
+  ✓ payables index lists payables                                        0.02s  
+  ✓ payable store creates unpaid payable                                 0.02s  
+  ✓ payable pay marks as paid                                            0.02s  
+  ✓ payable pay rejects amount over remaining                            0.02s  
+  ✓ payable pay requires payables pay ability                            0.02s  
+  ✓ payables supplier statement                                          0.02s  
+
+   PASS  Tests\Feature\Api\V1InventoryApiTest
+  ✓ stock transfer full flow create send receive                         0.03s  
+  ✓ stock transfer store creates draft                                   0.02s  
+  ✓ stock transfer store rejects same warehouse                          0.02s  
+  ✓ stock transfer index requires ability                                0.02s  
+  ✓ stock opname flow create item finalize adjusts stock                 0.03s  
+  ✓ stock opname item requires reason when difference exists             0.02s  
+  ✓ stock opname finalize requires dedicated ability                     0.02s  
+  ✓ stock mutations index lists recorded mutations                       0.02s  
+  ✓ purchase order flow store place cancel                               0.03s  
+  ✓ purchase order place requires update ability                         0.02s  
+  ✓ goods receiving store increments stock                               0.02s  
+  ✓ goods receiving rejects qty over outstanding                         0.02s  
+  ✓ supplier return flow create complete                                 0.03s  
+  ✓ supplier return cancel draft                                         0.02s  
+
+   PASS  Tests\Feature\AuditLogs\AuditLogTest
+  ✓ user without audit log permission cannot open audit log page         0.07s  
+  ✓ user with permission can view audit log index                        0.07s  
+  ✓ product crud and price change create audit logs                      0.08s  
+  ✓ payment setting update masks secrets in audit log                    0.04s  
+  ✓ bank account and cashier shift actions are audited                   0.05s  
+  ✓ stock opname finalize and payment confirmation are audited           0.04s  
+  ✓ sales return completion is audited                                   0.04s  
+
+   PASS  Tests\Feature\Auth\AuthenticationTest
+  ✓ login screen can be rendered                                         0.02s  
+  ✓ users can authenticate using the login screen                        0.02s  
+  ✓ unverified users can still authenticate                              0.02s  
+  ✓ users can not authenticate with invalid password                     0.22s  
+  ✓ users can logout                                                     0.03s  
+  ✓ login request is blocked when submitted too fast without valid bot…  0.02s  
+  ✓ security headers are present on login screen                         0.02s  
+  ✓ unverified user can access dashboard route                           0.03s  
+  ✓ production security warnings are shared to dashboard                 0.02s  
+  ✓ absolute session lifetime forces reauthentication                    0.01s  
+
+   PASS  Tests\Feature\Auth\PasswordConfirmationTest
+  ✓ confirm password screen can be rendered                              0.03s  
+  ✓ password can be confirmed                                            0.02s  
+  ✓ password is not confirmed with invalid password                      0.23s  
+  ✓ sensitive routes redirect to confirm password when recent confirmat… 0.03s  
+
+   PASS  Tests\Feature\Auth\PasswordResetTest
+  ✓ reset password link screen can be rendered                           0.02s  
+  ✓ reset password link can be requested                                 0.24s  
+  ✓ reset password screen can be rendered                                0.24s  
+  ✓ password can be reset with valid token                               0.24s  
+  ✓ forgot password request is throttled                                 1.08s  
+
+   PASS  Tests\Feature\Auth\PasswordUpdateTest
+  ✓ password can be updated                                              0.03s  
+  ✓ correct password must be provided to update password                 0.03s  
+
+   PASS  Tests\Feature\Auth\RegistrationTest
+  ✓ registration screen returns 404 when public registration is disable… 0.02s  
+  ✓ registration screen can be rendered when public registration is ena… 0.02s  
+  ✓ new users can register when public registration is enabled           0.02s  
+  ✓ register request is throttled when public registration is enabled    0.03s  
+  ✓ register request is blocked when bot guard is invalid                0.02s  
+  ✓ login page hides register link when public registration is disabled  0.02s  
+
+   PASS  Tests\Feature\Authorization\AuthorizationConsistencyTest
+  ✓ super admin can access permission guarded route without direct perm… 0.04s  
+  ✓ non super admin still gets 403 without permission                    0.03s  
+  ✓ unauthorized json request returns json 403                           0.04s  
+  ✓ role seeder normalizes legacy permission access role                 0.07s  
+
+   PASS  Tests\Feature\CashierShifts\CashMovementTest
+  ✓ cashier can record cash in and out                                   0.05s  
+  ✓ expected cash includes cash movements                                0.02s  
+  ✓ movement is rejected on closed shift                                 0.02s  
+  ✓ invalid amount is rejected                                           0.04s  
+  ✓ other cashier cannot record movement on foreign shift                0.03s  
+  ✓ shift report renders for owner                                       0.05s  
+  ✓ invalid report type is rejected                                      0.03s  
+
+   PASS  Tests\Feature\CashierShifts\CashierShiftTest
+  ✓ cashier can open shift                                               0.03s  
+  ✓ cashier cannot open second shift while first is active               0.03s  
+  ✓ transaction page receives active shift shared prop                   0.04s  
+  ✓ closing shift calculates expected cash and difference                0.04s  
+  ✓ split tenders count only cash tender in expected cash                0.02s  
+  ✓ admin with force close permission can close other cashier shift      0.03s  
+  ✓ force close redirects to confirm password when confirmation is stal… 0.03s  
+  ✓ open shift without warehouse falls back to sales warehouse           0.03s  
+  ✓ transaction page receives sales warehouses prop                      0.04s  
+
+   PASS  Tests\Feature\Console\AuditOutletCommandTest
+  ✓ audit command is read only and reports system data                   0.11s  
+  ✓ strict audit passes for clean system seed                            0.10s  
+  ✓ legacy audit is read only                                            0.09s  
+  ✓ legacy audit backfills only unambiguous stock mutations              0.09s  
+
+   PASS  Tests\Feature\Console\ExpirePendingTransactionsTest
+  ✓ expires old pending transaction and restocks                         0.11s  
+  ✓ expires multi unit transaction and restocks base units               0.10s  
+  ✓ fresh pending transaction is untouched                               0.10s  
+  ✓ pending approval transaction is untouched                            0.10s  
+  ✓ dry run does not mutate                                              0.10s  
+  ✓ webhook ignores terminal transaction                                 0.10s  
+  ✓ webhook ignores failed transaction                                   0.10s  
+
+   PASS  Tests\Feature\Console\SeedDemoCommandTest
+  ✓ system seeder is production safe                                     0.09s  
+  ✓ seed demo force regenerates full demo dataset                        0.71s  
+  ✓ demo seed resets application data but preserves schema and referenc… 0.31s  
+  ✓ seed demo rejects production even with force                         0.01s  
+  ✓ seed demo without confirmation aborts                                0.03s  
+
+   PASS  Tests\Feature\Crm\CrmCoreTest
+  ✓ user can create manual segment and assign it to customer             0.04s  
+  ✓ crm generate reminders command syncs auto segments and creates remi… 0.03s  
+  ✓ transaction share campaign is idempotent                             0.05s  
+
+   PASS  Tests\Feature\DineIn\DineOrderStatusTest
+  ✓ status check returns minimal order fields                            0.12s  
+  ✓ status check unknown token returns 404                               0.12s  
+  ✓ status check stale order returns 410                                 0.11s  
+  ✓ status page still renders full order with items                      0.12s  
+
+   PASS  Tests\Feature\DineIn\DineOrderTest
+  ✓ store rejects pay online                                             0.11s  
+  ✓ store pay at counter succeeds                                        0.11s  
+  ✓ store rejects qty exceeding global stock                             0.11s  
+  ✓ accept decrements warehouse and global stock                         0.15s  
+  ✓ accept records transaction profit and stock mutation                 0.15s  
+  ✓ accept decrements base units for multi unit product                  0.15s  
+  ✓ accept rejects insufficient stock atomically                         0.15s  
+  ✓ accept without open shift rejected                                   0.13s  
+  ✓ accept rejects shift from another outlet                             0.14s  
+  ✓ status page renders order                                            0.11s  
+  ✓ store maps product pricing for composite                             0.11s  
+
+   PASS  Tests\Feature\DineIn\DineTableManagementTest
+  ✓ store persists initial grid position                                 0.03s  
+  ✓ store rejects positions outside floor plan grid                      0.03s  
+  ✓ index filters active and inactive tables independently               0.04s  
+
+   PASS  Tests\Feature\Documents\DocumentOutletAuthorizationTest
+  ✓ authenticated invoice document rejects transaction from another out… 0.03s  
+
+   PASS  Tests\Feature\Documents\PublicInvoiceAuthorizationTest
+  ✓ public invoice requires valid access token                           0.36s  
+  ✓ public invoice rejects missing token                                 0.17s  
+  ✓ public invoice rejects wrong token                                   0.16s  
+  ✓ public invoice rejects unknown invoice                               0.18s  
+
+   PASS  Tests\Feature\ExampleTest
+  ✓ the application returns a successful response                        0.02s  
+
+   PASS  Tests\Feature\Finance\PaymentIntegrityTest
+  ✓ receivable overpay rejected                                          0.12s  
+  ✓ receivable exact pay marks paid                                      0.12s  
+  ✓ receivable partial pay sets partial status                           0.12s  
+  ✓ receivable second pay cannot exceed remaining                        0.12s  
+  ✓ payable overpay rejected                                             0.12s  
+  ✓ payable exact pay marks paid                                         0.11s  
+  ✓ payable partial pay sets partial status                              0.12s  
+  ✓ payable second pay cannot exceed remaining                           0.12s  
+
+   PASS  Tests\Feature\Http\Middleware\HandleInertiaRequestsTest
+  ✓ pending approval count is scoped to accessible outlets               0.04s  
+  ✓ pending dine orders count is scoped to accessible outlets            0.03s  
+  ✓ expiring batch notifications are scoped to accessible warehouses     0.03s  
+  ✓ receivable notifications are scoped to accessible outlets            0.04s  
+  ✓ payable notifications are scoped to accessible outlets               0.03s  
+  ✓ superadmin sees all outlet data                                      0.03s  
+
+Fatal error: Allowed memory size of 134217728 bytes exhausted (tried to allocate 1220608 bytes) in /home/zdann/Documents/ChatGPT/epl/point-of-sales/storage/framework/views/725804dd16119d6eba97991c2da5e55c.php on line 24
+Fatal error: Premature end of PHP process when running Tests\Feature\Inventory\ActiveOutletTest::test_active_shift_locks_outlet_switch.

@@ -1,0 +1,123 @@
+
+   INFO  Preparing database.  
+
+  Creating migration table ...................................... 27.44ms DONE
+
+   INFO  Running migrations.  
+
+  0001_01_01_000000_create_users_table ......................... 115.33ms DONE
+  0001_01_01_000001_create_cache_table .......................... 40.18ms DONE
+  0001_01_01_000002_create_jobs_table ........................... 98.63ms DONE
+  2016_08_03_072729_create_provinces_table ...................... 36.50ms DONE
+  2016_08_03_072750_create_cities_table ......................... 39.27ms DONE
+  2016_08_03_072804_create_districts_table ...................... 37.96ms DONE
+  2016_08_03_072819_create_villages_table ....................... 37.86ms DONE
+  2024_06_13_082620_create_permission_tables ................... 163.40ms DONE
+  2024_06_13_091315_add_avatar_field_to_users_table ............. 17.61ms DONE
+  2024_06_13_125039_create_customers_table ...................... 17.78ms DONE
+  2024_06_13_130507_create_categories_table ..................... 17.42ms DONE
+  2024_06_13_131744_create_products_table ....................... 34.69ms DONE
+  2024_06_13_132800_create_transactions_table ................... 16.99ms DONE
+  2024_06_13_133940_create_transaction_details_table ............ 17.23ms DONE
+  2024_06_13_133948_create_carts_table .......................... 17.72ms DONE
+  2024_06_13_133955_create_profits_table ........................ 17.32ms DONE
+  2025_11_19_172334_create_payment_settings_table ............... 17.33ms DONE
+  2025_11_19_172346_add_payment_columns_to_transactions_table ... 68.63ms DONE
+  2025_12_23_140000_add_hold_columns_to_carts_table ............. 97.50ms DONE
+  2025_12_25_200000_create_settings_table ....................... 53.23ms DONE
+  2025_12_25_230000_create_bank_accounts_table .................. 17.36ms DONE
+  2025_12_25_230100_add_bank_transfer_columns .................. 105.00ms DONE
+  2025_12_26_010000_add_shipping_cost_to_transactions ........... 17.01ms DONE
+  2025_12_28_105534_add_sku_field_to_products_table ............. 34.07ms DONE
+  2025_12_30_000000_add_user_avatar_column_if_missing ............ 0.47ms DONE
+  2025_12_31_000000_create_product_notification_reads_table ..... 35.61ms DONE
+  2025_12_31_010000_add_store_settings_defaults ................ 121.25ms DONE
+  2025_12_31_020000_add_region_columns_to_customers_table ...... 164.82ms DONE
+  2026_01_01_000000_create_receivables_tables ................... 53.54ms DONE
+  2026_01_02_000000_create_suppliers_and_payables_tables ........ 71.44ms DONE
+  2026_04_05_000000_add_xendit_callback_token_to_payment_settings_table  18.28ms DONE
+  2026_05_01_231134_create_stock_opname_tables ................. 104.38ms DONE
+  2026_05_02_000000_create_sales_return_tables .................. 86.42ms DONE
+  2026_05_02_010000_create_cashier_shifts_table ................. 56.51ms DONE
+  2026_05_02_010100_add_cashier_shift_references ............... 243.82ms DONE
+  2026_05_02_120000_create_audit_logs_table ..................... 69.21ms DONE
+  2026_05_02_120000_encrypt_payment_setting_secrets ............. 73.03ms DONE
+  2026_05_04_000001_create_purchase_orders_table ................ 53.38ms DONE
+  2026_05_04_000002_create_goods_receivings_table ............... 53.52ms DONE
+  2026_05_04_000003_add_purchase_order_id_to_payables_table .... 108.37ms DONE
+  2026_05_04_000004_add_collection_notes_to_receivables_table ... 18.46ms DONE
+  2026_05_05_000001_create_supplier_returns_table ............... 52.98ms DONE
+  2026_05_05_000100_create_pricing_rules_table .................. 69.78ms DONE
+  2026_05_05_000101_add_pricing_columns_to_transaction_details_table  165.78ms DONE
+  2026_05_05_000102_add_loyalty_columns_to_customers_transactions_and_pricing_rules  311.21ms DONE
+  2026_05_05_000103_create_loyalty_point_histories_table ........ 58.52ms DONE
+  2026_05_05_000104_create_customer_vouchers_table .............. 69.04ms DONE
+  2026_05_05_000105_extend_pricing_rules_for_advanced_promotions  111.57ms DONE
+  2026_05_05_000106_create_pricing_rule_qty_breaks_table ........ 34.54ms DONE
+  2026_05_05_000107_create_pricing_rule_bundle_items_table ...... 34.58ms DONE
+  2026_05_05_000108_create_pricing_rule_buy_get_items_table ..... 34.56ms DONE
+  2026_05_05_000109_add_loyalty_settings_defaults .............. 140.13ms DONE
+  2026_05_06_000110_create_customer_segments_table .............. 53.92ms DONE
+  2026_05_06_000111_create_customer_segment_memberships_table ... 52.40ms DONE
+  2026_05_06_000112_create_customer_campaigns_table ............. 76.96ms DONE
+  2026_05_06_000113_create_customer_campaign_logs_table ......... 51.28ms DONE
+  2026_06_22_000001_create_warehouses_table ..................... 39.17ms DONE
+  2026_06_22_000002_create_product_warehouse_table .............. 34.14ms DONE
+  2026_06_22_000003_add_warehouse_id_to_cashier_shifts ......... 122.88ms DONE
+  2026_06_22_000004_add_warehouse_id_to_transactions_carts_mutations  333.26ms DONE
+  2026_06_22_000005_add_warehouse_id_to_purchasing_chain ....... 546.54ms DONE
+  2026_06_22_000006_create_stock_transfers_table ................ 52.63ms DONE
+  2026_06_22_000007_add_tax_columns_to_products ................. 36.15ms DONE
+  2026_06_22_000008_add_tax_columns_to_transactions ............. 65.25ms DONE
+  2026_06_22_000009_add_tax_settings ............................ 55.88ms DONE
+  2026_06_22_000010_create_units_table .......................... 54.19ms DONE
+  2026_06_22_000011_create_product_units_table .................. 35.76ms DONE
+  2026_06_22_000012_add_unit_columns_to_carts_and_details ...... 270.40ms DONE
+  2026_06_22_000013_add_min_max_stock_to_products ............... 92.97ms DONE
+  2026_06_22_000014_create_discount_approval ................... 207.09ms DONE
+  2026_06_22_000015_create_price_lists ......................... 170.59ms DONE
+  2026_06_22_000016_create_product_batches ..................... 179.45ms DONE
+  2026_06_22_000017_create_composite_products ................... 56.02ms DONE
+  2026_06_22_000018_add_access_token_to_transactions ............ 81.91ms DONE
+  2026_08_04_130838_add_locale_to_users_table ................... 18.69ms DONE
+  2026_08_12_103406_create_personal_access_tokens_table ......... 70.51ms DONE
+  2026_08_14_013831_create_dine_areas_table ..................... 33.93ms DONE
+  2026_08_14_013832_create_dine_tables_table .................... 75.13ms DONE
+  2026_08_14_013833_create_dine_orders_table .................... 93.78ms DONE
+  2026_08_14_013834_create_dine_order_items_table ............... 17.57ms DONE
+  2026_08_15_000000_create_transaction_detail_batch_allocations_table  35.64ms DONE
+  2026_09_09_000001_make_category_image_and_description_nullable  87.46ms DONE
+  2026_09_09_000002_add_completed_tours_to_users_table .......... 17.70ms DONE
+  2026_09_10_000001_add_client_uuid_to_transactions_table ....... 37.06ms DONE
+  2026_09_10_000002_add_qr_string_to_transactions_table ......... 18.30ms DONE
+  2026_09_10_000003_create_shift_cash_movements_table ........... 18.12ms DONE
+  2026_09_11_000001_add_order_type_and_note_to_transactions_table  36.62ms DONE
+  2026_09_12_000001_add_cash_movement_totals_to_cashier_shifts_table  43.92ms DONE
+  2026_09_13_000001_create_transaction_tenders_table ............ 52.61ms DONE
+  2026_09_14_000001_create_outlets_table ........................ 34.70ms DONE
+  2026_09_14_000002_add_outlet_id_to_warehouses_table .......... 111.25ms DONE
+  2026_09_14_000003_create_user_outlets_table ................... 37.24ms DONE
+  2026_09_14_000004_add_outlet_id_to_settings_table ............ 147.34ms DONE
+  2026_09_14_000005_add_outlet_scope_to_payment_tables ......... 226.64ms DONE
+  2026_09_14_000006_add_outlet_scope_to_pricing_and_dine_in .... 436.36ms DONE
+  2026_09_15_000001_add_outlet_scope_to_customer_promotions .... 306.36ms DONE
+  2026_09_15_000002_make_pusat_central_only ...................... 0.93ms DONE
+  2026_09_18_000001_add_warehouse_created_at_index_to_transactions  18.17ms DONE
+  2026_09_19_000001_add_sync_fingerprint_to_transactions_table .. 36.87ms DONE
+  2026_09_27_000001_make_product_image_and_description_nullable  117.28ms DONE
+
+
+   INFO  Seeding database.  
+
+  Database\Seeders\PermissionSeeder .................................. RUNNING  
+  Database\Seeders\PermissionSeeder ............................ 1,974 ms DONE  
+
+  Database\Seeders\RoleSeeder ........................................ RUNNING  
+  Database\Seeders\RoleSeeder .................................. 1,619 ms DONE  
+
+  Database\Seeders\PaymentSettingSeeder .............................. RUNNING  
+  Database\Seeders\PaymentSettingSeeder ........................... 19 ms DONE  
+
+  Database\Seeders\DineInSettingsSeeder .............................. RUNNING  
+  Database\Seeders\DineInSettingsSeeder ........................... 55 ms DONE  
+

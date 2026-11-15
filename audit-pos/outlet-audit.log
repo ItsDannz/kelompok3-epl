@@ -1,0 +1,22 @@
+Outlet data audit (read-only)
+Outlets: 4
+Active outlets: 4
+Sales-enabled outlets: 3
+Warehouses: 4
+Warehouses without outlet: 0
+Users without outlet assignment: 0
+Open shifts: 2
+transactions without warehouse: 0
+carts without warehouse: 0
+stock_mutations without warehouse: 0
+cashier_shifts without warehouse: 0
+purchase_orders without warehouse: 0
+goods_receivings without warehouse: 0
+supplier_returns without warehouse: 0
+stock_opnames without warehouse: 0
+Product stock mismatches: 0
+settings: 33 global, 0 outlet-scoped
+payment_settings: 1 global, 0 outlet-scoped
+bank_accounts: 3 global, 0 outlet-scoped
+PUSAT sales enabled: no
+PUSAT warehouses: 1

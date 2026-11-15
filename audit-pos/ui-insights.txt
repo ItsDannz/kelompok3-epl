@@ -1,0 +1,947 @@
+Browser tab: 1, Title: "Laravel", URL: "http://127.0.0.1:8000/dashboard/reports/insights".
+1 AXWebArea Advanced Sales Insights - Laravel, URL: 127.0.0.1:8000/dashboard/reports/insights
+	2 container app
+		3 container
+			4 text T Toko Anda
+			5 text OVERVIEW
+			6 link Description: Dashboard, Value: 127.0.0.1:8000/dashboard
+			7 text MASTER DATA
+			8 link Description: Categories, Value: 127.0.0.1:8000/dashboard/categories
+			9 link Description: Products, Value: 127.0.0.1:8000/dashboard/products
+			10 link Description: Customers, Value: 127.0.0.1:8000/dashboard/customers
+			11 link Description: Suppliers, Value: 127.0.0.1:8000/dashboard/suppliers
+			12 text SALES
+			13 link Description: Transactions, Value: 127.0.0.1:8000/dashboard/transactions
+			14 link Description: Transaction History, Value: 127.0.0.1:8000/dashboard/transactions/history
+			15 link Description: Sales Returns, Value: 127.0.0.1:8000/dashboard/sales-returns
+			16 link Description: Receivables, Value: 127.0.0.1:8000/dashboard/receivables
+			17 link Description: Aging & Reminders, Value: 127.0.0.1:8000/dashboard/aging
+			18 text APPROVAL
+			19 link Description: Discount Approval, Value: 127.0.0.1:8000/dashboard/discount-approvals
+			20 text INVENTORY
+			21 link Description: Stock Opname, Value: 127.0.0.1:8000/dashboard/stock-opnames
+			22 link Description: Stock Mutations, Value: 127.0.0.1:8000/dashboard/stock-mutations
+			23 link Description: Stock Transfers, Value: 127.0.0.1:8000/dashboard/stock-transfers
+			24 text PROCUREMENT
+			25 link Description: Purchase Orders, Value: 127.0.0.1:8000/dashboard/purchase-orders
+			26 link Description: Goods Receiving, Value: 127.0.0.1:8000/dashboard/goods-receivings
+			27 link Description: Supplier Returns, Value: 127.0.0.1:8000/dashboard/supplier-returns
+			28 link Description: Supplier Payables, Value: 127.0.0.1:8000/dashboard/payables
+			29 text CRM & PRICING
+			30 link Description: Members, Value: 127.0.0.1:8000/dashboard/members
+			31 link Description: Price Promos, Value: 127.0.0.1:8000/dashboard/pricing-rules
+			32 link Description: Customer Vouchers, Value: 127.0.0.1:8000/dashboard/customer-vouchers
+			33 link Description: Customer Segments, Value: 127.0.0.1:8000/dashboard/customer-segments
+			34 link Description: CRM Campaigns, Value: 127.0.0.1:8000/dashboard/crm-campaigns
+			35 link Description: CRM Reminders, Value: 127.0.0.1:8000/dashboard/crm-reminders
+			36 text DINE-IN
+			37 link Description: Dine-In Areas, Value: 127.0.0.1:8000/dashboard/dine-areas
+			38 link Description: Dine-In Tables, Value: 127.0.0.1:8000/dashboard/dine-tables
+			39 link Description: Dine-In Orders, Value: 127.0.0.1:8000/dashboard/dine-orders
+			40 text REPORTS
+			41 link Description: Sales Report, Value: 127.0.0.1:8000/dashboard/reports/sales
+			42 link Description: Profit Report, Value: 127.0.0.1:8000/dashboard/reports/profits
+			43 link Description: Advanced Insights, Value: 127.0.0.1:8000/dashboard/reports/insights
+			44 text OPERATIONS & CONTROL
+			45 link Description: Cashier Shifts, Value: 127.0.0.1:8000/dashboard/cashier-shifts
+			46 link Description: Audit Logs, Value: 127.0.0.1:8000/dashboard/audit-logs
+			47 text USER MANAGEMENT
+			48 link Description: Permissions, Value: 127.0.0.1:8000/dashboard/permissions
+			49 link Description: Access Groups, Value: 127.0.0.1:8000/dashboard/roles
+			50 button Users
+				51 image
+				52 text Users
+				53 image
+			54 text SETTINGS
+			55 link Description: Payment Gateway, Value: 127.0.0.1:8000/dashboard/settings/payments
+			56 link Description: Store Profile, Value: 127.0.0.1:8000/dashboard/settings/store
+			57 link Description: Bank Accounts, Value: 127.0.0.1:8000/dashboard/settings/bank-accounts
+			58 link Description: Loyalty, Value: 127.0.0.1:8000/dashboard/settings/loyalty
+			59 link Description: Sales Target, Value: 127.0.0.1:8000/dashboard/settings/target
+			60 link Description: Price Lists, Value: 127.0.0.1:8000/dashboard/settings/price-lists
+			61 link Description: Warehouses / Branches, Value: 127.0.0.1:8000/dashboard/settings/warehouses
+			62 link Description: Outlet, Value: 127.0.0.1:8000/dashboard/settings/outlets
+			63 link Description: Units, Value: 127.0.0.1:8000/dashboard/settings/units
+			64 link Description: WhatsApp, Value: 127.0.0.1:8000/dashboard/settings/whatsapp
+			65 text Point of Sales  v3.0.3
+		66 container
+			67 button Toggle Sidebar
+				68 image
+			69 heading Advanced Insights, Value: 1
+				70 text Advanced Insights
+			71 container
+				72 image
+				73 pop up button (disabled, collapsed, settable) Value: MAL - Outlet Malabar, Secondary Actions: Expand
+					74 menu
+						75 (disabled) MAL - Outlet Malabar
+						76 (disabled) PUSAT - Gudang Pusat
+						77 (disabled) PUT - Outlet Puter
+						78 (disabled) TKB - Outlet Taman Kencana
+			79 button Guided Tour
+				80 image
+			81 pop up button (collapsed) Description: Change Language, ID: headlessui-menu-button-_r_2_, Secondary Actions: Expand
+				82 image
+			83 button Dark Mode
+				84 image
+			85 pop up button (collapsed) 2, ID: headlessui-menu-button-_r_5_, Secondary Actions: Expand
+				86 text 2
+				87 image
+			88 pop up button (collapsed) A, ID: headlessui-menu-button-_r_8_, Secondary Actions: Expand
+			89 heading Advanced Sales Insights, Value: 1
+				90 image
+				91 text Advanced Sales Insights
+			92 text Insight operasional penjualan, margin, produk, dan performa kasir dalam satu dashboard.
+			93 button Filter
+				94 image
+				95 text Filter
+			96 container
+				97 image
+				98 text Pendapatan Rp 596.996 8 transaksi
+			99 container
+				100 image
+				101 text Profit Rp 185.050 Rata-rata Rp 74.625
+			102 container
+				103 image
+				104 text Item Terjual 40 Diskon manual Rp 30.000
+			105 container
+				106 image
+				107 text Kasir Aktif di Filter 2 Leaderboard performa kasir
+			108 heading Sales by Hour, Value: 2
+				109 text Sales by Hour
+			110 text Pola omzet per jam dari transaksi yang lolos filter.
+			111 image
+			112 heading Sales by Day, Value: 2
+				113 text Sales by Day
+			114 text Tren omzet harian pada periode aktif.
+			115 image
+			116 container
+				117 image
+				118 text Customer Aktif 5 3 pelanggan baru
+			119 container
+				120 image
+				121 text Repeat Rate 40% 2 pelanggan repeat
+			122 container
+				123 image
+				124 text Member Revenue Share 26,49% Rp 151.000
+			125 container
+				126 image
+				127 text Stok Perlu Perhatian 3 3 hari jendela analisa
+			128 text Top Selling Products
+			129 table
+				130 row
+					131 cell
+						132 text Produk
+					133 cell
+						134 text Kategori
+					135 cell
+						136 text Qty
+					137 cell
+						138 text Omzet
+					139 cell
+						140 text Profit
+				141 row
+					142 cell
+						143 text Aqua Botol 600ml
+						144 text -
+					145 cell
+						146 text Minuman
+					147 cell
+						148 text 6
+					149 cell
+						150 text Rp 29.050
+					151 cell
+						152 text Rp 9.687
+				153 row
+					154 cell
+						155 text Indomie Goreng
+						156 text -
+					157 cell
+						158 text Makanan Ringan
+					159 cell
+						160 text 5
+					161 cell
+						162 text Rp 17.500
+					163 cell
+						164 text Rp 5.000
+				165 row
+					166 cell
+						167 text Chitato Original 68g
+						168 text -
+					169 cell
+						170 text Makanan Ringan
+					171 cell
+						172 text 3
+					173 cell
+						174 text Rp 36.000
+					175 cell
+						176 text Rp 9.819
+				177 row
+					178 cell
+						179 text Donat Coklat
+						180 text -
+					181 cell
+						182 text Roti & Kue
+					183 cell
+						184 text 3
+					185 cell
+						186 text Rp 24.000
+					187 cell
+						188 text Rp 9.000
+				189 row
+					190 cell
+						191 text Sosis Sapi 500g
+						192 text -
+					193 cell
+						194 text Makanan Berat
+					195 cell
+						196 text 2
+					197 cell
+						198 text Rp 96.000
+					199 cell
+						200 text Rp 18.942
+				201 row
+					202 cell
+						203 text Ayam Goreng Frozen
+						204 text -
+					205 cell
+						206 text Makanan Berat
+					207 cell
+						208 text 2
+					209 cell
+						210 text Rp 76.000
+					211 cell
+						212 text Rp 21.190
+				213 row
+					214 cell
+						215 text Kecap Manis ABC 600ml
+						216 text -
+					217 cell
+						218 text Bumbu & Rempah
+					219 cell
+						220 text 2
+					221 cell
+						222 text Rp 50.000
+					223 cell
+						224 text Rp 10.324
+				225 row
+					226 cell
+						227 text Tisu Paseo 250 Sheet
+						228 text -
+					229 cell
+						230 text Kebutuhan Rumah
+					231 cell
+						232 text 2
+					233 cell
+						234 text Rp 44.000
+					235 cell
+						236 text Rp 11.216
+				237 row
+					238 cell
+						239 text Ultra Milk 1L
+						240 text -
+					241 cell
+						242 text Produk Susu
+					243 cell
+						244 text 2
+					245 cell
+						246 text Rp 42.000
+					247 cell
+						248 text Rp 10.000
+				249 row
+					250 cell
+						251 text Kopi Susu Gula Aren
+						252 text -
+					253 cell
+						254 text Minuman
+					255 cell
+						256 text 2
+					257 cell
+						258 text Rp 36.000
+					259 cell
+						260 text Rp 12.000
+			261 text Low Performing Products
+			262 table
+				263 row
+					264 cell
+						265 text Produk
+					266 cell
+						267 text Stok
+					268 cell
+						269 text Qty Sold
+					270 cell
+						271 text Omzet
+					272 cell
+						273 text Last Sold
+				274 row
+					275 cell
+						276 text Jus Jeruk Segar 500ml
+						277 text Minuman
+					278 cell
+						279 text 25
+					280 cell
+						281 text 0
+					282 cell
+						283 text Rp 0
+					284 cell
+						285 text -
+				286 row
+					287 cell
+						288 text Pringles Sour Cream
+						289 text Makanan Ringan
+					290 cell
+						291 text 25
+					292 cell
+						293 text 0
+					294 cell
+						295 text Rp 0
+					296 cell
+						297 text -
+				298 row
+					299 cell
+						300 text Nasi Goreng Frozen
+						301 text Makanan Berat
+					302 cell
+						303 text 25
+					304 cell
+						305 text 0
+					306 cell
+						307 text Rp 0
+					308 cell
+						309 text -
+				310 row
+					311 cell
+						312 text Keju Cheddar 165g
+						313 text Produk Susu
+					314 cell
+						315 text 25
+					316 cell
+						317 text 0
+					318 cell
+						319 text Rp 0
+					320 cell
+						321 text -
+				322 row
+					323 cell
+						324 text Croissant Butter
+						325 text Roti & Kue
+					326 cell
+						327 text 25
+					328 cell
+						329 text 0
+					330 cell
+						331 text Rp 0
+					332 cell
+						333 text -
+				334 row
+					335 cell
+						336 text Gula Pasir 1kg
+						337 text Bumbu & Rempah
+					338 cell
+						339 text 25
+					340 cell
+						341 text 0
+					342 cell
+						343 text Rp 0
+					344 cell
+						345 text -
+				346 row
+					347 cell
+						348 text Pasta Gigi Pepsodent 190g
+						349 text Perawatan Tubuh
+					350 cell
+						351 text 25
+					352 cell
+						353 text 0
+					354 cell
+						355 text Rp 0
+					356 cell
+						357 text -
+				358 row
+					359 cell
+						360 text Sabun Cuci Piring 800ml
+						361 text Kebutuhan Rumah
+					362 cell
+						363 text 25
+					364 cell
+						365 text 0
+					366 cell
+						367 text Rp 0
+					368 cell
+						369 text -
+				370 row
+					371 cell
+						372 text Oreo Vanilla 133g
+						373 text Makanan Ringan
+					374 cell
+						375 text 24
+					376 cell
+						377 text 1
+					378 cell
+						379 text Rp 15.000
+					380 cell
+						381 text 15 Nov 2026, 17.00
+				382 row
+					383 cell
+						384 text Roti Tawar Sari Roti
+						385 text Roti & Kue
+					386 cell
+						387 text 24
+					388 cell
+						389 text 1
+					390 cell
+						391 text Rp 16.000
+					392 cell
+						393 text 13 Nov 2026, 16.00
+			394 heading Margin per Produk / Kategori, Value: 2
+				395 text Margin per Produk / Kategori
+			396 text Perbandingan omzet, profit, dan margin kotor.
+			397 button Per Produk
+			398 button Per Kategori
+			399 table
+				400 row
+					401 cell
+						402 text Produk
+					403 cell
+						404 text Qty
+					405 cell
+						406 text Omzet
+					407 cell
+						408 text Profit
+					409 cell
+						410 text Margin %
+				411 row
+					412 cell
+						413 text Ayam Goreng Frozen
+					414 cell
+						415 text 2
+					416 cell
+						417 text Rp 76.000
+					418 cell
+						419 text Rp 21.190
+					420 cell
+						421 text 27.88 %
+				422 row
+					423 cell
+						424 text Sosis Sapi 500g
+					425 cell
+						426 text 2
+					427 cell
+						428 text Rp 96.000
+					429 cell
+						430 text Rp 18.942
+					431 cell
+						432 text 19.73 %
+				433 row
+					434 cell
+						435 text Kopi Susu Gula Aren
+					436 cell
+						437 text 2
+					438 cell
+						439 text Rp 36.000
+					440 cell
+						441 text Rp 12.000
+					442 cell
+						443 text 33.33 %
+				444 row
+					445 cell
+						446 text Tisu Paseo 250 Sheet
+					447 cell
+						448 text 2
+					449 cell
+						450 text Rp 44.000
+					451 cell
+						452 text Rp 11.216
+					453 cell
+						454 text 25.49 %
+				455 row
+					456 cell
+						457 text Kecap Manis ABC 600ml
+					458 cell
+						459 text 2
+					460 cell
+						461 text Rp 50.000
+					462 cell
+						463 text Rp 10.324
+					464 cell
+						465 text 20.65 %
+				466 row
+					467 cell
+						468 text Ultra Milk 1L
+					469 cell
+						470 text 2
+					471 cell
+						472 text Rp 42.000
+					473 cell
+						474 text Rp 10.000
+					475 cell
+						476 text 23.81 %
+				477 row
+					478 cell
+						479 text Chitato Original 68g
+					480 cell
+						481 text 3
+					482 cell
+						483 text Rp 36.000
+					484 cell
+						485 text Rp 9.819
+					486 cell
+						487 text 27.28 %
+				488 row
+					489 cell
+						490 text Aqua Botol 600ml
+					491 cell
+						492 text 6
+					493 cell
+						494 text Rp 29.050
+					495 cell
+						496 text Rp 9.687
+					497 cell
+						498 text 33.35 %
+				499 row
+					500 cell
+						501 text Donat Coklat
+					502 cell
+						503 text 3
+					504 cell
+						505 text Rp 24.000
+					506 cell
+						507 text Rp 9.000
+					508 cell
+						509 text 37.5 %
+				510 row
+					511 cell
+						512 text Yogurt Cimory 250ml
+					513 cell
+						514 text 2
+					515 cell
+						516 text Rp 24.000
+					517 cell
+						518 text Rp 8.000
+					519 cell
+						520 text 33.33 %
+			521 text Cashier Performance
+			522 table
+				523 row
+					524 cell
+						525 text Kasir
+					526 cell
+						527 text Transaksi
+					528 cell
+						529 text Items Sold
+					530 cell
+						531 text Omzet
+					532 cell
+						533 text Profit
+					534 cell
+						535 text Avg Basket
+				536 row
+					537 cell
+						538 text Cashier
+					539 cell
+						540 text 7
+					541 cell
+						542 text 39
+					543 cell
+						544 text Rp 592.500
+					545 cell
+						546 text Rp 184.000
+					547 cell
+						548 text Rp 84.643
+				549 row
+					550 cell
+						551 text Arya Dwi Putra
+					552 cell
+						553 text 1
+					554 cell
+						555 text 1
+					556 cell
+						557 text Rp 4.496
+					558 cell
+						559 text Rp 1.050
+					560 cell
+						561 text Rp 4.496
+			562 text Repeat Customer Metrics
+			563 text Repeat Revenue
+			564 text Rp 265.496
+			565 text Revenue Member
+			566 text Rp 151.000
+			567 text Revenue Non-Member
+			568 text Rp 418.996
+			569 table
+				570 row
+					571 cell
+						572 text Pelanggan
+					573 cell
+						574 text Status
+					575 cell
+						576 text Transaksi
+					577 cell
+						578 text Omzet
+					579 cell
+						580 text Avg Basket
+					581 cell
+						582 text Last Purchase
+				583 row
+					584 cell
+						585 text Fitri Lestari
+						586 text REGULAR
+					587 cell
+						588 text Non-member
+					589 cell
+						590 text 2
+					591 cell
+						592 text Rp 193.496
+					593 cell
+						594 text Rp 96.748
+					595 cell
+						596 text 15 Nov 2026, 16.00
+				597 row
+					598 cell
+						599 text Andi Nugraha
+						600 text GOLD
+					601 cell
+						602 text Member
+					603 cell
+						604 text 2
+					605 cell
+						606 text Rp 72.000
+					607 cell
+						608 text Rp 36.000
+					609 cell
+						610 text 15 Nov 2026, 12.39
+			611 text Stock Coverage Analysis
+			612 text Stok Kritis
+			613 text 0
+			614 text Stok Rendah
+			615 text 3
+			616 text Stok Sehat
+			617 text 15
+			618 text Tidak Bergerak
+			619 text 8
+			620 table
+				621 row
+					622 cell
+						623 text Produk
+					624 cell
+						625 text Status
+					626 cell
+						627 text Stok
+					628 cell
+						629 text Qty Sold
+					630 cell
+						631 text Avg / Hari
+					632 cell
+						633 text Coverage
+					634 cell
+						635 text Last Sold
+				636 row
+					637 cell
+						638 text Indomie Goreng
+						639 text Makanan Ringan
+					640 cell
+						641 text Rendah
+					642 cell
+						643 text 20
+					644 cell
+						645 text 5
+					646 cell
+						647 text 1,67
+					648 cell
+						649 text 12 hari
+					650 cell
+						651 text 14 Nov 2026, 18.00
+				652 row
+					653 cell
+						654 text Donat Coklat
+						655 text Roti & Kue
+					656 cell
+						657 text Rendah
+					658 cell
+						659 text 22
+					660 cell
+						661 text 3
+					662 cell
+						663 text 1
+					664 cell
+						665 text 22 hari
+					666 cell
+						667 text 13 Nov 2026, 17.00
+				668 row
+					669 cell
+						670 text Aqua Botol 600ml
+						671 text Minuman
+					672 cell
+						673 text Rendah
+					674 cell
+						675 text 49
+					676 cell
+						677 text 6
+					678 cell
+						679 text 2
+					680 cell
+						681 text 24,5 hari
+					682 cell
+						683 text 15 Nov 2026, 12.43
+				684 row
+					685 cell
+						686 text Chitato Original 68g
+						687 text Makanan Ringan
+					688 cell
+						689 text Sehat
+					690 cell
+						691 text 32
+					692 cell
+						693 text 3
+					694 cell
+						695 text 1
+					696 cell
+						697 text 32 hari
+					698 cell
+						699 text 15 Nov 2026, 12.39
+				700 row
+					701 cell
+						702 text Teh Botol Sosro 450ml
+						703 text Minuman
+					704 cell
+						705 text Sehat
+					706 cell
+						707 text 23
+					708 cell
+						709 text 2
+					710 cell
+						711 text 0,67
+					712 cell
+						713 text 34,3 hari
+					714 cell
+						715 text 15 Nov 2026, 17.00
+				716 row
+					717 cell
+						718 text Kopi Susu Gula Aren
+						719 text Minuman
+					720 cell
+						721 text Sehat
+					722 cell
+						723 text 23
+					724 cell
+						725 text 2
+					726 cell
+						727 text 0,67
+					728 cell
+						729 text 34,3 hari
+					730 cell
+						731 text 14 Nov 2026, 18.00
+				732 row
+					733 cell
+						734 text Sosis Sapi 500g
+						735 text Makanan Berat
+					736 cell
+						737 text Sehat
+					738 cell
+						739 text 23
+					740 cell
+						741 text 2
+					742 cell
+						743 text 0,67
+					744 cell
+						745 text 34,3 hari
+					746 cell
+						747 text 15 Nov 2026, 16.00
+				748 row
+					749 cell
+						750 text Kecap Manis ABC 600ml
+						751 text Bumbu & Rempah
+					752 cell
+						753 text Sehat
+					754 cell
+						755 text 23
+					756 cell
+						757 text 2
+					758 cell
+						759 text 0,67
+					760 cell
+						761 text 34,3 hari
+					762 cell
+						763 text 15 Nov 2026, 16.00
+				764 row
+					765 cell
+						766 text Sabun Lifebuoy 85g
+						767 text Perawatan Tubuh
+					768 cell
+						769 text Sehat
+					770 cell
+						771 text 23
+					772 cell
+						773 text 2
+					774 cell
+						775 text 0,67
+					776 cell
+						777 text 34,3 hari
+					778 cell
+						779 text 13 Nov 2026, 17.00
+				780 row
+					781 cell
+						782 text Tisu Paseo 250 Sheet
+						783 text Kebutuhan Rumah
+					784 cell
+						785 text Sehat
+					786 cell
+						787 text 23
+					788 cell
+						789 text 2
+					790 cell
+						791 text 0,67
+					792 cell
+						793 text 34,3 hari
+					794 cell
+						795 text 14 Nov 2026, 17.00
+			796 text Promo Active Monitor
+			797 text Promo Aktif
+			798 text 4
+			799 text Promo Terjadwal
+			800 text 0
+			801 text Discount : 1 Grosir : 1 Bundle : 1 BXGY : 1
+			802 table
+				803 row
+					804 cell
+						805 text Rule
+					806 cell
+						807 text Tipe
+					808 cell
+						809 text Status
+					810 cell
+						811 text Periode
+				812 row
+					813 cell
+						814 text Beli 2 Indomie Gratis 1
+						815 text Indomie Goreng
+					816 cell
+						817 text BXGY
+					818 cell
+						819 text Aktif
+					820 cell
+						821 text 14 Nov 2026, 12.39
+						822 text 15 Feb 2027, 12.39
+				823 row
+					824 cell
+						825 text Bundle Indomie + Kopi
+						826 text all
+					827 cell
+						828 text Bundle
+					829 cell
+						830 text Aktif
+					831 cell
+						832 text 14 Nov 2026, 12.39
+						833 text 15 Feb 2027, 12.39
+				834 row
+					835 cell
+						836 text Beli Banyak Snack Lebih Hemat
+						837 text Chitato Original 68g
+					838 cell
+						839 text Grosir
+					840 cell
+						841 text Aktif
+					842 cell
+						843 text 14 Nov 2026, 12.39
+						844 text 15 Feb 2027, 12.39
+				845 row
+					846 cell
+						847 text Diskon Minuman 10%
+						848 text Aqua Botol 600ml
+					849 cell
+						850 text Discount
+					851 cell
+						852 text Aktif
+					853 cell
+						854 text 14 Nov 2026, 12.39
+						855 text 15 Feb 2027, 12.39
+			856 heading Audit Promo Terbaru, Value: 3
+				857 text Audit Promo Terbaru
+			858 text Belum ada audit promo terbaru.
+			859 text Loyalty Performance Summary
+			860 text Total Member
+			861 text 3
+			862 text Saldo Poin
+			863 text 660
+			864 text Poin Earned
+			865 text 50
+			866 text Poin Redeemed
+			867 text 0
+			868 text REGULAR : 0 SILVER : 1 GOLD : 1 PLATINUM : 1
+			869 text Voucher Aktif
+			870 text 3
+			871 text Voucher Digunakan
+			872 text 0
+			873 text Nominal Voucher
+			874 text Rp 0
+			875 table
+				876 row
+					877 cell
+						878 text Member
+					879 cell
+						880 text Tier
+					881 cell
+						882 text Poin
+					883 cell
+						884 text Total Belanja
+				885 row
+					886 cell
+						887 text Eko Saputra
+					888 cell
+						889 text PLATINUM
+					890 cell
+						891 text 420
+					892 cell
+						893 text Rp 3.600.000
+				894 row
+					895 cell
+						896 text Andi Nugraha
+					897 cell
+						898 text GOLD
+					899 cell
+						900 text 180
+					901 cell
+						902 text Rp 1.800.000
+				903 row
+					904 cell
+						905 text Bunga Maharani
+					906 cell
+						907 text SILVER
+					908 cell
+						909 text 60
+					910 cell
+						911 text Rp 780.000
+			912 text CRM Operational Snapshot
+			913 text Segment Aktif
+			914 text 2
+			915 text Campaign Draft/Ready
+			916 text 1
+			917 text Queue Ready
+			918 text 0
+			919 text Queue Sent
+			920 text 0
+			921 text Manual Segment: 1 Auto Segment: 1 Memberships: 2 Campaign Processed: 0
+			922 table
+				923 row
+					924 cell
+						925 text Campaign
+					926 cell
+						927 text Tipe
+					928 cell
+						929 text Status
+					930 cell
+						931 text Target
+					932 cell
+						933 text Diproses
+				934 row
+					935 cell
+						936 text Promo Akhir Bulan
+					937 cell
+						938 text Promo Broadcast
+					939 cell
+						940 text ready
+					941 cell
+						942 text 2
+					943 cell
+						944 text 15 Nov 2026, 12.39
+
+The focused UI element is 1 AXWebArea Advanced Sales Insights - Laravel, URL: 127.0.0.1:8000/dashboard/reports/insights

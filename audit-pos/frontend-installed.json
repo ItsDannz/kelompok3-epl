@@ -1,0 +1,130 @@
+{
+  "name": "point-of-sales",
+  "dependencies": {
+    "@headlessui/react": {
+      "version": "2.2.10",
+      "resolved": "https://registry.npmjs.org/@headlessui/react/-/react-2.2.10.tgz",
+      "overridden": false
+    },
+    "@inertiajs/react": {
+      "version": "3.11.0",
+      "resolved": "https://registry.npmjs.org/@inertiajs/react/-/react-3.11.0.tgz",
+      "overridden": false
+    },
+    "@tabler/icons-react": {
+      "version": "3.52.0",
+      "resolved": "https://registry.npmjs.org/@tabler/icons-react/-/icons-react-3.52.0.tgz",
+      "overridden": false
+    },
+    "@tailwindcss/forms": {
+      "version": "0.5.11",
+      "resolved": "https://registry.npmjs.org/@tailwindcss/forms/-/forms-0.5.11.tgz",
+      "overridden": false
+    },
+    "@vitejs/plugin-react": {
+      "version": "4.7.0",
+      "resolved": "https://registry.npmjs.org/@vitejs/plugin-react/-/plugin-react-4.7.0.tgz",
+      "overridden": false
+    },
+    "autoprefixer": {
+      "version": "10.6.2",
+      "resolved": "https://registry.npmjs.org/autoprefixer/-/autoprefixer-10.6.2.tgz",
+      "overridden": false
+    },
+    "axios": {
+      "version": "1.21.1",
+      "resolved": "https://registry.npmjs.org/axios/-/axios-1.21.1.tgz",
+      "overridden": false
+    },
+    "chart.js": {
+      "version": "4.6.1",
+      "resolved": "https://registry.npmjs.org/chart.js/-/chart.js-4.6.1.tgz",
+      "overridden": false
+    },
+    "concurrently": {
+      "version": "10.0.7",
+      "resolved": "https://registry.npmjs.org/concurrently/-/concurrently-10.0.7.tgz",
+      "overridden": false
+    },
+    "driver.js": {
+      "version": "1.14.0",
+      "resolved": "https://registry.npmjs.org/driver.js/-/driver.js-1.14.0.tgz",
+      "overridden": false
+    },
+    "html5-qrcode": {
+      "version": "2.3.8",
+      "resolved": "https://registry.npmjs.org/html5-qrcode/-/html5-qrcode-2.3.8.tgz",
+      "overridden": false
+    },
+    "i18next-browser-languagedetector": {
+      "version": "8.3.0",
+      "resolved": "https://registry.npmjs.org/i18next-browser-languagedetector/-/i18next-browser-languagedetector-8.3.0.tgz",
+      "overridden": false
+    },
+    "i18next": {
+      "version": "26.7.2",
+      "resolved": "https://registry.npmjs.org/i18next/-/i18next-26.7.2.tgz",
+      "overridden": false
+    },
+    "idb": {
+      "version": "8.0.4",
+      "resolved": "https://registry.npmjs.org/idb/-/idb-8.0.4.tgz",
+      "overridden": false
+    },
+    "jsbarcode": {
+      "version": "3.12.3",
+      "resolved": "https://registry.npmjs.org/jsbarcode/-/jsbarcode-3.12.3.tgz",
+      "overridden": false
+    },
+    "laravel-vite-plugin": {
+      "version": "1.3.0",
+      "resolved": "https://registry.npmjs.org/laravel-vite-plugin/-/laravel-vite-plugin-1.3.0.tgz",
+      "overridden": false
+    },
+    "postcss": {
+      "version": "8.5.33",
+      "resolved": "https://registry.npmjs.org/postcss/-/postcss-8.5.33.tgz",
+      "overridden": false
+    },
+    "puppeteer": {
+      "version": "25.17.0",
+      "resolved": "https://registry.npmjs.org/puppeteer/-/puppeteer-25.17.0.tgz",
+      "overridden": false
+    },
+    "react-dom": {
+      "version": "19.3.1",
+      "resolved": "https://registry.npmjs.org/react-dom/-/react-dom-19.3.1.tgz",
+      "overridden": false
+    },
+    "react-hot-toast": {
+      "version": "2.6.1",
+      "resolved": "https://registry.npmjs.org/react-hot-toast/-/react-hot-toast-2.6.1.tgz",
+      "overridden": false
+    },
+    "react-i18next": {
+      "version": "17.1.13",
+      "resolved": "https://registry.npmjs.org/react-i18next/-/react-i18next-17.1.13.tgz",
+      "overridden": false
+    },
+    "react": {
+      "version": "19.3.1",
+      "resolved": "https://registry.npmjs.org/react/-/react-19.3.1.tgz",
+      "overridden": false
+    },
+    "sweetalert2": {
+      "version": "11.26.25",
+      "resolved": "https://registry.npmjs.org/sweetalert2/-/sweetalert2-11.26.25.tgz",
+      "overridden": false
+    },
+    "tailwindcss": {
+      "version": "3.4.19",
+      "resolved": "https://registry.npmjs.org/tailwindcss/-/tailwindcss-3.4.19.tgz",
+      "overridden": false
+    },
+    "vite": {
+      "version": "5.4.21",
+      "resolved": "https://registry.npmjs.org/vite/-/vite-5.4.21.tgz",
+      "overridden": false
+    }
+  }
+}

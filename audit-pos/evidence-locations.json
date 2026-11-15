@@ -1,0 +1,1530 @@
+[
+  {
+    "path": "app/Http/Controllers/Apps/ProductController.php",
+    "symbol": "update",
+    "context_start": 184,
+    "context_end": 279,
+    "snippet_start": 252,
+    "snippet_end": 258
+  },
+  {
+    "path": "app/Http/Controllers/Apps/ProductController.php",
+    "symbol": "update",
+    "context_start": 184,
+    "context_end": 279,
+    "snippet_start": 224,
+    "snippet_end": 230
+  },
+  {
+    "path": "resources/js/Pages/Dashboard/Products/Create.jsx",
+    "symbol": "Create/addUnitRow",
+    "context_start": 21,
+    "context_end": 765,
+    "snippet_start": 55,
+    "snippet_end": 61
+  },
+  {
+    "path": "resources/js/Pages/Dashboard/Products/Edit.jsx",
+    "symbol": "Edit/addUnitRow",
+    "context_start": 21,
+    "context_end": 796,
+    "snippet_start": 74,
+    "snippet_end": 80
+  },
+  {
+    "path": "app/Http/Controllers/Apps/CustomerController.php",
+    "symbol": "store",
+    "context_start": 73,
+    "context_end": 113,
+    "snippet_start": 89,
+    "snippet_end": 95
+  },
+  {
+    "path": "app/Http/Controllers/Apps/MemberController.php",
+    "symbol": "resolveRegionPayload",
+    "context_start": 219,
+    "context_end": 236,
+    "snippet_start": 220,
+    "snippet_end": 226
+  },
+  {
+    "path": "app/Http/Controllers/Apps/CustomerController.php",
+    "symbol": "buildStats",
+    "context_start": 447,
+    "context_end": 456,
+    "snippet_start": 448,
+    "snippet_end": 454
+  },
+  {
+    "path": "app/Http/Controllers/Apps/MemberController.php",
+    "symbol": "buildStats",
+    "context_start": 261,
+    "context_end": 270,
+    "snippet_start": 262,
+    "snippet_end": 268
+  },
+  {
+    "path": "resources/js/Pages/Dashboard/Customers/Create.jsx",
+    "symbol": "Create",
+    "context_start": 14,
+    "context_end": 325,
+    "snippet_start": 23,
+    "snippet_end": 29
+  },
+  {
+    "path": "resources/js/Pages/Dashboard/Customers/Edit.jsx",
+    "symbol": "Edit",
+    "context_start": 10,
+    "context_end": 362,
+    "snippet_start": 27,
+    "snippet_end": 33
+  },
+  {
+    "path": "resources/js/Pages/Dashboard/Members/Form.jsx",
+    "symbol": "Form",
+    "context_start": 14,
+    "context_end": 443,
+    "snippet_start": 31,
+    "snippet_end": 37
+  },
+  {
+    "path": "resources/js/Pages/Dashboard/Customers/Show.jsx",
+    "symbol": "Show",
+    "context_start": 29,
+    "context_end": 496,
+    "snippet_start": 34,
+    "snippet_end": 40
+  },
+  {
+    "path": "resources/js/Pages/Dashboard/Members/Show.jsx",
+    "symbol": "Show",
+    "context_start": 30,
+    "context_end": 385,
+    "snippet_start": 32,
+    "snippet_end": 38
+  },
+  {
+    "path": "app/Http/Controllers/Apps/ReceivableController.php",
+    "symbol": "pay",
+    "context_start": 85,
+    "context_end": 144,
+    "snippet_start": 95,
+    "snippet_end": 101
+  },
+  {
+    "path": "app/Http/Controllers/Api/V1/ReceivableController.php",
+    "symbol": "payReceivable",
+    "context_start": 134,
+    "context_end": 191,
+    "snippet_start": 144,
+    "snippet_end": 150
+  },
+  {
+    "path": "app/Http/Controllers/Apps/PayableController.php",
+    "symbol": "pay",
+    "context_start": 166,
+    "context_end": 219,
+    "snippet_start": 176,
+    "snippet_end": 182
+  },
+  {
+    "path": "app/Http/Controllers/Api/V1/PayableController.php",
+    "symbol": "payPayable",
+    "context_start": 170,
+    "context_end": 221,
+    "snippet_start": 180,
+    "snippet_end": 186
+  },
+  {
+    "path": "app/Http/Controllers/Apps/ReceivableController.php",
+    "symbol": "index",
+    "context_start": 23,
+    "context_end": 63,
+    "snippet_start": 24,
+    "snippet_end": 30
+  },
+  {
+    "path": "app/Http/Controllers/Api/V1/ReceivableController.php",
+    "symbol": "listReceivables",
+    "context_start": 23,
+    "context_end": 60,
+    "snippet_start": 24,
+    "snippet_end": 30
+  },
+  {
+    "path": "app/Http/Controllers/Api/V1/PayableController.php",
+    "symbol": "listPayables",
+    "context_start": 25,
+    "context_end": 62,
+    "snippet_start": 26,
+    "snippet_end": 32
+  },
+  {
+    "path": "app/Http/Controllers/Apps/PayableController.php",
+    "symbol": "scopeQuery",
+    "context_start": 221,
+    "context_end": 232,
+    "snippet_start": 222,
+    "snippet_end": 228
+  },
+  {
+    "path": "app/Services/PayableAgingService.php",
+    "symbol": "scopeQuery",
+    "context_start": 34,
+    "context_end": 51,
+    "snippet_start": 39,
+    "snippet_end": 45
+  },
+  {
+    "path": "app/Models/Receivable.php",
+    "symbol": "getAgingBucketAttribute",
+    "context_start": 60,
+    "context_end": 82,
+    "snippet_start": 73,
+    "snippet_end": 79
+  },
+  {
+    "path": "app/Models/Payable.php",
+    "symbol": "getAgingBucketAttribute",
+    "context_start": 54,
+    "context_end": 76,
+    "snippet_start": 67,
+    "snippet_end": 73
+  },
+  {
+    "path": "app/Services/ReceivableService.php",
+    "symbol": "getAgingSummary",
+    "context_start": 12,
+    "context_end": 32,
+    "snippet_start": 18,
+    "snippet_end": 24
+  },
+  {
+    "path": "app/Services/PayableAgingService.php",
+    "symbol": "getAgingSummary",
+    "context_start": 12,
+    "context_end": 32,
+    "snippet_start": 18,
+    "snippet_end": 24
+  },
+  {
+    "path": "app/Http/Controllers/Apps/StockOpnameController.php",
+    "symbol": "finalize",
+    "context_start": 217,
+    "context_end": 310,
+    "snippet_start": 232,
+    "snippet_end": 238
+  },
+  {
+    "path": "app/Http/Controllers/Api/V1/StockOpnameController.php",
+    "symbol": "finalizeOpname",
+    "context_start": 197,
+    "context_end": 290,
+    "snippet_start": 212,
+    "snippet_end": 218
+  },
+  {
+    "path": "app/Http/Controllers/Apps/SalesReturnController.php",
+    "symbol": "complete",
+    "context_start": 180,
+    "context_end": 338,
+    "snippet_start": 187,
+    "snippet_end": 193
+  },
+  {
+    "path": "app/Http/Controllers/Api/V1/SalesReturnController.php",
+    "symbol": "completeReturn",
+    "context_start": 177,
+    "context_end": 328,
+    "snippet_start": 184,
+    "snippet_end": 190
+  },
+  {
+    "path": "app/Http/Requests/StoreSalesReturnRequest.php",
+    "symbol": "rules",
+    "context_start": 14,
+    "context_end": 25,
+    "snippet_start": 16,
+    "snippet_end": 22
+  },
+  {
+    "path": "app/Http/Requests/UpdateSalesReturnRequest.php",
+    "symbol": "rules",
+    "context_start": 14,
+    "context_end": 25,
+    "snippet_start": 16,
+    "snippet_end": 22
+  },
+  {
+    "path": "app/Http/Controllers/Apps/PricingRuleController.php",
+    "symbol": "validateRule",
+    "context_start": 268,
+    "context_end": 440,
+    "snippet_start": 269,
+    "snippet_end": 275
+  },
+  {
+    "path": "app/Services/PricingService.php",
+    "symbol": "buildPreview",
+    "context_start": 172,
+    "context_end": 295,
+    "snippet_start": 206,
+    "snippet_end": 212
+  },
+  {
+    "path": "app/Services/PricingService.php",
+    "symbol": "applyComplexStage",
+    "context_start": 297,
+    "context_end": 350,
+    "snippet_start": 304,
+    "snippet_end": 310
+  },
+  {
+    "path": "app/Services/PricingService.php",
+    "symbol": "calculateLineCandidate",
+    "context_start": 529,
+    "context_end": 584,
+    "snippet_start": 537,
+    "snippet_end": 543
+  },
+  {
+    "path": "app/Services/PricingService.php",
+    "symbol": "calculateLineCandidate",
+    "context_start": 529,
+    "context_end": 584,
+    "snippet_start": 562,
+    "snippet_end": 568
+  },
+  {
+    "path": "app/Services/LoyaltyService.php",
+    "symbol": "previewCheckout",
+    "context_start": 173,
+    "context_end": 286,
+    "snippet_start": 207,
+    "snippet_end": 213
+  },
+  {
+    "path": "app/Services/TaxService.php",
+    "symbol": "calculateTransactionTax",
+    "context_start": 42,
+    "context_end": 71,
+    "snippet_start": 47,
+    "snippet_end": 53
+  },
+  {
+    "path": "app/Services/TransactionTenderService.php",
+    "symbol": "normalize",
+    "context_start": 33,
+    "context_end": 167,
+    "snippet_start": 54,
+    "snippet_end": 60
+  },
+  {
+    "path": "app/Services/TransactionTenderService.php",
+    "symbol": "normalize",
+    "context_start": 33,
+    "context_end": 167,
+    "snippet_start": 143,
+    "snippet_end": 149
+  },
+  {
+    "path": "app/Services/CheckoutService.php",
+    "symbol": "execute",
+    "context_start": 31,
+    "context_end": 159,
+    "snippet_start": 90,
+    "snippet_end": 96
+  },
+  {
+    "path": "app/Services/CheckoutService.php",
+    "symbol": "execute",
+    "context_start": 31,
+    "context_end": 159,
+    "snippet_start": 132,
+    "snippet_end": 138
+  },
+  {
+    "path": "app/Services/CheckoutService.php",
+    "symbol": "processCartItems",
+    "context_start": 161,
+    "context_end": 325,
+    "snippet_start": 160,
+    "snippet_end": 166
+  },
+  {
+    "path": "app/Services/CheckoutService.php",
+    "symbol": "processCartItems",
+    "context_start": 161,
+    "context_end": 325,
+    "snippet_start": 286,
+    "snippet_end": 292
+  },
+  {
+    "path": "app/Services/DineOrderService.php",
+    "symbol": "accept",
+    "context_start": 22,
+    "context_end": 212,
+    "snippet_start": 167,
+    "snippet_end": 173
+  },
+  {
+    "path": "app/Http/Controllers/Apps/TransactionController.php",
+    "symbol": "addToCart",
+    "context_start": 252,
+    "context_end": 335,
+    "snippet_start": 272,
+    "snippet_end": 278
+  },
+  {
+    "path": "app/Http/Controllers/Api/PosApiController.php",
+    "symbol": "addToCart",
+    "context_start": 269,
+    "context_end": 351,
+    "snippet_start": 290,
+    "snippet_end": 296
+  },
+  {
+    "path": "app/Http/Controllers/Apps/TransactionController.php",
+    "symbol": "holdCart",
+    "context_start": 434,
+    "context_end": 468,
+    "snippet_start": 442,
+    "snippet_end": 448
+  },
+  {
+    "path": "app/Http/Controllers/Api/PosApiController.php",
+    "symbol": "holdCart",
+    "context_start": 427,
+    "context_end": 450,
+    "snippet_start": 433,
+    "snippet_end": 439
+  },
+  {
+    "path": "app/Http/Controllers/Apps/TransactionController.php",
+    "symbol": "store",
+    "context_start": 594,
+    "context_end": 733,
+    "snippet_start": 666,
+    "snippet_end": 672
+  },
+  {
+    "path": "app/Http/Controllers/Api/PosApiController.php",
+    "symbol": "checkout",
+    "context_start": 525,
+    "context_end": 705,
+    "snippet_start": 625,
+    "snippet_end": 631
+  },
+  {
+    "path": "app/Http/Controllers/Apps/TransactionController.php",
+    "symbol": "store",
+    "context_start": 594,
+    "context_end": 733,
+    "snippet_start": 685,
+    "snippet_end": 691
+  },
+  {
+    "path": "app/Http/Controllers/Api/PosApiController.php",
+    "symbol": "checkout",
+    "context_start": 525,
+    "context_end": 705,
+    "snippet_start": 648,
+    "snippet_end": 654
+  },
+  {
+    "path": "app/Http/Controllers/Api/PosApiController.php",
+    "symbol": "syncOne",
+    "context_start": 768,
+    "context_end": 920,
+    "snippet_start": 852,
+    "snippet_end": 858
+  },
+  {
+    "path": "app/Http/Controllers/Api/PosApiController.php",
+    "symbol": "syncOne",
+    "context_start": 768,
+    "context_end": 920,
+    "snippet_start": 872,
+    "snippet_end": 878
+  },
+  {
+    "path": "resources/js/Pages/Dashboard/Transactions/Index.jsx",
+    "symbol": "Index/flushPendingTransactions",
+    "context_start": 53,
+    "context_end": 2081,
+    "snippet_start": 470,
+    "snippet_end": 476
+  },
+  {
+    "path": "resources/js/Utils/offlineDb.js",
+    "symbol": "getPendingTransactions",
+    "context_start": 99,
+    "context_end": 118,
+    "snippet_start": 101,
+    "snippet_end": 107
+  },
+  {
+    "path": "resources/js/Pages/Dashboard/Transactions/Index.jsx",
+    "symbol": "Index",
+    "context_start": 53,
+    "context_end": 2081,
+    "snippet_start": 52,
+    "snippet_end": 58
+  },
+  {
+    "path": "resources/js/Pages/Dashboard/Transactions/Index.jsx",
+    "symbol": "Index",
+    "context_start": 53,
+    "context_end": 2081,
+    "snippet_start": 862,
+    "snippet_end": 868
+  },
+  {
+    "path": "resources/js/Pages/Dashboard/Transactions/Index.jsx",
+    "symbol": "Index/handleSubmitTransaction",
+    "context_start": 53,
+    "context_end": 2081,
+    "snippet_start": 739,
+    "snippet_end": 745
+  },
+  {
+    "path": "resources/js/Pages/Dashboard/Transactions/Index.jsx",
+    "symbol": "Index/handleSubmitTransaction",
+    "context_start": 53,
+    "context_end": 2081,
+    "snippet_start": 778,
+    "snippet_end": 784
+  },
+  {
+    "path": "resources/js/Pages/Dashboard/Transactions/Index.jsx",
+    "symbol": "formatPrice",
+    "context_start": 43,
+    "context_end": 48,
+    "snippet_start": 42,
+    "snippet_end": 48
+  },
+  {
+    "path": "resources/js/Pages/Dashboard/Transactions/Print.jsx",
+    "symbol": "Print/formatPrice",
+    "context_start": 23,
+    "context_end": 1045,
+    "snippet_start": 60,
+    "snippet_end": 66
+  },
+  {
+    "path": "resources/js/Pages/Dashboard/Transactions/Print.jsx",
+    "symbol": "Print",
+    "context_start": 23,
+    "context_end": 1045,
+    "snippet_start": 36,
+    "snippet_end": 42
+  },
+  {
+    "path": "resources/js/Pages/Dashboard/Transactions/Print.jsx",
+    "symbol": "Print/handleThermalPrint",
+    "context_start": 23,
+    "context_end": 1045,
+    "snippet_start": 237,
+    "snippet_end": 243
+  },
+  {
+    "path": "resources/js/Pages/Dashboard/Transactions/Print.jsx",
+    "symbol": "Print/receiptData",
+    "context_start": 23,
+    "context_end": 1045,
+    "snippet_start": 164,
+    "snippet_end": 170
+  },
+  {
+    "path": "resources/js/Components/Receipt/ThermalReceipt.jsx",
+    "symbol": "ThermalReceipt",
+    "context_start": 13,
+    "context_end": 275,
+    "snippet_start": 59,
+    "snippet_end": 65
+  },
+  {
+    "path": "app/Services/ThermalPrintService.php",
+    "symbol": "generateReceiptText",
+    "context_start": 12,
+    "context_end": 102,
+    "snippet_start": 48,
+    "snippet_end": 54
+  },
+  {
+    "path": "app/Http/Controllers/DocumentController.php",
+    "symbol": "storeProfile",
+    "context_start": 36,
+    "context_end": 66,
+    "snippet_start": 37,
+    "snippet_end": 43
+  },
+  {
+    "path": "app/Http/Middleware/HandleInertiaRequests.php",
+    "symbol": "share",
+    "context_start": 33,
+    "context_end": 290,
+    "snippet_start": 226,
+    "snippet_end": 232
+  },
+  {
+    "path": "resources/views/pdf/receipt_58.blade.php",
+    "symbol": "Blade receipt_58",
+    "context_start": 32,
+    "context_end": 39,
+    "snippet_start": 32,
+    "snippet_end": 38
+  },
+  {
+    "path": "resources/views/pdf/receipt_80.blade.php",
+    "symbol": "Blade receipt_80",
+    "context_start": 46,
+    "context_end": 53,
+    "snippet_start": 46,
+    "snippet_end": 52
+  },
+  {
+    "path": "resources/views/pdf/payable.blade.php",
+    "symbol": "Blade payable",
+    "context_start": 4,
+    "context_end": 11,
+    "snippet_start": 4,
+    "snippet_end": 10
+  },
+  {
+    "path": "resources/views/pdf/receivable.blade.php",
+    "symbol": "Blade receivable",
+    "context_start": 4,
+    "context_end": 11,
+    "snippet_start": 4,
+    "snippet_end": 10
+  },
+  {
+    "path": "app/Http/Controllers/Reports/SalesReportController.php",
+    "symbol": "applyFilters",
+    "context_start": 103,
+    "context_end": 112,
+    "snippet_start": 104,
+    "snippet_end": 110
+  },
+  {
+    "path": "app/Http/Controllers/Reports/ProfitReportController.php",
+    "symbol": "applyFilters",
+    "context_start": 93,
+    "context_end": 102,
+    "snippet_start": 94,
+    "snippet_end": 100
+  },
+  {
+    "path": "app/Http/Controllers/Reports/AdvancedSalesInsightsController.php",
+    "symbol": "reportData",
+    "context_start": 40,
+    "context_end": 124,
+    "snippet_start": 90,
+    "snippet_end": 96
+  },
+  {
+    "path": "app/Http/Controllers/Reports/AdvancedSalesInsightsController.php",
+    "symbol": "stockCoverageAnalysis",
+    "context_start": 495,
+    "context_end": 592,
+    "snippet_start": 498,
+    "snippet_end": 504
+  },
+  {
+    "path": "app/Http/Controllers/Reports/AdvancedSalesInsightsController.php",
+    "symbol": "topSellingProducts",
+    "context_start": 171,
+    "context_end": 210,
+    "snippet_start": 182,
+    "snippet_end": 188
+  },
+  {
+    "path": "app/Http/Controllers/Reports/AdvancedSalesInsightsController.php",
+    "symbol": "lowPerformingProducts",
+    "context_start": 212,
+    "context_end": 272,
+    "snippet_start": 218,
+    "snippet_end": 224
+  },
+  {
+    "path": "resources/js/Pages/Dashboard/Reports/Insights.jsx",
+    "symbol": "Insights",
+    "context_start": 169,
+    "context_end": 1298,
+    "snippet_start": 168,
+    "snippet_end": 174
+  },
+  {
+    "path": "resources/js/Pages/Dashboard/Reports/Insights.jsx",
+    "symbol": "Insights",
+    "context_start": 169,
+    "context_end": 1298,
+    "snippet_start": 184,
+    "snippet_end": 190
+  },
+  {
+    "path": "resources/js/Pages/Dashboard/Reports/Insights.jsx",
+    "symbol": "Insights/useEffect chart",
+    "context_start": 169,
+    "context_end": 1298,
+    "snippet_start": 241,
+    "snippet_end": 247
+  },
+  {
+    "path": "resources/js/Pages/Dashboard/Reports/Insights.jsx",
+    "symbol": "Insights/useEffect chart",
+    "context_start": 169,
+    "context_end": 1298,
+    "snippet_start": 277,
+    "snippet_end": 283
+  },
+  {
+    "path": "app/Http/Controllers/DashboardController.php",
+    "symbol": "index",
+    "context_start": 22,
+    "context_end": 248,
+    "snippet_start": 23,
+    "snippet_end": 29
+  },
+  {
+    "path": "app/Http/Controllers/DashboardController.php",
+    "symbol": "index",
+    "context_start": 22,
+    "context_end": 248,
+    "snippet_start": 218,
+    "snippet_end": 224
+  },
+  {
+    "path": "app/Http/Middleware/HandleInertiaRequests.php",
+    "symbol": "share",
+    "context_start": 33,
+    "context_end": 290,
+    "snippet_start": 85,
+    "snippet_end": 91
+  },
+  {
+    "path": "app/Http/Middleware/HandleInertiaRequests.php",
+    "symbol": "share",
+    "context_start": 33,
+    "context_end": 290,
+    "snippet_start": 115,
+    "snippet_end": 121
+  },
+  {
+    "path": "app/Http/Controllers/Apps/SettingController.php",
+    "symbol": "updateStoreProfile",
+    "context_start": 85,
+    "context_end": 153,
+    "snippet_start": 87,
+    "snippet_end": 93
+  },
+  {
+    "path": "app/Http/Controllers/Api/V1/SettingController.php",
+    "symbol": "updateStoreProfile",
+    "context_start": 78,
+    "context_end": 146,
+    "snippet_start": 80,
+    "snippet_end": 86
+  },
+  {
+    "path": "app/Http/Controllers/Apps/PaymentSettingController.php",
+    "symbol": "update",
+    "context_start": 82,
+    "context_end": 217,
+    "snippet_start": 105,
+    "snippet_end": 111
+  },
+  {
+    "path": "app/Http/Controllers/Api/V1/PaymentSettingController.php",
+    "symbol": "updatePaymentSettings",
+    "context_start": 66,
+    "context_end": 189,
+    "snippet_start": 89,
+    "snippet_end": 95
+  },
+  {
+    "path": "app/Http/Controllers/Api/V1/SalesReportController.php",
+    "symbol": "sales",
+    "context_start": 10,
+    "context_end": 17,
+    "snippet_start": 10,
+    "snippet_end": 16
+  },
+  {
+    "path": "app/Http/Controllers/Api/V1/ReceivableController.php",
+    "symbol": "payReceivable",
+    "context_start": 14,
+    "context_end": 21,
+    "snippet_start": 14,
+    "snippet_end": 20
+  },
+  {
+    "path": "app/Http/Controllers/UserController.php",
+    "symbol": "destroy",
+    "context_start": 188,
+    "context_end": 255,
+    "snippet_start": 199,
+    "snippet_end": 205
+  },
+  {
+    "path": "app/Http/Controllers/Api/V1/UserController.php",
+    "symbol": "destroyUser",
+    "context_start": 177,
+    "context_end": 241,
+    "snippet_start": 178,
+    "snippet_end": 184
+  },
+  {
+    "path": "app/Services/PurchaseOrderService.php",
+    "symbol": "generateDocumentNumber",
+    "context_start": 19,
+    "context_end": 29,
+    "snippet_start": 20,
+    "snippet_end": 26
+  },
+  {
+    "path": "app/Services/GoodsReceivingService.php",
+    "symbol": "generateDocumentNumber",
+    "context_start": 26,
+    "context_end": 36,
+    "snippet_start": 27,
+    "snippet_end": 33
+  },
+  {
+    "path": "app/Services/SupplierReturnService.php",
+    "symbol": "generateDocumentNumber",
+    "context_start": 23,
+    "context_end": 33,
+    "snippet_start": 24,
+    "snippet_end": 30
+  },
+  {
+    "path": "app/Services/StockTransferService.php",
+    "symbol": "generateDocumentNumber",
+    "context_start": 23,
+    "context_end": 33,
+    "snippet_start": 24,
+    "snippet_end": 30
+  },
+  {
+    "path": "app/Services/GoodsReceivingService.php",
+    "symbol": "receive",
+    "context_start": 38,
+    "context_end": 150,
+    "snippet_start": 64,
+    "snippet_end": 70
+  },
+  {
+    "path": "app/Services/GoodsReceivingService.php",
+    "symbol": "createOrUpdatePayable",
+    "context_start": 166,
+    "context_end": 203,
+    "snippet_start": 173,
+    "snippet_end": 179
+  },
+  {
+    "path": "app/Services/StockMutationService.php",
+    "symbol": "recordStockOpnameAdjustment",
+    "context_start": 98,
+    "context_end": 154,
+    "snippet_start": 127,
+    "snippet_end": 133
+  },
+  {
+    "path": "app/Services/StockMutationService.php",
+    "symbol": "recordSalesReturnRestock",
+    "context_start": 156,
+    "context_end": 212,
+    "snippet_start": 185,
+    "snippet_end": 191
+  },
+  {
+    "path": "app/Services/StockMutationService.php",
+    "symbol": "recordMutation",
+    "context_start": 18,
+    "context_end": 42,
+    "snippet_start": 17,
+    "snippet_end": 23
+  },
+  {
+    "path": "app/Services/CrmAutomationService.php",
+    "symbol": "processCampaign",
+    "context_start": 132,
+    "context_end": 176,
+    "snippet_start": 146,
+    "snippet_end": 152
+  },
+  {
+    "path": "app/Services/CrmAutomationService.php",
+    "symbol": "buildAudience",
+    "context_start": 45,
+    "context_end": 104,
+    "snippet_start": 67,
+    "snippet_end": 73
+  },
+  {
+    "path": "app/Services/CrmAutomationService.php",
+    "symbol": "generateDueSoonCampaign",
+    "context_start": 312,
+    "context_end": 337,
+    "snippet_start": 314,
+    "snippet_end": 320
+  },
+  {
+    "path": "app/Services/CrmAutomationService.php",
+    "symbol": "generateOverdueCampaign",
+    "context_start": 339,
+    "context_end": 364,
+    "snippet_start": 341,
+    "snippet_end": 347
+  },
+  {
+    "path": "app/Services/WhatsAppService.php",
+    "symbol": "status",
+    "context_start": 45,
+    "context_end": 54,
+    "snippet_start": 46,
+    "snippet_end": 52
+  },
+  {
+    "path": "app/Services/WhatsAppService.php",
+    "symbol": "start",
+    "context_start": 56,
+    "context_end": 65,
+    "snippet_start": 57,
+    "snippet_end": 63
+  },
+  {
+    "path": "whatsapp-service/server.js",
+    "symbol": "createClient",
+    "context_start": 31,
+    "context_end": 38,
+    "snippet_start": 31,
+    "snippet_end": 37
+  },
+  {
+    "path": "whatsapp-service/server.js",
+    "symbol": "createClient",
+    "context_start": 38,
+    "context_end": 70,
+    "snippet_start": 37,
+    "snippet_end": 43
+  },
+  {
+    "path": "app/Models/Setting.php",
+    "symbol": "getForOutlet",
+    "context_start": 45,
+    "context_end": 59,
+    "snippet_start": 47,
+    "snippet_end": 53
+  },
+  {
+    "path": "app/Models/Setting.php",
+    "symbol": "setForOutlet",
+    "context_start": 66,
+    "context_end": 80,
+    "snippet_start": 71,
+    "snippet_end": 77
+  },
+  {
+    "path": "tests/Feature/Products/BatchAllocationTest.php",
+    "symbol": "setUp",
+    "context_start": 33,
+    "context_end": 61,
+    "snippet_start": 37,
+    "snippet_end": 43
+  },
+  {
+    "path": "tests/Feature/Products/BatchFefoTest.php",
+    "symbol": "setUp",
+    "context_start": 35,
+    "context_end": 65,
+    "snippet_start": 39,
+    "snippet_end": 45
+  },
+  {
+    "path": "tests/Feature/Reports/AdvancedSalesInsightsTest.php",
+    "symbol": "test_wave_three_summaries_include_promo_loyalty_and_crm_operational_metrics",
+    "context_start": 259,
+    "context_end": 408,
+    "snippet_start": 258,
+    "snippet_end": 264
+  },
+  {
+    "path": "app/Services/CheckoutService.php",
+    "symbol": "__construct",
+    "context_start": 21,
+    "context_end": 29,
+    "snippet_start": 25,
+    "snippet_end": 31
+  },
+  {
+    "path": "app/Http/Controllers/Apps/TransactionController.php",
+    "symbol": "__construct",
+    "context_start": 41,
+    "context_end": 51,
+    "snippet_start": 46,
+    "snippet_end": 52
+  },
+  {
+    "path": "app/Services/BatchService.php",
+    "symbol": "getAvailableBatches",
+    "context_start": 11,
+    "context_end": 22,
+    "snippet_start": 10,
+    "snippet_end": 16
+  },
+  {
+    "path": "resources/js/Pages/Dashboard/Transactions/Index.jsx",
+    "symbol": "Index/LowStockAlerts",
+    "context_start": 53,
+    "context_end": 2081,
+    "snippet_start": 169,
+    "snippet_end": 175
+  },
+  {
+    "path": "resources/js/Components/POS/index.jsx",
+    "symbol": "barrel exports",
+    "context_start": 3,
+    "context_end": 7,
+    "snippet_start": 3,
+    "snippet_end": 7
+  },
+  {
+    "path": "resources/js/Utils/Permission.jsx",
+    "symbol": "hasAnyPermission",
+    "context_start": 3,
+    "context_end": 14,
+    "snippet_start": 2,
+    "snippet_end": 8
+  },
+  {
+    "path": "resources/js/Utils/authorization.js",
+    "symbol": "useAuthorization",
+    "context_start": 36,
+    "context_end": 46,
+    "snippet_start": 35,
+    "snippet_end": 41
+  },
+  {
+    "path": "resources/js/Components/Modal.jsx",
+    "symbol": "Modal",
+    "context_start": 4,
+    "context_end": 57,
+    "snippet_start": 10,
+    "snippet_end": 16
+  },
+  {
+    "path": "resources/js/Components/Dashboard/Modal.jsx",
+    "symbol": "Modal",
+    "context_start": 4,
+    "context_end": 62,
+    "snippet_start": 10,
+    "snippet_end": 16
+  },
+  {
+    "path": "resources/js/Pages/Dashboard/PurchaseOrders/Create.jsx",
+    "symbol": "Create",
+    "context_start": 22,
+    "context_end": 273,
+    "snippet_start": 37,
+    "snippet_end": 43
+  },
+  {
+    "path": "resources/js/Pages/Dashboard/StockTransfers/Create.jsx",
+    "symbol": "Create",
+    "context_start": 8,
+    "context_end": 168,
+    "snippet_start": 21,
+    "snippet_end": 27
+  },
+  {
+    "path": "resources/js/Pages/Dashboard/SupplierReturns/Create.jsx",
+    "symbol": "Create",
+    "context_start": 20,
+    "context_end": 347,
+    "snippet_start": 40,
+    "snippet_end": 46
+  },
+  {
+    "path": "resources/js/Pages/Dashboard/Transactions/History.jsx",
+    "symbol": "History",
+    "context_start": 37,
+    "context_end": 762,
+    "snippet_start": 46,
+    "snippet_end": 52
+  },
+  {
+    "path": "resources/js/Pages/Dashboard/Transactions/Print.jsx",
+    "symbol": "Print",
+    "context_start": 23,
+    "context_end": 1045,
+    "snippet_start": 26,
+    "snippet_end": 32
+  },
+  {
+    "path": "resources/js/Pages/Dashboard/CrmCampaigns/Index.jsx",
+    "symbol": "Index",
+    "context_start": 10,
+    "context_end": 19,
+    "snippet_start": 9,
+    "snippet_end": 15
+  },
+  {
+    "path": "resources/js/Pages/Dashboard/CrmReminders/Index.jsx",
+    "symbol": "Index",
+    "context_start": 8,
+    "context_end": 108,
+    "snippet_start": 37,
+    "snippet_end": 43
+  },
+  {
+    "path": "resources/js/Pages/Dashboard/PurchaseOrders/Index.jsx",
+    "symbol": "Index",
+    "context_start": 23,
+    "context_end": 40,
+    "snippet_start": 22,
+    "snippet_end": 28
+  },
+  {
+    "path": "resources/js/Pages/Dashboard/PurchaseOrders/Show.jsx",
+    "symbol": "Show",
+    "context_start": 32,
+    "context_end": 49,
+    "snippet_start": 31,
+    "snippet_end": 37
+  },
+  {
+    "path": "resources/js/Pages/Dashboard/SupplierReturns/Show.jsx",
+    "symbol": "Show",
+    "context_start": 30,
+    "context_end": 43,
+    "snippet_start": 29,
+    "snippet_end": 35
+  },
+  {
+    "path": "database/seeders/FeatureCoverageSeeder.php",
+    "symbol": "seedPurchaseFlow",
+    "context_start": 265,
+    "context_end": 521,
+    "snippet_start": 264,
+    "snippet_end": 270
+  },
+  {
+    "path": "database/seeders/FeatureCoverageSeeder.php",
+    "symbol": "seedStockOpnames",
+    "context_start": 523,
+    "context_end": 663,
+    "snippet_start": 522,
+    "snippet_end": 528
+  },
+  {
+    "path": "app/Imports/ProductsImport.php",
+    "symbol": "model",
+    "context_start": 17,
+    "context_end": 44,
+    "snippet_start": 19,
+    "snippet_end": 25
+  },
+  {
+    "path": "app/Imports/ProductsImport.php",
+    "symbol": "model",
+    "context_start": 17,
+    "context_end": 44,
+    "snippet_start": 27,
+    "snippet_end": 33
+  },
+  {
+    "path": "app/Console/Commands/ExpirePendingTransactionsCommand.php",
+    "symbol": "handle",
+    "context_start": 16,
+    "context_end": 112,
+    "snippet_start": 49,
+    "snippet_end": 55
+  },
+  {
+    "path": "app/Console/Commands/ExpirePendingTransactionsCommand.php",
+    "symbol": "restock",
+    "context_start": 114,
+    "context_end": 133,
+    "snippet_start": 115,
+    "snippet_end": 121
+  },
+  {
+    "path": "app/Console/Commands/InventoryReconcileCommand.php",
+    "symbol": "handle",
+    "context_start": 15,
+    "context_end": 59,
+    "snippet_start": 18,
+    "snippet_end": 24
+  },
+  {
+    "path": "app/Console/Commands/AuditOutletCommand.php",
+    "symbol": "auditStock",
+    "context_start": 90,
+    "context_end": 107,
+    "snippet_start": 95,
+    "snippet_end": 101
+  },
+  {
+    "path": "database/seeders/DemoDatabaseResetter.php",
+    "symbol": "assertInventoryAggregate",
+    "context_start": 138,
+    "context_end": 155,
+    "snippet_start": 143,
+    "snippet_end": 149
+  },
+  {
+    "path": "app/Http/Controllers/SetupController.php",
+    "symbol": "store",
+    "context_start": 42,
+    "context_end": 193,
+    "snippet_start": 102,
+    "snippet_end": 108
+  },
+  {
+    "path": "app/Http/Controllers/SetupController.php",
+    "symbol": "store",
+    "context_start": 42,
+    "context_end": 193,
+    "snippet_start": 146,
+    "snippet_end": 152
+  },
+  {
+    "path": "resources/js/Pages/Setup/Wizard.jsx",
+    "symbol": "Wizard",
+    "context_start": 27,
+    "context_end": 940,
+    "snippet_start": 26,
+    "snippet_end": 32
+  },
+  {
+    "path": "resources/js/Pages/Setup/Wizard.jsx",
+    "symbol": "Wizard",
+    "context_start": 27,
+    "context_end": 940,
+    "snippet_start": 191,
+    "snippet_end": 197
+  },
+  {
+    "path": "resources/js/Pages/Dashboard/PricingRules/Form.jsx",
+    "symbol": "Form",
+    "context_start": 55,
+    "context_end": 844,
+    "snippet_start": 54,
+    "snippet_end": 60
+  },
+  {
+    "path": "resources/js/Pages/Dashboard/PricingRules/Form.jsx",
+    "symbol": "Form",
+    "context_start": 55,
+    "context_end": 844,
+    "snippet_start": 104,
+    "snippet_end": 110
+  },
+  {
+    "path": "app/Http/Controllers/Apps/GoodsReceivingController.php",
+    "symbol": "store",
+    "context_start": 70,
+    "context_end": 121,
+    "snippet_start": 71,
+    "snippet_end": 77
+  },
+  {
+    "path": "app/Http/Controllers/Api/V1/GoodsReceivingController.php",
+    "symbol": "storeReceiving",
+    "context_start": 73,
+    "context_end": 122,
+    "snippet_start": 74,
+    "snippet_end": 80
+  },
+  {
+    "path": "app/Http/Controllers/Apps/SupplierReturnController.php",
+    "symbol": "store",
+    "context_start": 78,
+    "context_end": 102,
+    "snippet_start": 79,
+    "snippet_end": 85
+  },
+  {
+    "path": "app/Http/Controllers/Apps/StockOpnameController.php",
+    "symbol": "updateItem",
+    "context_start": 181,
+    "context_end": 215,
+    "snippet_start": 186,
+    "snippet_end": 192
+  },
+  {
+    "path": "app/Http/Controllers/Api/V1/StockOpnameController.php",
+    "symbol": "updateOpnameItem",
+    "context_start": 155,
+    "context_end": 191,
+    "snippet_start": 160,
+    "snippet_end": 166
+  },
+  {
+    "path": "app/Http/Controllers/Apps/CustomerVoucherController.php",
+    "symbol": "index",
+    "context_start": 22,
+    "context_end": 64,
+    "snippet_start": 29,
+    "snippet_end": 35
+  },
+  {
+    "path": "app/Http/Controllers/Api/V1/CustomerVoucherController.php",
+    "symbol": "listVouchers",
+    "context_start": 19,
+    "context_end": 58,
+    "snippet_start": 26,
+    "snippet_end": 32
+  },
+  {
+    "path": "app/Http/Controllers/Apps/CustomerSegmentController.php",
+    "symbol": "show",
+    "context_start": 65,
+    "context_end": 97,
+    "snippet_start": 74,
+    "snippet_end": 80
+  },
+  {
+    "path": "app/Http/Controllers/Api/V1/CustomerSegmentController.php",
+    "symbol": "showSegment",
+    "context_start": 59,
+    "context_end": 91,
+    "snippet_start": 68,
+    "snippet_end": 74
+  },
+  {
+    "path": "app/Http/Controllers/Apps/DineTableController.php",
+    "symbol": "store",
+    "context_start": 54,
+    "context_end": 73,
+    "snippet_start": 55,
+    "snippet_end": 61
+  },
+  {
+    "path": "app/Http/Controllers/Apps/DineTableController.php",
+    "symbol": "update",
+    "context_start": 75,
+    "context_end": 93,
+    "snippet_start": 77,
+    "snippet_end": 83
+  },
+  {
+    "path": "app/Http/Controllers/Api/V1/DineTableController.php",
+    "symbol": "storeTable",
+    "context_start": 61,
+    "context_end": 80,
+    "snippet_start": 62,
+    "snippet_end": 68
+  },
+  {
+    "path": "app/Http/Controllers/Apps/OutletController.php",
+    "symbol": "store",
+    "context_start": 30,
+    "context_end": 65,
+    "snippet_start": 34,
+    "snippet_end": 40
+  },
+  {
+    "path": "app/Http/Controllers/Api/V1/OutletController.php",
+    "symbol": "storeOutlet",
+    "context_start": 34,
+    "context_end": 71,
+    "snippet_start": 38,
+    "snippet_end": 44
+  },
+  {
+    "path": "app/Http/Controllers/Apps/AuditLogController.php",
+    "symbol": "index",
+    "context_start": 19,
+    "context_end": 66,
+    "snippet_start": 20,
+    "snippet_end": 26
+  },
+  {
+    "path": "app/Http/Controllers/Api/V1/AuditLogController.php",
+    "symbol": "listAuditLogs",
+    "context_start": 20,
+    "context_end": 67,
+    "snippet_start": 21,
+    "snippet_end": 27
+  },
+  {
+    "path": "app/Http/Controllers/Apps/DiscountApprovalController.php",
+    "symbol": "pending",
+    "context_start": 21,
+    "context_end": 53,
+    "snippet_start": 25,
+    "snippet_end": 31
+  },
+  {
+    "path": "app/Http/Controllers/Api/V1/DiscountApprovalController.php",
+    "symbol": "listPending",
+    "context_start": 20,
+    "context_end": 52,
+    "snippet_start": 24,
+    "snippet_end": 30
+  },
+  {
+    "path": "app/Http/Middleware/HandleInertiaRequests.php",
+    "symbol": "share",
+    "context_start": 33,
+    "context_end": 290,
+    "snippet_start": 57,
+    "snippet_end": 63
+  },
+  {
+    "path": "resources/js/Pages/Dashboard/Users/Create.jsx",
+    "symbol": "Create",
+    "context_start": 15,
+    "context_end": 232,
+    "snippet_start": 22,
+    "snippet_end": 28
+  },
+  {
+    "path": "resources/js/Pages/Dashboard/Users/Edit.jsx",
+    "symbol": "Edit",
+    "context_start": 15,
+    "context_end": 237,
+    "snippet_start": 22,
+    "snippet_end": 28
+  },
+  {
+    "path": "resources/js/Pages/Dashboard/Categories/Create.jsx",
+    "symbol": "Create",
+    "context_start": 14,
+    "context_end": 137,
+    "snippet_start": 24,
+    "snippet_end": 30
+  },
+  {
+    "path": "resources/js/Pages/Dashboard/Categories/Edit.jsx",
+    "symbol": "Edit",
+    "context_start": 14,
+    "context_end": 140,
+    "snippet_start": 26,
+    "snippet_end": 32
+  },
+  {
+    "path": "resources/js/Pages/Dashboard/Reports/Sales.jsx",
+    "symbol": "Sales",
+    "context_start": 45,
+    "context_end": 52,
+    "snippet_start": 45,
+    "snippet_end": 51
+  },
+  {
+    "path": "resources/js/Pages/Dashboard/Reports/Profit.jsx",
+    "symbol": "Profit",
+    "context_start": 41,
+    "context_end": 48,
+    "snippet_start": 41,
+    "snippet_end": 47
+  },
+  {
+    "path": "resources/js/Pages/Dashboard/Payables/Show.jsx",
+    "symbol": "Show",
+    "context_start": 31,
+    "context_end": 506,
+    "snippet_start": 40,
+    "snippet_end": 46
+  },
+  {
+    "path": "resources/js/Pages/Dashboard/Receivables/Show.jsx",
+    "symbol": "Show",
+    "context_start": 21,
+    "context_end": 594,
+    "snippet_start": 30,
+    "snippet_end": 36
+  },
+  {
+    "path": "app/Http/Controllers/Apps/BankAccountController.php",
+    "symbol": "store",
+    "context_start": 59,
+    "context_end": 95,
+    "snippet_start": 66,
+    "snippet_end": 72
+  },
+  {
+    "path": "app/Http/Controllers/Apps/BankAccountController.php",
+    "symbol": "update",
+    "context_start": 100,
+    "context_end": 140,
+    "snippet_start": 110,
+    "snippet_end": 116
+  },
+  {
+    "path": "app/Http/Controllers/Api/V1/BankAccountController.php",
+    "symbol": "updateBankAccount",
+    "context_start": 77,
+    "context_end": 121,
+    "snippet_start": 88,
+    "snippet_end": 94
+  },
+  {
+    "path": "app/Services/DineOrderService.php",
+    "symbol": "accept",
+    "context_start": 22,
+    "context_end": 212,
+    "snippet_start": 57,
+    "snippet_end": 63
+  },
+  {
+    "path": "app/Services/DineOrderService.php",
+    "symbol": "accept",
+    "context_start": 22,
+    "context_end": 212,
+    "snippet_start": 97,
+    "snippet_end": 103
+  },
+  {
+    "path": "app/Http/Controllers/DineOrderController.php",
+    "symbol": "store",
+    "context_start": 20,
+    "context_end": 100,
+    "snippet_start": 48,
+    "snippet_end": 54
+  },
+  {
+    "path": "app/Http/Controllers/DineOrderController.php",
+    "symbol": "store",
+    "context_start": 20,
+    "context_end": 100,
+    "snippet_start": 80,
+    "snippet_end": 86
+  },
+  {
+    "path": "app/Http/Controllers/Api/PaymentWebhookController.php",
+    "symbol": "midtrans",
+    "context_start": 19,
+    "context_end": 125,
+    "snippet_start": 87,
+    "snippet_end": 93
+  },
+  {
+    "path": "app/Http/Controllers/Api/PaymentWebhookController.php",
+    "symbol": "xendit",
+    "context_start": 131,
+    "context_end": 246,
+    "snippet_start": 208,
+    "snippet_end": 214
+  },
+  {
+    "path": "database/migrations/2026_06_22_000009_add_tax_settings.php",
+    "symbol": "up",
+    "context_start": 8,
+    "context_end": 13,
+    "snippet_start": 9,
+    "snippet_end": 15
+  },
+  {
+    "path": "database/migrations/2026_09_14_000002_add_outlet_id_to_warehouses_table.php",
+    "symbol": "up",
+    "context_start": 11,
+    "context_end": 39,
+    "snippet_start": 18,
+    "snippet_end": 24
+  }
+]

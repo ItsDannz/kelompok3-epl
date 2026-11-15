@@ -1,0 +1,79 @@
+Browser tab: 1, Title: "Edit Produk - Laravel", URL: "http://127.0.0.1:8000/dashboard/products/1/edit".
+The following is a diff from the previous accessibility tree with ~ and + representing changed and added elements, respectively. Removed elements are summarized by ID range.
+Removed element IDs: 90-92, 94-288
+~1 AXWebArea Edit Produk - Laravel, URL: 127.0.0.1:8000/dashboard/products/1/edit
+~			69 heading Dashboard, Value: 1
+~				70 text Dashboard
+~			89 link Description: Kembali ke Produk, Value: 127.0.0.1:8000/dashboard/products
++			90 heading Edit Produk, Value: 1
++				91 image
++				92 text Edit Produk
+~			93 text Aqua Botol 600ml
++			94 container
++				95 heading Gambar Produk, Value: 3
++					96 image
++					97 text Gambar Produk
++				98 image
++				99 text Belum ada gambar Ganti Gambar
++				100 button Choose file
++				101 heading Informasi Dasar, Value: 3
++					102 image
++					103 text Informasi Dasar
++				104 text Kategori
++				105 pop up button (collapsed) Minuman, ID: headlessui-listbox-button-_r_b_, Secondary Actions: Expand
++					106 text Minuman
++					107 image
++				108 text Barcode
++				109 text field (settable) MNM-0001
++				110 text SKU
++				111 text field (settable)
++				112 text Nama Produk
++				113 text field (settable) Aqua Botol 600ml
++				114 text Deskripsi
++				115 text entry area (settable) Air mineral murni dalam kemasan botol praktis
++				116 heading Satuan, Value: 3
++					117 image
++					118 text Satuan
++				119 button + Tambah Satuan
++				120 pop up button (collapsed) PCS, ID: headlessui-listbox-button-_r_h_, Secondary Actions: Expand
++					121 text PCS
++					122 image
++				123 stepper (disabled, settable, integer) Value: 1, Details: 1.0000
++				124 stepper (settable, integer) 5000
++				125 text field (settable) MNM-0001
++				126 checkbox (settable, integer) Description: Dasar, Value: 1
++				127 button
++					128 image
++				129 pop up button (collapsed) BOX, ID: headlessui-listbox-button-_r_n_, Secondary Actions: Expand
++					130 text BOX
++					131 image
++				132 stepper (settable, integer) Value: 24, Details: 24.0000
++				133 stepper (settable, integer) 120000
++				134 text field (settable) MNM-0001-BOX
++				135 checkbox (settable, integer) Description: Dasar, Value: 0
++				136 button
++					137 image
++				138 heading Harga Produk, Value: 3
++					139 image
++					140 text Harga Produk
++				141 checkbox (settable, integer) Description: Produk Komposit (bundling / paket), Value: 0
++				142 image
++				143 text Produk Komposit (bundling / paket) Harga Beli
++				144 stepper (settable, integer) 3000
++				145 text Harga Jual
++				146 stepper (settable, integer) 5000
++				147 text STOK SAAT INI 299 Perubahan stok dilakukan melalui transaksi atau stock opname. Stok Minimum
++				148 stepper (settable, integer) 0
++				149 text Stok Maksimum
++				150 stepper (settable, integer) 0
++				151 text Dipakai untuk reorder point: saat stok menyentuh minimum, draft purchase order otomatis dibuat oleh sistem (reorder:generate harian). Tipe Pajak
++				152 radio button (settable, integer) Description: Exclusive, Value: 1
++				153 radio button (settable, integer) Description: Inclusive, Value: 0
++				154 text Persentase Pajak (%)
++				155 stepper (settable, integer) Value: 11, Details: 11.00
++				156 text Estimasi Profit per Item + Rp 2.000 Margin 66.7 %
++				157 link Description: Batal, Value: 127.0.0.1:8000/dashboard/products
++				158 button Simpan Perubahan
++					159 image
++					160 text Simpan Perubahan
+The focused UI element is 1 AXWebArea Edit Produk - Laravel, URL: 127.0.0.1:8000/dashboard/products/1/edit

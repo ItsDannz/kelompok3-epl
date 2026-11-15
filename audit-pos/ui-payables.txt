@@ -1,0 +1,143 @@
+Browser tab: 1, Title: "Hutang Supplier - Laravel", URL: "http://127.0.0.1:8000/dashboard/payables".
+1 AXWebArea Hutang Supplier - Laravel, URL: 127.0.0.1:8000/dashboard/payables
+	2 container app
+		3 container
+			4 text T Toko Anda
+			5 text OVERVIEW
+			6 link Description: Dashboard, Value: 127.0.0.1:8000/dashboard
+			7 text MASTER DATA
+			8 link Description: Categories, Value: 127.0.0.1:8000/dashboard/categories
+			9 link Description: Products, Value: 127.0.0.1:8000/dashboard/products
+			10 link Description: Customers, Value: 127.0.0.1:8000/dashboard/customers
+			11 link Description: Suppliers, Value: 127.0.0.1:8000/dashboard/suppliers
+			12 text SALES
+			13 link Description: Transactions, Value: 127.0.0.1:8000/dashboard/transactions
+			14 link Description: Transaction History, Value: 127.0.0.1:8000/dashboard/transactions/history
+			15 link Description: Sales Returns, Value: 127.0.0.1:8000/dashboard/sales-returns
+			16 link Description: Receivables, Value: 127.0.0.1:8000/dashboard/receivables
+			17 link Description: Aging & Reminders, Value: 127.0.0.1:8000/dashboard/aging
+			18 text APPROVAL
+			19 link Description: Discount Approval, Value: 127.0.0.1:8000/dashboard/discount-approvals
+			20 text INVENTORY
+			21 link Description: Stock Opname, Value: 127.0.0.1:8000/dashboard/stock-opnames
+			22 link Description: Stock Mutations, Value: 127.0.0.1:8000/dashboard/stock-mutations
+			23 link Description: Stock Transfers, Value: 127.0.0.1:8000/dashboard/stock-transfers
+			24 text PROCUREMENT
+			25 link Description: Purchase Orders, Value: 127.0.0.1:8000/dashboard/purchase-orders
+			26 link Description: Goods Receiving, Value: 127.0.0.1:8000/dashboard/goods-receivings
+			27 link Description: Supplier Returns, Value: 127.0.0.1:8000/dashboard/supplier-returns
+			28 link Description: Supplier Payables, Value: 127.0.0.1:8000/dashboard/payables
+			29 text CRM & PRICING
+			30 link Description: Members, Value: 127.0.0.1:8000/dashboard/members
+			31 link Description: Price Promos, Value: 127.0.0.1:8000/dashboard/pricing-rules
+			32 link Description: Customer Vouchers, Value: 127.0.0.1:8000/dashboard/customer-vouchers
+			33 link Description: Customer Segments, Value: 127.0.0.1:8000/dashboard/customer-segments
+			34 link Description: CRM Campaigns, Value: 127.0.0.1:8000/dashboard/crm-campaigns
+			35 link Description: CRM Reminders, Value: 127.0.0.1:8000/dashboard/crm-reminders
+			36 text DINE-IN
+			37 link Description: Dine-In Areas, Value: 127.0.0.1:8000/dashboard/dine-areas
+			38 link Description: Dine-In Tables, Value: 127.0.0.1:8000/dashboard/dine-tables
+			39 link Description: Dine-In Orders, Value: 127.0.0.1:8000/dashboard/dine-orders
+			40 text REPORTS
+			41 link Description: Sales Report, Value: 127.0.0.1:8000/dashboard/reports/sales
+			42 link Description: Profit Report, Value: 127.0.0.1:8000/dashboard/reports/profits
+			43 link Description: Advanced Insights, Value: 127.0.0.1:8000/dashboard/reports/insights
+			44 text OPERATIONS & CONTROL
+			45 link Description: Cashier Shifts, Value: 127.0.0.1:8000/dashboard/cashier-shifts
+			46 link Description: Audit Logs, Value: 127.0.0.1:8000/dashboard/audit-logs
+			47 text USER MANAGEMENT
+			48 link Description: Permissions, Value: 127.0.0.1:8000/dashboard/permissions
+			49 link Description: Access Groups, Value: 127.0.0.1:8000/dashboard/roles
+			50 button Users
+				51 image
+				52 text Users
+				53 image
+			54 text SETTINGS
+			55 link Description: Payment Gateway, Value: 127.0.0.1:8000/dashboard/settings/payments
+			56 link Description: Store Profile, Value: 127.0.0.1:8000/dashboard/settings/store
+			57 link Description: Bank Accounts, Value: 127.0.0.1:8000/dashboard/settings/bank-accounts
+			58 link Description: Loyalty, Value: 127.0.0.1:8000/dashboard/settings/loyalty
+			59 link Description: Sales Target, Value: 127.0.0.1:8000/dashboard/settings/target
+			60 link Description: Price Lists, Value: 127.0.0.1:8000/dashboard/settings/price-lists
+			61 link Description: Warehouses / Branches, Value: 127.0.0.1:8000/dashboard/settings/warehouses
+			62 link Description: Outlet, Value: 127.0.0.1:8000/dashboard/settings/outlets
+			63 link Description: Units, Value: 127.0.0.1:8000/dashboard/settings/units
+			64 link Description: WhatsApp, Value: 127.0.0.1:8000/dashboard/settings/whatsapp
+			65 text Point of Sales  v3.0.3
+		66 container
+			67 button Toggle Sidebar
+				68 image
+			69 heading Supplier Payables, Value: 1
+				70 text Supplier Payables
+			71 container
+				72 image
+				73 pop up button (disabled, collapsed, settable) Value: MAL - Outlet Malabar, Secondary Actions: Expand
+					74 menu
+						75 (disabled) MAL - Outlet Malabar
+						76 (disabled) PUSAT - Gudang Pusat
+						77 (disabled) PUT - Outlet Puter
+						78 (disabled) TKB - Outlet Taman Kencana
+			79 button Guided Tour
+				80 image
+			81 pop up button (collapsed) Description: Change Language, ID: headlessui-menu-button-_r_2_, Secondary Actions: Expand
+				82 image
+			83 button Dark Mode
+				84 image
+			85 pop up button (collapsed) 2, ID: headlessui-menu-button-_r_5_, Secondary Actions: Expand
+				86 text 2
+				87 image
+			88 pop up button (collapsed) A, ID: headlessui-menu-button-_r_8_, Secondary Actions: Expand
+			89 heading Hutang Supplier, Value: 1
+				90 image
+				91 text Hutang Supplier
+			92 text Catat dan lacak pembayaran hutang ke supplier.
+			93 container
+				94 text Supplier
+				95 pop up button (collapsed, settable) Value: Umum, Secondary Actions: Expand
+					96 menu
+						97 (selected) Umum
+						98 CV Makmur Jaya Distribusi
+						99 PT Segar Sentosa Abadi
+						100 PT Sumber Pangan Nusantara
+						101 UD Berkah Retail Grosir
+				102 text Nomor Dokumen
+				103 text field (settable)
+				104 text Total
+				105 stepper (settable)
+				106 text Jatuh Tempo
+				107 date field (settable)
+					108 container
+						109 stepper
+						110 stepper
+						111 stepper
+					112 pop up button Show date picker
+				113 button Simpan
+					114 image
+					115 text Simpan
+				116 text Catatan
+				117 text entry area (settable)
+			118 container
+				119 image
+				120 text field (settable)
+				121 pop up button (collapsed, settable) Value: Semua Supplier, Secondary Actions: Expand
+					122 menu
+						123 (selected) Semua Supplier
+						124 CV Makmur Jaya Distribusi
+						125 PT Segar Sentosa Abadi
+						126 PT Sumber Pangan Nusantara
+						127 UD Berkah Retail Grosir
+				128 image
+				129 pop up button (collapsed, settable) Value: Semua Status, Secondary Actions: Expand
+					130 menu
+						131 (selected) Semua Status
+						132 Belum Lunas
+						133 Parsial
+						134 Lunas
+						135 Jatuh Tempo
+				136 button Terapkan
+			137 container
+				138 text DOKUMEN SUPPLIER TOTAL SISA JATUH TEMPO STATUS
+				139 link Description: GR-20261115-0001 PT Sumber Pangan Nusantara Rp 163.000 Rp 163.000 15 Des 2026 Belum Lunas, Value: 127.0.0.1:8000/dashboard/payables/5
+				140 link Description: GR-20261115-0002 PT Segar Sentosa Abadi Rp 754.000 Rp 504.000 29 Nov 2026 Parsial, Value: 127.0.0.1:8000/dashboard/payables/6
+
+The focused UI element is 1 AXWebArea Hutang Supplier - Laravel, URL: 127.0.0.1:8000/dashboard/payables
