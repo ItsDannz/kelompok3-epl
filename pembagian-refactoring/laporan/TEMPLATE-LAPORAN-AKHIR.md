@@ -564,18 +564,131 @@ git diff --check
 
 ## 4.6 Dokumentasi Perbandingan UI (Before vs After)
 
-Tangkapan layar resolusi tinggi disimpan secara terstruktur di folder `pembagian-refactoring/audit-pos/SS_UI/`:
+Berikut adalah dokumentasi tangkapan layar antarmuka pengguna sebelum dan sesudah refactoring untuk membuktikan bahwa perubahan struktur internal kode tidak mengubah fungsionalitas dan tampilan bagi pengguna (*behavior-preserving*). Seluruh berkas gambar tersimpan pada direktori `pembagian-refactoring/audit-pos/SS_UI/`.
 
-| Target RF | Fitur / Halaman | Bukti Sebelum Refactoring | Bukti Sesudah Refactoring | Analisis Perbandingan Visual |
-|---|---|---|---|---|
-| **RF-001** | Edit Produk & Upload Gambar | `SS_UI/sebelum/RF-001/RF-001_01_produk-awal-DB.jpg` | `SS_UI/sesudah/RF-001/RF-001_01_produk-setelah-refactoring.jpg` | Nilai barcode, kategori, harga, dan file gambar tersimpan identik ke database. |
-| **RF-002** | Form Produk (Multi-Satuan & Komposit) | `SS_UI/sebelum/RF-002/RF-002_01_multi-satuan-DB.jpg` | `SS_UI/sesudah/RF-002/RF-002_01_multi-satuan-setelah-refactoring.jpg` | Tampilan form Create & Edit tetap konsisten; tombol penambahan satuan berfungsi normal. |
-| **RF-003** | Wilayah Pelanggan & Member | `SS_UI/sebelum/RF-003/RF-003_01_pelanggan-wilayah-awal-DB.jpg` | `SS_UI/sesudah/RF-003/RF-003_01_wilayah-setelah-refactoring.jpg` | Dropdown wilayah provinsi, kota, dan kecamatan tersimpan dengan benar. |
-| **RF-007** | Pembayaran Piutang Usaha | `SS_UI/sebelum/RF-007/RF-007_01_piutang-awal-DB.jpg` | `SS_UI/sesudah/RF-007/RF-007_01_piutang-setelah-refactoring.jpg` | Riwayat pelunasan dan perubahan status tagihan lunas/sebagian berfungsi persis. |
-| **RF-008** | Pembayaran Hutang Supplier | `SS_UI/sebelum/RF-008/RF-008_01_hutang-awal-DB.jpg` | `SS_UI/sesudah/RF-008/RF-008_01_hutang-setelah-refactoring.jpg` | Mutasi saldo hutang dan pilihan buku kas bank berjalan normal tanpa selisih. |
-| **RF-011** | Laporan Aging Piutang & Hutang | `SS_UI/sebelum/RF-011/RF-011_01_ringkasan-aging-DB.jpg` | `SS_UI/sesudah/RF-011/RF-011_01_aging-setelah-refactoring.jpg` | Kartu ringkasan dan tabel interval umur piutang menghasilkan angka hari yang sama. |
-| **RF-015** | Form & Draft Retur Penjualan | `SS_UI/sebelum/RF-015/RF-015_01_draft-awal-DB.jpg` | `SS_UI/sesudah/RF-015/RF-015_01_retur-setelah-refactoring.jpg` | Validasi kuantitas retur dan kalkulasi pengembalian uang/store credit bekerja tepat. |
-| **RF-032** | Struk Pembayaran & Kasir POS | `SS_UI/sebelum/RF-032/RF-032_01_struk-DB.jpg` | `SS_UI/sesudah/RF-032/RF-032_01_invoice-setelah-refactoring.jpg` | Format teks Rupiah pada invoice dan kembalian kasir POS tampil rapi dan seragam. |
+### 4.6.1 RF-001: Alur Update Produk dan Penggantian Gambar
+Pada target ini, alur pembaruan produk dengan atau tanpa upload gambar baru disatukan ke dalam satu metode pembentuk atribut.
+
+* **Sebelum Refactoring:**
+  ![Gambar 4.1: Tampilan form edit produk sebelum refactoring](../audit-pos/SS_UI/sebelum/RF-001/RF-001_01_produk-awal-DB.jpg)  
+  *Gambar 4.1. Tampilan form edit data produk awal sebelum refactoring.*
+
+* **Sesudah Refactoring:**
+  ![Gambar 4.2: Tampilan form edit produk sesudah refactoring](../audit-pos/SS_UI/sesudah/RF-001/RF-001_01_produk-setelah-refactoring.jpg)  
+  *Gambar 4.2. Tampilan form edit data produk setelah alur update disatukan.*
+
+* **Keterangan Perbandingan:** Data nama produk, barcode, kategori, harga, dan file gambar tersimpan dengan benar ke database. Nilai stok tidak berubah selama proses update.
+
+---
+
+### 4.6.2 RF-002: Form Produk Multi-Satuan dan Komposit
+Pada target ini, bagian form informasi dasar, baris multi-satuan, dan komposisi komposit diekstrak ke komponen React terpisah (`ProductFormFields`, `ProductUnitRows`, `ProductCompositeRows`).
+
+* **Sebelum Refactoring:**
+  ![Gambar 4.3: Form multi-satuan sebelum refactoring](../audit-pos/SS_UI/sebelum/RF-002/RF-002_01_multi-satuan-DB.jpg)  
+  *Gambar 4.3. Form input multi-satuan produk pada halaman Create/Edit awal.*
+
+* **Sesudah Refactoring:**
+  ![Gambar 4.4: Form multi-satuan sesudah ekstraksi komponen](../audit-pos/SS_UI/sesudah/RF-002/RF-002_01_multi-satuan-setelah-refactoring.jpg)  
+  *Gambar 4.4. Form multi-satuan sesudah diekstrak ke komponen modular `ProductUnitRows.jsx`.*
+
+  ![Gambar 4.5: Interaksi estimasi komposit sesudah refactoring](../audit-pos/SS_UI/sesudah/RF-002/RF-002_04_estimasi-komposit-interaksi.jpg)  
+  *Gambar 4.5. Interaksi penambahan komponen dan perhitungan otomatis estimasi harga komposit.*
+
+* **Keterangan Perbandingan:** Penambahan dan penghapusan baris satuan dinamis, pemilihan satuan dasar, serta perhitungan estimasi harga pokok komposit berfungsi normal persis seperti sebelum komponen diekstrak.
+
+---
+
+### 4.6.3 RF-003: Resolusi Wilayah Pelanggan dan Member
+Pada target ini, query pemetaan kode wilayah Indonesia ke nama teks diekstrak ke service `RegionPayloadResolver`.
+
+* **Sebelum Refactoring:**
+  ![Gambar 4.6: Form wilayah pelanggan sebelum refactoring](../audit-pos/SS_UI/sebelum/RF-003/RF-003_01_pelanggan-wilayah-awal-DB.jpg)  
+  *Gambar 4.6. Form input pelanggan dengan dropdown wilayah awal.*
+
+* **Sesudah Refactoring:**
+  ![Gambar 4.7: Form wilayah pelanggan sesudah refactoring](../audit-pos/SS_UI/sesudah/RF-003/RF-003_01_wilayah-setelah-refactoring.jpg)  
+  *Gambar 4.7. Form input pelanggan sesudah pemetaan wilayah ditangani oleh service.*
+
+* **Keterangan Perbandingan:** Pilihan provinsi, kabupaten/kota, kecamatan, dan kelurahan tersimpan ke tabel pelanggan dan member dengan data teks yang sesuai.
+
+---
+
+### 4.6.4 RF-007: Pencatatan Pembayaran Piutang Usaha
+Pada target ini, transaksi pencatatan pembayaran piutang dan isolasi locking database dipindahkan ke `ReceivablePaymentRecorder`.
+
+* **Sebelum Refactoring:**
+  ![Gambar 4.8: Daftar piutang awal sebelum pembayaran](../audit-pos/SS_UI/sebelum/RF-007/RF-007_01_piutang-awal-DB.jpg)  
+  *Gambar 4.8. Daftar piutang dan sisa tagihan awal.*
+
+* **Sesudah Refactoring:**
+  ![Gambar 4.9: Status piutang lunas sesudah refactoring](../audit-pos/SS_UI/sesudah/RF-007/RF-007_01_piutang-setelah-refactoring.jpg)  
+  *Gambar 4.9. Status piutang lunas dan pencatatan riwayat pembayaran sesudah menggunakan service.*
+
+* **Keterangan Perbandingan:** Pelunasan sebagian (parsial) dan pelunasan tepat sisa berhasil memperbarui sisa tagihan, mengubah status transaksi menjadi `paid`, dan mencatat riwayat pembayaran tanpa selisih.
+
+---
+
+### 4.6.5 RF-008: Pencatatan Pembayaran Hutang Supplier
+Pada target ini, transaksi pelunasan hutang supplier dipindahkan dari controller ke `PayablePaymentRecorder`.
+
+* **Sebelum Refactoring:**
+  ![Gambar 4.10: Daftar hutang supplier sebelum pembayaran](../audit-pos/SS_UI/sebelum/RF-008/RF-008_01_hutang-awal-DB.jpg)  
+  *Gambar 4.10. Daftar hutang supplier dan sisa tagihan awal.*
+
+* **Sesudah Refactoring:**
+  ![Gambar 4.11: Status hutang supplier lunas sesudah refactoring](../audit-pos/SS_UI/sesudah/RF-008/RF-008_01_hutang-setelah-refactoring.jpg)  
+  *Gambar 4.11. Status hutang supplier lunas sesudah diproses melalui service pembayaran.*
+
+* **Keterangan Perbandingan:** Pemilihan rekening bank outlet, pengurangan saldo hutang, dan mutasi kas keluar berjalan normal.
+
+---
+
+### 4.6.6 RF-011: Laporan Aging Piutang dan Hutang
+Pada target ini, kalkulasi interval umur tagihan (0–30, 31–60, 61–90, >90 hari) diekstrak ke kelas utilitas murni `DebtAgingBucket`.
+
+* **Sebelum Refactoring:**
+  ![Gambar 4.12: Ringkasan kartu aging sebelum refactoring](../audit-pos/SS_UI/sebelum/RF-011/RF-011_01_ringkasan-aging-DB.jpg)  
+  *Gambar 4.12. Kartu ringkasan interval aging piutang dan hutang.*
+
+* **Sesudah Refactoring:**
+  ![Gambar 4.13: Laporan tabel aging sesudah refactoring](../audit-pos/SS_UI/sesudah/RF-011/RF-011_01_aging-setelah-refactoring.jpg)  
+  *Gambar 4.13. Tampilan tabel laporan aging sesudah perhitungan dipusatkan ke helper.*
+
+* **Keterangan Perbandingan:** Pengelompokan tagihan ke dalam interval hari jatuh tempo menghasilkan data ringkasan dan tabel yang persis sama.
+
+---
+
+### 4.6.7 RF-015: Form Validasi Retur Penjualan
+Pada target ini, array aturan validasi pada `StoreSalesReturnRequest` dan `UpdateSalesReturnRequest` disatukan ke `SalesReturnRules`.
+
+* **Sebelum Refactoring:**
+  ![Gambar 4.14: Draft retur penjualan sebelum refactoring](../audit-pos/SS_UI/sebelum/RF-015/RF-015_01_draft-awal-DB.jpg)  
+  *Gambar 4.14. Draft form retur penjualan awal.*
+
+* **Sesudah Refactoring:**
+  ![Gambar 4.15: Form retur penjualan sesudah refactoring](../audit-pos/SS_UI/sesudah/RF-015/RF-015_01_retur-setelah-refactoring.jpg)  
+  *Gambar 4.15. Form retur penjualan sesudah penyatuan aturan validasi.*
+
+* **Keterangan Perbandingan:** Validasi batas kuantitas retur, pemilihan alasan retur, dan penentuan pengembalian dana (*refund cash / store credit*) tetap konsisten.
+
+---
+
+### 4.6.8 RF-032: Format Mata Uang Rupiah pada Struk dan Kasir POS
+Pada target ini, fungsi pemformat Rupiah dipusatkan ke utilitas `formatRupiah.js`.
+
+* **Sebelum Refactoring:**
+  ![Gambar 4.16: Tampilan kasir POS dengan format Rupiah awal](../audit-pos/SS_UI/sebelum/RF-032/RF-032_02_POS-tunai-kembalian.jpg)  
+  *Gambar 4.16. Tampilan transaksi kasir POS (total Rp4.496, tunai Rp5.000, kembalian Rp504).*
+
+* **Sesudah Refactoring:**
+  ![Gambar 4.17: Tampilan invoice struk sesudah refactoring](../audit-pos/SS_UI/sesudah/RF-032/RF-032_01_invoice-setelah-refactoring.jpg)  
+  *Gambar 4.17. Tampilan struk invoice pembayaran sesudah menggunakan utilitas `formatRupiah.js`.*
+
+  ![Gambar 4.18: Tampilan kasir POS sesudah refactoring](../audit-pos/SS_UI/sesudah/RF-032/RF-032_02_POS-setelah-refactoring.jpg)  
+  *Gambar 4.18. Tampilan kasir POS sesudah menggunakan utilitas `formatRupiah.js`.*
+
+* **Keterangan Perbandingan:** Simbol mata uang `Rp`, pemisah ribuan titik, penanganan desimal, serta spasi non-breaking space (NBSP) menghasilkan tampilan nominal yang rapi dan konsisten di layar kasir maupun cetak struk.
 
 ---
 
