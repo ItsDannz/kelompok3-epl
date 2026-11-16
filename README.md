@@ -1,41 +1,204 @@
-# Kelompok 3 — Refactoring dan Testing Studi Kasus POS
+> **Repositori Kelompok 3 — Refactoring dan Testing**
+>
+> Source aplikasi berada langsung di root repositori. Seluruh dokumen pembagian dan audit yang sebelumnya ada di GitHub dipindahkan utuh ke [`pembagian-refactoring/`](pembagian-refactoring/README.md).
+>
+> Mulai dari [laporan dan pembagian kerja](pembagian-refactoring/audit-pos/audit-dan-rencana.md), [inventaris kandidat](pembagian-refactoring/audit-pos/B-inventaris-refactoring.md), dan [pembagian semua temuan](pembagian-refactoring/audit-pos/pembagian-semua-temuan.csv).
+>
+> Ini adalah **baseline sebelum refactoring**, disalin dari folder lokal `point-of-sales`. Sumber upstream: [aryadwiputra/point-of-sales](https://github.com/aryadwiputra/point-of-sales), commit `81a91b8fc0ef479be9e0c751c0d11370d89dd8a2`. Lockfile npm mengikuti hasil instalasi lokal; source fungsional belum diubah. Lisensi dan atribusi upstream dipertahankan.
+>
+> `.env`, database lokal, `vendor/`, `node_modules/`, cache, sesi WhatsApp, dan hasil build tidak diunggah. Siapkan dependensi sendiri mengikuti petunjuk di bawah; gunakan PHP 8.4 agar sesuai dengan `composer.lock`. Atur MySQL/MariaDB di `.env` sebelum migrasi. Jalankan `cp .env.example .env` hanya ketika `.env` belum ada. Tidak ada akun default; admin dibuat di `/setup`.
 
-Dokumentasi audit dan rencana kerja untuk **Anggota 1, Anggota 2, dan Anggota 3**. Tahap saat ini adalah audit dan perencanaan; belum ada implementasi refactoring.
+> Workflow deployment asli disimpan utuh sebagai [`.github/workflow-reference/deploy.yml.disabled`](.github/workflow-reference/deploy.yml.disabled). Ekstensi dinonaktifkan karena token hanya mengizinkan penulisan konten, dan workflow upstream menargetkan VPS proyek asal. Source aplikasi tetap sama; menjalankan aplikasi lokal tidak membutuhkan workflow ini.
 
-## Mulai membaca
+---
 
-1. [Laporan utama dan rencana A–I](audit-pos/audit-dan-rencana.md)
-2. [Bukti lengkap 91 kandidat refactoring](audit-pos/B-inventaris-refactoring.md)
-3. [Pembagian seluruh kandidat dan pemilik utama](audit-pos/pembagian-semua-temuan.csv)
-4. [Rencana testing dan hasil baseline](audit-pos/testing.md)
-5. [Matriks kandidat ke testing](audit-pos/matriks-RF-test.csv)
-6. [Temuan di luar refactoring](audit-pos/temuan-di-luar-refactoring.md)
-7. [Template dokumentasi aktivitas](audit-pos/template-aktivitas.md)
-8. [Setup lokal dan bukti menjalankan proyek](audit-pos/runtime.md)
+# Point of Sales
 
-## Paket pengerjaan yang direkomendasikan
+Sistem kasir berbasis Laravel + Inertia + React untuk transaksi penjualan, inventory audit, purchasing, finance, CRM, loyalty, dan observability operasional — dengan dukungan multi-warehouse, PPN, dan offline mode.
 
-Delapan kandidat berikut merupakan rekomendasi scope kelompok, bukan kewajiban yang ditetapkan dosen. Setiap anggota bertanggung jawab atas analisis awal, implementasi, testing, dokumentasi sebelum/sesudah, bagian laporan, dan demo.
+> 200+ GitHub stars • Open-source • GNU AGPL-3.0 License
 
-| Anggota | Target utama | Mereview pekerjaan |
-|---|---|---|
-| Anggota 1 | RF-001, RF-003, RF-011 | Anggota 2 |
-| Anggota 2 | RF-007, RF-008, RF-015 | Anggota 3 |
-| Anggota 3 | RF-002, RF-032 | Anggota 1 |
+---
 
-Terdapat 60 kandidat opsional dan 23 kandidat ditunda. Selesaikan testing, review, dan dokumentasi target utama sebelum memperluas scope. Pembagian mempertimbangkan usaha dan risiko, bukan hanya jumlah temuan.
+## Cuplikan Layar
 
-## Baseline dan batas audit
+| POS Checkout | Dashboard | Stock Opname |
+|:---:|:---:|:---:|
+| ![POS](public/screenshots/02-pos-checkout.png) | ![Dashboard](public/screenshots/01-dashboard.png) | ![Stock Opname](public/screenshots/06-stock-opnames.png) |
+| **Sales Report** | **Receivables** | **Multi-Warehouse** |
+| ![Sales Report](public/screenshots/15-sales-report.png) | ![Receivables](public/screenshots/12-receivables.png) | ![Warehouses](public/screenshots/07-warehouses.png) |
 
-- Sumber: [aryadwiputra/point-of-sales](https://github.com/aryadwiputra/point-of-sales).
-- Branch yang dianalisis: `main`.
-- Commit: `81a91b8fc0ef479be9e0c751c0d11370d89dd8a2`.
-- Tanggal audit: 15 November 2026, Asia/Jakarta.
-- Arsip source sebelum refactoring: [baseline-81a91b8.tar.gz](audit-pos/baseline-81a91b8.tar.gz). Arsip mempertahankan lisensi dan atribusi proyek sumber; lihat berkas lisensi di dalamnya.
-- Hasil baseline aktual: **580 test lulus, 1 dilewati, 2452 assertions**; build frontend berhasil. Satu test QR dilewati karena ekstensi imagick tidak tersedia.
-- Analisis statik memetakan seluruh tracked source, tetapi pendalaman semantik manual setiap fungsi belum selesai. Sebanyak 91 kandidat adalah temuan terkonfirmasi dalam cakupan audit, bukan jaminan inventaris final seluruh kemungkinan masalah.
-- Test baru, implementasi refactoring, hasil sesudah, dan laporan akhir PDF belum dikerjakan. Lihat batas verifikasi pada laporan utama.
+📸 **[Lihat galeri lengkap (33 screenshot)](docs/screenshots.md)**
 
-Folder `audit-pos` berisi laporan, CSV, metrik, log, screenshot data demo lokal, serta arsip baseline. Path absolut dalam bukti mencatat lingkungan audit asal; gunakan tautan relatif dokumentasi ini saat membaca di GitHub. Skrip alat audit mungkin memerlukan penyesuaian path di komputer anggota.
+---
 
-Tidak menyertakan `.env` lokal, database audit, dependensi terinstal, atau hasil build aplikasi. Untuk menjalankan sistem gunakan petunjuk pada `runtime.md` dan dokumentasi proyek sumber.
+## Fitur Utama
+
+### POS & Transaksi
+- Pencarian produk via barcode / keyword
+- Barcode scanner via kamera (PWA)
+- Cart multi-item dengan hold/resume
+- Checkout multi-metode: tunai, transfer bank, Midtrans, Xendit, pay later
+- Multi-satuan produk (pcs, box, kg, karton) dengan konversi stok otomatis
+- Multi-price list: harga berbeda per kelompok pelanggan
+- Promo engine: diskon, qty break, bundle, buy-x-get-y
+- Diskon dengan approval workflow
+- PPN 11% (exclusive/inclusive)
+- Thermal printer support (WebUSB)
+- Offline mode (queue transaksi saat offline, sync saat online)
+
+### Inventory & Multi-Warehouse
+- Manajemen produk + kategori + barcode
+- Stok terpisah per gudang/cabang
+- Transfer stok antar warehouse (draft → send → receive)
+- Stock opname per warehouse
+- Stock mutation history
+- Batch/expiry date tracking (FEFO)
+- Composite products / kits
+- Reorder point + auto-PO suggestion
+- Low stock notification
+
+### Purchasing
+- Purchase Order (draft → ordered → partial → completed)
+- Goods Receiving (dengan input batch)
+- Supplier Returns
+- Payables (hutang supplier) dengan aging
+
+### Finance
+- Receivables (piutang pelanggan) dengan partial payment
+- Aging analysis + collection notes
+- PPN/PPh tax management
+- Customer portal: lihat invoice + bayar piutang online
+
+### CRM & Loyalty
+- Customer management + wilayah Indonesia
+- Member tiers (regular, silver, gold, platinum)
+- Poin loyalty (earn/redeem)
+- Voucher customer
+- Customer segments (manual & auto)
+- Campaign automation (reminder, promo broadcast)
+- **WhatsApp Gateway** — kirim pesan otomatis via whatsapp-web.js (QR scan, session persistent)
+
+### Reports & Documents
+- Sales report + filter + summary
+- Profit report + margin analysis
+- Advanced sales insights (hourly, cashier performance, repeat customer)
+- PDF invoice, receipt (80mm/58mm), shipping label
+- PDF receivable/payable
+- Export ke Excel (produk, customer, transaksi)
+
+### Admin
+- Full RBAC (users, roles, permissions)
+- Audit log (before/after snapshot)
+- Import produk & customer dari Excel
+- **App Versioning** — versi aplikasi terpusat (`APP_VERSION`), tampil di sidebar + POS navbar
+
+### Integrasi
+- **WhatsApp Gateway** — terhubung via Node.js service (`whatsapp-service/`)
+- **Payment Gateways** — Midtrans, Xendit
+
+---
+
+## Quick Start
+
+```bash
+git clone https://github.com/aryadwiputra/point-of-sales.git
+cd point-of-sales
+cp .env.example .env
+composer install && PUPPETEER_SKIP_DOWNLOAD=true npm install
+php artisan key:generate
+php artisan migrate --seed
+php artisan storage:link
+
+# Dev — server, queue, logs, dan Vite
+composer run dev
+
+# Setelah server berjalan, buka http://localhost:8000.
+# Pada instalasi pertama, aplikasi otomatis mengarahkan ke /setup.
+
+# WhatsApp Gateway (opsional) — untuk kirim WA otomatis
+cd whatsapp-service
+npm install && npm start
+```
+
+Tidak ada akun default. Setelah `migrate --seed`, buka root aplikasi (`http://localhost:8000`); pada instalasi pertama aplikasi otomatis mengarahkan ke `/setup` untuk membuat akun admin dan profil toko.
+Ingin langsung mencoba dengan data contoh? Jalankan `php artisan seed:demo --force`. Seeder ini membuat dataset demo lengkap (outlet `MAL`/`TKB`/`PUT`, produk, transaksi, purchasing, CRM, dine-in) beserta tiga akun siap pakai — lihat `docs/demo-data.md`.
+
+## Dokumentasi Detail
+
+| Dokumen | Isi |
+|---------|-----|
+| `docs/getting-started.md` | Setup lengkap |
+| `docs/demo-data.md` | Seeder demo lengkap + akun demo |
+| `docs/configuration.md` | Konfigurasi environment, payment, pajak, printer, WhatsApp |
+| `docs/architecture-overview.md` | Arsitektur, middleware, service layer, Node service |
+| `docs/feature-index.md` | Indeks semua modul (44 fitur) |
+
+## REST API (OpenAPI)
+
+Dikasir menyediakan REST API untuk integrasi mobile app / pihak ketiga. Dokumentasi interaktif otomatis (Scramble) tersedia di:
+
+- **UI docs:** `/docs/api` — coba endpoint langsung dari browser (Try It)
+- **OpenAPI spec:** `/docs/api.json` — untuk generate client (Postman, OpenAPI Generator, Swagger Codegen)
+
+Semua endpoint (kecuali `auth/login`, `auth/register`, webhooks) memerlukan **Bearer token**:
+
+```bash
+# 1. Login → dapat token
+curl -X POST https://dikasir.web.id/api/v1/auth/login \
+  -H "Content-Type: application/json" \
+  -d '{"email":"admin@example.com","password":"password"}'
+# → {"token": "1|abc123...", "user": {...}}
+
+# 2. Panggil API dengan token
+curl https://dikasir.web.id/api/v1/products \
+  -H "Authorization: Bearer 1|abc123..."
+```
+
+**Modul yang tersedia** (`/api/v1/`):
+
+| Modul | Endpoint | Keterangan |
+|-------|----------|------------|
+| Auth | `auth/login`, `auth/logout`, `auth/me`, `auth/register` | Token-based (Sanctum) |
+| Produk | `products` | CRUD + search + kategori |
+| Pelanggan | `customers` | CRUD + loyalty member |
+| Kategori | `categories` | CRUD |
+| Gudang | `warehouses` | CRUD (multi-warehouse) |
+| Supplier | `suppliers` | CRUD |
+| POS | `pos/shift`, `pos/products`, `pos/cart`, `pos/hold`, `pos/checkout`, `pos/transactions` | Alur kasir lengkap (mobile) |
+
+Base URL: `https://dikasir.web.id/api/v1` (dev: `http://localhost:8000/api/v1`)
+
+### Per Modul
+
+- POS & Transaksi, Sales Return, Cashier Shift
+- Inventory: produk, stock opname, mutation, warehouse, stock transfer, batch, composite
+- Purchasing: PO, goods receiving, supplier return, payables
+- Finance: receivables, PPN
+- Pricing: pricing rules, price list, loyalty, vouchers
+- CRM: member, segments, campaigns, **WhatsApp Gateway**
+- Reports: sales, profit, insights, dokumen PDF
+- Tools: import/export, mobile POS, thermal printer, offline mode
+
+## Troubleshooting Umum
+
+1. **Permission cache stale setelah seeding** — logout lalu login lagi
+2. **Webhook Midtrans/Xendit tidak bekerja** — pastikan `APP_URL` public, bukan `localhost`
+3. **Gambar produk tidak tampil** — jalankan `php artisan storage:link`
+4. **Route error 500** — jalankan `php artisan migrate` untuk modul baru
+5. **Test gagal karena PPN** — pastikan `tax_rate=0` di test Product::create
+6. **Vite tidak jalan** — pastikan `composer run dev` berjalan; command tersebut juga menjalankan Vite
+7. **WhatsApp QR tidak muncul** — pastikan `whatsapp-service/` sudah jalan (`npm start`)
+8. **WhatsApp terputus** — klik "Hubungkan Ulang" di Settings > WhatsApp, scan ulang QR
+
+## Kontribusi
+
+1. Branch dari `development`: `git checkout -b feature/nama-fitur development`
+2. Buat PR ke `development`
+3. PR ke `main` hanya dari `development` via branching release
+
+Pastikan `php artisan test` lulus sebelum PR.
+
+## Lisensi
+
+GNU Affero General Public License v3.0 (AGPL-3.0)
