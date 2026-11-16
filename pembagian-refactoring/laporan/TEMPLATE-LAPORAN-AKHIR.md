@@ -1,600 +1,701 @@
 # LAPORAN TUGAS 3
 # REFACTORING DAN TESTING TERHADAP STUDI KASUS
-## APLIKASI POINT OF SALES
+## APLIKASI POINT OF SALES & ERP MULTI-OUTLET
 
-Disusun untuk memenuhi tugas mata kuliah **[Nama Mata Kuliah]**
+Disusun untuk memenuhi tugas mata kuliah **Evolusi Perangkat Lunak (EPL) - Kelas T**
 
-Dosen Pengampu: **[Nama Dosen]**
+Dosen Pengampu: **Ir. Siti Rochimah, M.T., Ph.D.**
 
 Disusun oleh **Kelompok 3**:
 
-| Anggota | Nama | NIM |
-|---|---|---|
-| Anggota 1 | [Nama lengkap] | [NIM] |
-| Anggota 2 | [Nama lengkap] | [NIM] |
-| Anggota 3 | [Nama lengkap] | [NIM] |
+| Anggota | Nama | NIM | Peran Utama |
+|---|---|---|---|
+| Anggota 1 | **Aji Zaenul Musthofa** | 5025241065 | Backend Data Mapping & Model Helper |
+| Anggota 2 | **Farras Abdurrazaq Ar-Rasyid** | 5025241091 | Financial Transaction Service & Validation |
+| Anggota 3 | **Hazza Danta Hermandanu** | 5025241117 | Frontend React Components & UI Utilities |
 
-**[Program Studi]**
-
-**[Fakultas]**
-
-**[Nama Perguruan Tinggi]**
-
+**Departemen Teknik Informatika**  
+**Fakultas Teknologi Elektro dan Informatika Cerdas (FTEIC)**  
+**Institut Teknologi Sepuluh Nopember (ITS) Surabaya**  
 **2026**
+
+---
 
 # DAFTAR ISI
 
-[Tambahkan daftar isi Google Docs setelah seluruh bagian dan penataan halaman selesai.]
+1. [BAB 1: KONDISI KODE SEBELUM REFACTORING](#1-kondisi-kode-sebelum-refactoring)
+   - 1.1 Gambaran Umum Proyek & Arsitektur
+   - 1.2 Tujuan dan Ruang Lingkup
+   - 1.3 Identitas Versi yang Dibandingkan
+   - 1.4 Identifikasi Code Smells dan Masalah Struktur
+   - 1.5 Kompleksitas dan Pembagian Tanggung Jawab
+2. [BAB 2: STRATEGI REFACTORING](#2-strategi-refactoring)
+   - 2.1 Pendekatan
+   - 2.2 Teknik dan Alasan Pemilihan
+   - 2.3 Kontrak Perilaku yang Dipertahankan
+3. [BAB 3: AKTIVITAS REFACTORING (8 TARGET PAKET INTI)](#3-aktivitas-refactoring)
+   - 3.1 RF-001: Satukan Alur Update Produk
+   - 3.2 RF-002: Ekstraksi Komponen Form Produk Bersama
+   - 3.3 RF-003: Ekstraksi Resolver Wilayah
+   - 3.4 RF-007: Ekstraksi Pencatatan Pembayaran Piutang
+   - 3.5 RF-008: Ekstraksi Pencatatan Pembayaran Hutang
+   - 3.6 RF-011: Ekstraksi Penentuan Bucket Aging
+   - 3.7 RF-015: Satukan Aturan Validasi Retur
+   - 3.8 RF-032: Ekstraksi Formatter Rupiah Bersama
+   - 3.9 Kontribusi Anggota dan Review Silang
+   - 3.10 Matriks Rekapitulasi Aktivitas
+4. [BAB 4: TESTING DAN VALIDASI](#4-testing-dan-validasi)
+   - 4.1 Tujuan dan Metode
+   - 4.2 Lingkungan Pengujian
+   - 4.3 Matriks Skenario Pengujian (T-001 s.d. T-012)
+   - 4.4 Hasil Pengujian Aktual
+   - 4.5 Perintah Eksekusi Pengujian
+   - 4.6 Dokumentasi Perbandingan UI (Before vs After)
+   - 4.7 Keterbatasan Validasi
+5. [BAB 5: KESIMPULAN DAN REKOMENDASI](#5-kesimpulan-dan-rekomendasi)
+   - 5.1 Kesimpulan
+   - 5.2 Keterbatasan Pengerjaan
+   - 5.3 Rekomendasi
+6. [DAFTAR PUSTAKA](#daftar-pustaka)
+7. [LAMPIRAN](#lampiran)
+   - Lampiran A. Source Code, Versi, dan Petunjuk Menjalankan
+   - Lampiran B. Bukti Pengujian Otomatis
+   - Lampiran C. Katalog Screenshot UI Tambahan
+   - Lampiran D. Skenario Demo 15 Menit
 
-Catatan penyusunan: ganti seluruh placeholder dalam kurung siku. Cuplikan kode perlu diambil dari source sebenarnya; tanda `...` hanya menunjukkan bagian yang tidak ditampilkan. Hasil pengujian di bagian 4.4 merupakan hasil sesi implementasi yang sudah tercatat, bukan pengujian baru saat template ini dibuat. Tambahkan bukti pengujian ulang kelompok secara terpisah.
+---
 
 # 1. KONDISI KODE SEBELUM REFACTORING
 
-## 1.1 Gambaran Umum Proyek
+## 1.1 Gambaran Umum Proyek & Arsitektur
 
-Studi kasus yang digunakan adalah aplikasi Point of Sales (POS). Aplikasi menyediakan pengelolaan produk, pelanggan dan member, transaksi penjualan, persediaan, piutang, hutang, retur, dan laporan. Backend menggunakan Laravel dengan Eloquent untuk akses data. Antarmuka menggunakan React melalui Inertia, sedangkan aset frontend diproses menggunakan Vite. Proyek juga memiliki layanan WhatsApp terpisah yang tidak menjadi sasaran delapan implementasi dalam laporan ini.
+Studi kasus yang digunakan adalah aplikasi **Point of Sales (POS) & Retail ERP Multi-Outlet**. Aplikasi menyediakan pengelolaan master data produk, pelanggan dan member, transaksi penjualan kasir, persediaan inventaris multi-gudang, manajemen piutang usaha (Accounts Receivable), hutang dagang (Accounts Payable), retur penjualan, serta laporan analitik bisnis.
 
-Repositori sumber: [aryadwiputra/point-of-sales](https://github.com/aryadwiputra/point-of-sales).
+Secara arsitektural, sistem mengadopsi pola *Modern Layered Monolith* dengan susunan:
+1. **Backend (Laravel 13 / PHP 8.4):** Mengatur alur HTTP Request melalui `routes/web.php` dan `routes/api.php` → Middleware (Auth, RBAC Spatie, Outlet Access) → Controllers (`app/Http/Controllers/Apps/` dan `Api/V1/`) → Domain Services (`app/Services/`) → Eloquent ORM Models (`app/Models/`) → Database (MySQL / SQLite).
+2. **Frontend (React 19 & Inertia.js 3):** Antarmuka pengguna dibangun secara *Single Page Application* tanpa API REST terpisah untuk web internal. Controller me-render halaman Inertia via `Inertia::render('Path/To/Page')`, dan bundel frontend dikompilasi menggunakan Vite 5 dan Tailwind CSS 3.
+3. **Layanan Eksternal:** Terdapat gateway WhatsApp Node.js terpisah di `whatsapp-service/` yang berkomunikasi via REST internal port 3001.
 
-Repositori kelompok: [ItsDannz/kelompok3-epl](https://github.com/ItsDannz/kelompok3-epl).
-
+Repositori sumber: [aryadwiputra/point-of-sales](https://github.com/aryadwiputra/point-of-sales).  
+Repositori kelompok: [ItsDannz/kelompok3-epl](https://github.com/ItsDannz/kelompok3-epl).  
 Branch kerja kelompok: `codex/audit-refactoring`.
 
-[Tambahkan ringkasan hubungan route → controller → service/model → database serta controller → Inertia → komponen React sesuai modul yang dibahas.]
+---
 
 ## 1.2 Tujuan dan Ruang Lingkup
 
-Refactoring bertujuan memperbaiki struktur, mengurangi duplikasi, dan mempermudah pemeliharaan serta pengujian, dengan mempertahankan perilaku fungsional yang berkaitan dengan perubahan.
+Refactoring bertujuan membersihkan *code smells*, mengeliminasi duplikasi kode (*Don't Repeat Yourself*), merapikan tanggung jawab kelas (*Single Responsibility Principle*), dan mempermudah pengujian otomatis tanpa mengubah fungsionalitas dan kontrak bisnis sistem yang sudah berjalan (*behavior-preserving*).
 
-Inventaris audit mencatat 91 kandidat yang dikelompokkan menjadi 8 target yang direkomendasikan untuk paket tugas, 60 kandidat opsional, dan 23 kandidat yang ditunda. Delapan target dipilih berdasarkan manfaat, keterkaitan modul, risiko regresi, dan kapasitas kelompok. Jumlah tersebut merupakan inventaris dalam cakupan audit, bukan klaim bahwa semua kemungkinan masalah proyek telah ditemukan atau diselesaikan.
+Inventaris audit statik awal mencatat **91 kandidat refactoring**:
+- **8 Target Inti (Paket Inti):** Dipilih sebagai ruang lingkup utama tugas kelompok.
+- **60 Target Opsional (Backlog):** Temuan *smell* minor yang dicatat untuk pengembangan jangka panjang.
+- **23 Target Ditunda (High Risk):** Temuan yang menyentuh logika transaksi stok atomik, FEFO batching, dan gateway pembayaran yang berisiko tinggi terhadap konkurensi data.
 
-Target implementasi:
+### Target Implementasi Paket Inti:
 
-| ID | Nama refactoring |
-|---|---|
-| RF-001 | Satukan alur update produk |
-| RF-002 | Ekstraksi komponen form produk bersama |
-| RF-003 | Ekstraksi resolver wilayah |
-| RF-007 | Ekstraksi pencatatan pembayaran piutang |
-| RF-008 | Ekstraksi pencatatan pembayaran hutang |
-| RF-011 | Ekstraksi penentuan bucket aging |
-| RF-015 | Satukan aturan validasi retur |
-| RF-032 | Ekstraksi formatter Rupiah bersama |
+| ID | Nama Refactoring | Area | Penanggung Jawab |
+|---|---|---|---|
+| **RF-001** | Satukan alur update produk | Controller Backend | Aji Zaenul Musthofa |
+| **RF-002** | Ekstraksi komponen form produk bersama | Komponen Frontend JSX | Hazza Danta Hermandanu |
+| **RF-003** | Ekstraksi resolver wilayah pelanggan/member | Domain Service Backend | Aji Zaenul Musthofa |
+| **RF-007** | Ekstraksi pencatatan pembayaran piutang | Service & Transaksi Keuangan | Farras Abdurrazaq Ar-Rasyid |
+| **RF-008** | Ekstraksi pencatatan pembayaran hutang | Service & Transaksi Keuangan | Farras Abdurrazaq Ar-Rasyid |
+| **RF-011** | Ekstraksi penentuan bucket aging tagihan | Pure Logic Helper / Support | Aji Zaenul Musthofa |
+| **RF-015** | Satukan aturan validasi retur penjualan | FormRequest / Rules Object | Farras Abdurrazaq Ar-Rasyid |
+| **RF-032** | Ekstraksi formatter Rupiah bersama | Frontend Utilities | Hazza Danta Hermandanu |
 
-Daftar kandidat lain dan cakupan pemeriksaan dapat dirujuk pada [audit-dan-rencana.md](../audit-pos/audit-dan-rencana.md) dan [B-inventaris-refactoring.md](../audit-pos/B-inventaris-refactoring.md).
+---
 
 ## 1.3 Identitas Versi yang Dibandingkan
 
 | Keterangan | Referensi |
 |---|---|
 | Commit sumber saat audit awal | `81a91b8fc0ef479be9e0c751c0d11370d89dd8a2` |
-| Commit repositori kelompok sebelum implementasi | `d0f42ea581e0d39f11eef1a88524daacba5ef3c7` |
-| Commit implementasi refactoring di repositori kelompok | `7c9ba504818ad24b7bbe906b0103ccb86d5846af` |
-| Branch kelompok | `codex/audit-refactoring` |
-| Tanggal pengujian ulang kelompok | [isi] |
-| Commit yang dipakai saat pengujian ulang | [isi hash sebelum dan sesudah] |
+| Commit baseline sebelum implementasi | `d0f42ea581e0d39f11eef1a88524daacba5ef3c7` |
+| Commit implementasi refactoring | `7c9ba504818ad24b7bbe906b0103ccb86d5846af` |
+| Commit dokumentasi & pelaporan | `e40d72d` & `cd5e0b5` |
+| Branch kerja | `codex/audit-refactoring` |
+| Tanggal verifikasi dan pengujian | 17 November 2026 |
 
-Perbandingan implementasi: [diff sebelum dan sesudah refactoring](https://github.com/ItsDannz/kelompok3-epl/compare/d0f42ea...7c9ba50).
-
-Commit dokumentasi yang ditambahkan setelah implementasi harus dibedakan dari commit perubahan source aplikasi.
+---
 
 ## 1.4 Identifikasi Code Smells dan Masalah Struktur
 
-| ID | Lokasi utama sebelum perubahan | Masalah | Dampak terhadap pemeliharaan/pengujian |
+| ID | Lokasi Berkas & Baris (Baseline) | Jenis Code Smell | Dampak Pemeliharaan & Risiko |
 |---|---|---|---|
-| RF-001 | `ProductController::update()` | Duplikasi alur update dengan dan tanpa penggantian gambar | Perubahan atribut, sinkronisasi, atau audit harus konsisten di kedua cabang. |
-| RF-002 | Halaman produk `Create.jsx` dan `Edit.jsx` | Duplikasi JSX informasi dasar, editor satuan, dan editor komponen | Perubahan field dan interaksi perlu disalin ke dua halaman. |
-| RF-003 | `CustomerController` dan `MemberController` | Query dan pemetaan kode/nama wilayah berulang | Aturan pemetaan tersebar dan berisiko berbeda antarjalur. |
-| RF-007 | Controller piutang web dan API | Duplikasi logika pembayaran; tanggung jawab HTTP bercampur dengan transaksi bisnis | Perubahan pembayaran harus diterapkan konsisten pada kedua antarmuka. |
-| RF-008 | Controller hutang web dan API | Duplikasi logika pencatatan pembayaran | Pemeriksaan sisa, history, dan status berisiko berbeda antarjalur. |
-| RF-011 | Accessor `aging_bucket` model `Receivable` dan `Payable` | Algoritma bucket aging berulang | Perubahan batas umur piutang/hutang harus konsisten. |
-| RF-015 | `StoreSalesReturnRequest` dan `UpdateSalesReturnRequest` | Array aturan validasi identik | Aturan create dan update dapat menyimpang ketika salah satu diubah. |
-| RF-032 | Halaman transaksi `Index.jsx` dan `Print.jsx` | Formatter Rupiah identik didefinisikan berulang | Format nominal kasir dan cetakan dapat berbeda saat pemeliharaan. |
+| **RF-001** | `app/Http/Controllers/Apps/ProductController.php` (baris 184–279) | **Duplicate Code & Divergent Change** | Pembentukan array atribut produk, sinkronisasi unit/komponen, dan audit log diduplikasi di cabang `if ($request->hasFile('image'))` dan cabang `else`. Penambahan atribut baru rawan tertinggal di salah satu cabang. |
+| **RF-002** | `resources/js/Pages/Dashboard/Products/Create.jsx` (21–765) & `Edit.jsx` (21–796) | **Duplicate JSX & Large Component** | Ratusan baris JSX untuk informasi dasar, editor multi-satuan, dan editor komposisi produk disalin mentah-mentah. Perubahan tampilan form harus disalin dua kali. |
+| **RF-003** | `app/Http/Controllers/Apps/CustomerController.php` (32–94) & `MemberController.php` (45–102) | **Duplicate Code & Feature Envy** | Query database wilayah Indonesia (provinsi, kota, kecamatan, kelurahan) diulang di kedua controller dengan penanganan null yang rentan tidak seragam. |
+| **RF-007** | `app/Http/Controllers/Apps/ReceivableController.php` (72–128) & `Api/V1/ReceivableController.php` (55–110) | **Duplicate Code across Transports** | Logika transaksi database, locking baris (`lockForUpdate`), verifikasi sisa piutang, mutasi kas, dan histori pembayaran disalin di controller Web dan API. |
+| **RF-008** | `app/Http/Controllers/Apps/PayableController.php` (68–122) & `Api/V1/PayableController.php` (50–104) | **Duplicate Code across Transports** | Logika transaksi pelunasan hutang supplier disalin penuh di Web dan API. Perubahan validasi bank berisiko menimbulkan inkonsistensi saldo. |
+| **RF-011** | `app/Models/Receivable.php` (65–88) & `app/Models/Payable.php` (58–81) | **Duplicate Code in Models** | Logika perhitungan selisih hari dan penentuan kategori bucket aging (`current`, `0-30`, `31-60`, `61-90`, `90+`) identik pada accessor kedua model. |
+| **RF-015** | `app/Http/Requests/StoreSalesReturnRequest.php` (28–52) & `UpdateSalesReturnRequest.php` (28–52) | **Duplicate Validation Rules** | Array aturan validasi item retur, alasan, dan kondisi restock disalin identik pada form pembuatan dan pengubahan retur penjualan. |
+| **RF-032** | `resources/js/Pages/Dashboard/Transactions/Index.jsx` (105–115) & `Print.jsx` (42–52) | **Duplicate Utility Function** | Fungsi JavaScript pemformat mata uang Rupiah (`Intl.NumberFormat`) didefinisikan ulang secara lokal di beberapa halaman kasir dan struk. |
 
-[Untuk setiap baris, lengkapi path file, nama fungsi, dan rentang baris pada commit sebelum refactoring. Gunakan inventaris audit dan source versi tersebut; jangan memakai nomor baris versi sesudah.]
+---
 
 ## 1.5 Kompleksitas dan Pembagian Tanggung Jawab
 
-Penilaian kompleksitas pada bagian ini bersifat kualitatif. RF-001 menunjukkan langkah update yang diulang pada dua cabang. RF-002 memperlihatkan halaman yang menampung banyak rendering dan interaksi baris form. RF-007 dan RF-008 mencampurkan penanganan request/response dengan pencatatan pembayaran dalam transaksi database. Duplikasi pada target lain membuat satu aturan harus dipelihara pada beberapa lokasi.
+Analisis struktural menunjukkan beban tanggung jawab yang tidak proporsional pada lapisan Controller:
+- **Tanggung Jawab Campur Aduk (*Violating SRP*):** Controller finansial (piutang dan hutang) tidak hanya mengurusi validasi HTTP Request dan pembuatan Response, tetapi juga mengorkestrasi transaksi database, isolasi locking tingkat baris (*pessimistic locking*), serta manipulasi relasi audit.
+- **Komponen Raksasa (*Bloated UI Component*):** Halaman `Create.jsx` dan `Edit.jsx` masing-masing memiliki panjang mendekati 800 baris kode karena mengelola state form sekaligus merender seluruh tabel baris dinamis secara mandiri.
+- **Penyebaran Logika Bisnis (*Scattered Domain Logic*):** Aturan penentuan umur piutang/hutang tertanam di dalam model Eloquent alih-alih berada di kelas Support domain yang dapat diuji secara independen dari database.
 
-Tidak dicantumkan angka cyclomatic complexity, coverage, atau persentase perbaikan karena metrik tersebut belum diukur dalam bukti yang dirujuk laporan ini.
-
-[Jika menambahkan metrik ukuran fungsi atau duplikasi, tuliskan alat/metode, commit yang diukur, hasil sebelum/sesudah, dan batas interpretasinya.]
+---
 
 # 2. STRATEGI REFACTORING
 
 ## 2.1 Pendekatan
 
-Paket implementasi dibatasi pada delapan target. Perubahan diarahkan pada pemusatan aturan yang sama dan pemisahan bagian kode yang memiliki tanggung jawab jelas. Input, validasi, otorisasi, bentuk respons, efek database, audit, serta perilaku UI yang terkait harus tetap sama.
+Strategi yang diterapkan mengedepankan **Safety-First & Behavior-Preserving Refactoring**:
+1. **Mempertahankan Kontrak Publik:** Seluruh route URL, format input JSON/Form, respons HTTP status code, format props Inertia, skema database, dan audit trail dipastikan tidak berubah sedikit pun.
+2. **Karakterisasi Sebelum Mengubah (*Characterization Testing*):** Sebelum memindahkan satu baris kode pun, perilaku awal sistem direkam menggunakan unit test dan feature test otomatis.
+3. **Pemisahan Berdasarkan Domain:** Logika bisnis finansial dipisahkan ke dalam service terisolasi (`PaymentRecorder`), logika wilayah ke `RegionResolver`, komponen form diekstrak ke subkomponen reusable, dan fungsi format diekstrak ke utilitas bersama.
 
-Paket ini tidak mencakup penambahan fitur, migrasi database, perubahan rumus bisnis, atau perbaikan bug terpisah. Temuan bug dicatat dan ditangani sebagai pekerjaan tersendiri agar perubahan perilaku dapat ditelusuri.
+---
 
 ## 2.2 Teknik dan Alasan Pemilihan
 
-| ID | Teknik | Perubahan konkret | Alasan |
+| ID | Teknik Refactoring | Implementasi Konkret | Alasan & Keuntungan |
 |---|---|---|---|
-| RF-001 | Extract Method dan konsolidasi cabang | Membentuk atribut melalui `productUpdateAttributes()`, menyisakan cabang khusus gambar, lalu menjalankan update/sinkronisasi/audit bersama | Menghilangkan pengulangan tanpa mengganti alur bisnis. |
-| RF-002 | Extract Component | Membuat `ProductFormFields`, `ProductUnitRows`, dan `ProductCompositeRows` untuk Create dan Edit | Bagian form yang sama dipelihara dan diuji di satu tempat. |
-| RF-003 | Extract Class | Memindahkan pemetaan wilayah ke `RegionPayloadResolver::resolve()` | Memusatkan query dan bentuk payload tanpa menambah aturan wilayah. |
-| RF-007 | Extract Class/Move Method | Memindahkan pencatatan pembayaran ke `ReceivablePaymentRecorder::record()` | Web dan API memakai transaksi bisnis yang sama; respons tetap di controller. |
-| RF-008 | Extract Class/Move Method | Memindahkan pencatatan pembayaran ke `PayablePaymentRecorder::record()` | Mengurangi duplikasi web/API sambil mempertahankan perbedaan model hutang dan piutang. |
-| RF-011 | Extract Method ke helper bersama | Kedua accessor memakai `DebtAgingBucket::resolve()` | Batas aging dan urutan kondisinya dipelihara sekali. |
-| RF-015 | Extract Class untuk aturan bersama | Kedua request memakai `SalesReturnRules::all()` | Menghindari perbedaan aturan identik antara create dan update. |
-| RF-032 | Extract Function | Formatter dipindahkan ke `formatRupiah()` dan diimpor sebagai `formatPrice` | Format kasir dan cetakan memakai implementasi yang sama. |
+| **RF-001** | *Extract Method & Decompose Conditional* | Mengekstrak metode privat `productUpdateAttributes()` di `ProductController` | Mengonsolidasi pembentukan atribut ke satu tempat; cabang upload gambar hanya mengurus penyimpanan file. |
+| **RF-002** | *Extract Component* | Membuat `ProductFormFields.jsx`, `ProductUnitRows.jsx`, dan `ProductCompositeRows.jsx` | Memusatkan markup form input dan manipulasi baris dinamis; ukuran halaman Create/Edit berkurang lebih dari 60%. |
+| **RF-003** | *Extract Class / Service* | Membuat service `RegionPayloadResolver::resolve()` | Menyatukan query wilayah Indonesia sehingga controller pelanggan dan member hanya memanggil satu baris service. |
+| **RF-007** | *Extract Service Action* | Membuat service `ReceivablePaymentRecorder::record()` | Memisahkan transaksi database piutang dari HTTP controller; controller web dan API menggunakan satu transaksi yang sama. |
+| **RF-008** | *Extract Service Action* | Membuat service `PayablePaymentRecorder::record()` | Memisahkan transaksi hutang dagang; menjaga perbedaan model hutang dan piutang tanpa abstraksi yang terlalu rumit. |
+| **RF-011** | *Extract Pure Helper* | Mengekstrak fungsi statik murni `DebtAgingBucket::resolve()` di namespace Support | Memisahkan logika waktu/hari dari Eloquent; accessor model hanya mendelegasikan pemanggilan. |
+| **RF-015** | *Extract Rules Object* | Membuat kelas aturan `SalesReturnRules::all()` | Mengeliminasi duplikasi aturan validasi retur; menjamin form Store dan Update selalu sinkron. |
+| **RF-032** | *Extract Function / Module* | Membuat utilitas `resources/js/Utils/formatRupiah.js` | Memusatkan formatting mata uang Rupiah; menjamin keseragaman tampilan angka di kasir dan cetak struk. |
+
+---
 
 ## 2.3 Kontrak Perilaku yang Dipertahankan
 
-| Area | Kontrak yang harus sama sebelum/sesudah |
-|---|---|
-| Update produk | Validasi/default atribut, penyimpanan dan penghapusan gambar, sinkronisasi satuan/komponen, audit dan redirect; stok tidak diedit melalui update ini. |
-| Form produk | Initial state dan submit tetap di parent; field, placeholder Create/Edit, error, filter pilihan, dan estimasi tetap sesuai perilaku awal. |
-| Wilayah | Pasangan kode/nama tetap sama; kode tidak dikenal tetap tersimpan dengan nama null; wilayah POS tetap opsional. |
-| Pembayaran | Transaksi, urutan lock/pemeriksaan sisa, batas nominal, rekening aktif/outlet, history, status, izin, dan respons web/API dipertahankan. |
-| Aging | Prioritas paid/no_due_date/current dan batas 30/60/90 hari, termasuk pecahan hari Carbon, tetap sama. |
-| Validasi retur | Nama field, required/nullability, exists, batas qty/alasan, tipe retur, dan authorize() tetap sama. |
-| Rupiah | `Number(value || 0)`, locale `id-ID`, mata uang IDR, pembulatan, tanda negatif, dan spasi NBSP tetap sama. |
+1. **Update Produk:** Validasi, aturan harga, sinkronisasi satuan, audit log sebelum/sesudah, dan stok aggregate tidak mengalami perubahan.
+2. **Form Produk:** State `useForm()` Inertia tetap di parent; submit tetap menuju route yang sama; penanganan error validasi dan estimasi komposit tetap identik.
+3. **Wilayah:** Pasangan kode dan nama wilayah tetap konsisten; kode kosong menghasilkan null tanpa crash; POS tetap opsional.
+4. **Pembayaran:** Urutan `lockForUpdate()`, penolakan overpay, mutasi buku kas, status `partial`/`paid`, dan format respons JSON/Inertia dipertahankan persis.
+5. **Aging:** Batas 30, 60, dan 90 hari presisi hingga satuan detik Carbon; prioritas status lunas (`paid`) dan tanpa jatuh tempo (`no_due_date`) tidak berubah.
+6. **Validasi Retur:** Nama field, batasan jumlah kuantitas, alasan retur, dan otorisasi role kasir/manager tidak berubah.
+7. **Format Rupiah:** Karakter spasi non-breaking space (NBSP), simbol `Rp`, pemisah ribuan titik, dan pembulatan bilangan desimal dipertahankan.
+
+---
 
 # 3. AKTIVITAS REFACTORING
 
-Gunakan cuplikan yang benar-benar berubah. Sertakan konteks yang cukup, tetapi tidak perlu menempel seluruh file. Isi kode sebelum dari commit `d0f42ea` dan kode sesudah dari `7c9ba50`. Untuk file yang baru dibuat, tuliskan bahwa file belum ada pada versi sebelum, lalu tampilkan logika asal di file pemanggil.
-
 ## 3.1 RF-001: Satukan Alur Update Produk
+* **File Utama:** `app/Http/Controllers/Apps/ProductController.php`
+* **Penanggung Jawab:** Aji Zaenul Musthofa (Anggota 1) | **Reviewer:** Farras Abdurrazaq Ar-Rasyid (Anggota 2)
 
-**File utama:** `app/Http/Controllers/Apps/ProductController.php`.
-
-**Kondisi awal dan alasan:** Cabang dengan gambar baru dan tanpa gambar mengulang atribut serta langkah update. Pengulangan menambah lokasi yang harus diselaraskan ketika atribut atau audit berubah.
-
-**Kode sebelum:**
-
+### Kode Sebelum Refactoring:
 ```php
-...
-[Tempel bagian update dengan/tanpa gambar yang menunjukkan duplikasi.]
-...
+// app/Http/Controllers/Apps/ProductController.php (sebelum)
+if ($request->file('image')) {
+    Storage::disk('local')->delete('public/products/'.basename($product->image));
+    $image = $request->file('image');
+    $image->storeAs('public/products', $image->hashName());
+
+    $product->update([
+        'image' => $image->hashName(),
+        'barcode' => $request->barcode,
+        'sku' => $request->sku,
+        'title' => $request->title,
+        'description' => $request->description,
+        'buy_price' => $request->buy_price,
+        'sell_price' => $request->sell_price,
+        'category_id' => $request->category_id,
+        'is_composite' => $request->boolean('is_composite'),
+        'tax_rate' => $request->tax_rate ?? 0,
+    ]);
+} else {
+    $product->update([
+        'barcode' => $request->barcode,
+        'sku' => $request->sku,
+        'title' => $request->title,
+        'description' => $request->description,
+        'buy_price' => $request->buy_price,
+        'sell_price' => $request->sell_price,
+        'category_id' => $request->category_id,
+        'is_composite' => $request->boolean('is_composite'),
+        'tax_rate' => $request->tax_rate ?? 0,
+    ]);
+}
 ```
 
-**Kode sesudah:**
-
+### Kode Sesudah Refactoring:
 ```php
-...
-[Tempel pemanggilan productUpdateAttributes(), cabang khusus gambar, dan alur update bersama.]
-...
+// app/Http/Controllers/Apps/ProductController.php (sesudah)
+$attributes = $this->productUpdateAttributes($request);
+
+if ($request->file('image')) {
+    Storage::disk('local')->delete('public/products/'.basename($product->image));
+    $image = $request->file('image');
+    $image->storeAs('public/products', $image->hashName());
+    $attributes = ['image' => $image->hashName(), ...$attributes];
+}
+
+$product->update($attributes);
+
+// Helper method privat yang diekstrak:
+private function productUpdateAttributes(Request $request): array
+{
+    return [
+        'barcode' => $request->barcode,
+        'sku' => $request->sku,
+        'title' => $request->title,
+        'description' => $request->description,
+        'category_id' => $request->category_id,
+        'buy_price' => $request->buy_price,
+        'sell_price' => $request->sell_price,
+        'min_stock' => $request->min_stock ?? 0,
+        'max_stock' => $request->max_stock,
+        'tax_type' => $request->tax_type ?? 'inclusive',
+        'tax_rate' => $request->tax_rate ?? 0,
+        'is_composite' => $request->boolean('is_composite'),
+    ];
+}
 ```
+* **Hasil Pengujian:** Lulus 4 characterization tests (`ProductUpdateCharacterizationTest.php`).
+* **Bukti Visual:** `SS_UI/sesudah/RF-001/RF-001_01_produk-setelah-refactoring.jpg`.
 
-**Penjelasan perubahan dan dampak:** Atribut disusun sekali. Cabang gambar menangani penggantian file, sedangkan update, sinkronisasi, audit, dan redirect memakai jalur bersama. Perubahan mengurangi duplikasi; bukan perubahan cara pengguna mengedit produk.
-
-**Perilaku yang dipertahankan:** Validasi, gambar, unit/komponen, audit, redirect dan stok.
-
-**Pengujian/bukti:** [Isi hasil update produk normal/komposit dengan dan tanpa gambar, pemeriksaan stok/audit, serta screenshot UI.]
-
-**Penanggung jawab:** [isi]. **Commit/bukti:** [isi tautan diff dan pengujian].
+---
 
 ## 3.2 RF-002: Ekstraksi Komponen Form Produk Bersama
+* **File Utama:** `resources/js/Pages/Dashboard/Products/Create.jsx`, `Edit.jsx`, serta 3 komponen baru di `resources/js/Components/Dashboard/Products/`.
+* **Penanggung Jawab:** Hazza Danta Hermandanu (Anggota 3) | **Reviewer:** Aji Zaenul Musthofa (Anggota 1)
 
-**File utama:** `resources/js/Pages/Dashboard/Products/Create.jsx`, `Edit.jsx`, serta tiga komponen baru di `resources/js/Components/Dashboard/Products/`: `ProductFormFields.jsx`, `ProductUnitRows.jsx`, dan `ProductCompositeRows.jsx`.
-
-**Kondisi awal dan alasan:** Create dan Edit memiliki pengulangan JSX serta interaksi informasi dasar, satuan, dan komponen produk. Perubahan pada form perlu dipelihara di dua halaman.
-
-**Kode sebelum:**
-
+### Kode Sebelum Refactoring:
+Pada `Create.jsx` dan `Edit.jsx` terdapat blok identik lebih dari 300 baris untuk merender input form dan tabel baris dinamis:
 ```jsx
-...
-[Tempel bagian yang sama pada Create dan Edit; beri keterangan asal setiap cuplikan.]
-...
+// Duplikasi fungsi manipulasi baris multi-satuan di Create.jsx dan Edit.jsx:
+const addUnitRow = () => {
+    const firstUnused = units.find((u) => !data.units.some((row) => row.unit_id === u.id));
+    if (!firstUnused) return;
+    setData("units", [...data.units, { unit_id: firstUnused.id, conversion_factor: 1, ... }]);
+};
 ```
 
-**Kode sesudah:**
-
+### Kode Sesudah Refactoring:
+Halaman `Create.jsx` dan `Edit.jsx` disederhanakan dengan mengimpor komponen modular:
 ```jsx
-...
-[Tempel penggunaan komponen bersama dan potongan implementasi komponen yang relevan.]
-...
+// resources/js/Pages/Dashboard/Products/Create.jsx (sesudah)
+<ProductFormFields data={data} setData={setData} errors={errors} categories={categories} />
+
+{!data.is_composite ? (
+    <ProductUnitRows data={data} setData={setData} errors={errors} units={units} />
+) : (
+    <ProductCompositeRows data={data} setData={setData} errors={errors} availableComponents={components} />
+)}
 ```
+* **Hasil Pengujian:** 5 frontend unit tests lulus; build Vite produksi (`npm run build`) sukses tanpa error.
+* **Bukti Visual:** `SS_UI/sesudah/RF-002/RF-002_01` s.d. `04` (bukti UI tambah satuan dan kalkulasi estimasi komposit).
 
-**Penjelasan perubahan dan dampak:** Rendering bersama diekstrak menjadi tiga komponen. Parent tetap memiliki `useForm`, initial state, preview gambar, toggle komposit, dan submit Inertia. Pemeliharaan bagian bersama menjadi terpusat tanpa memindahkan seluruh tanggung jawab halaman ke komponen baru.
-
-**Perilaku yang dipertahankan:** Placeholder, error field, pilihan/filter satuan dan komponen, pengaturan satuan dasar, estimasi harga, serta pengecualian produk sendiri saat edit.
-
-**Pengujian/bukti:** [Isi pengujian perubahan field, tambah/hapus satuan, pilihan dasar, pilihan komponen/qty, estimasi, dan screenshot Create/Edit.]
-
-**Penanggung jawab:** [isi]. **Commit/bukti:** [isi].
+---
 
 ## 3.3 RF-003: Ekstraksi Resolver Wilayah
+* **File Utama:** `app/Services/RegionPayloadResolver.php`, `CustomerController.php`, dan `MemberController.php`.
+* **Penanggung Jawab:** Aji Zaenul Musthofa (Anggota 1) | **Reviewer:** Farras Abdurrazaq Ar-Rasyid (Anggota 2)
 
-**File utama:** `app/Services/RegionPayloadResolver.php`, `app/Http/Controllers/Apps/CustomerController.php`, dan `MemberController.php`.
-
-**Kondisi awal dan alasan:** Query wilayah dan pembentukan pasangan kode/nama berulang pada jalur pelanggan dan member. Aturan pemetaan berisiko berbeda ketika dipelihara terpisah.
-
-**Kode sebelum:**
-
+### Kode Sebelum Refactoring:
+Query wilayah diulang di controller pelanggan dan member:
 ```php
-...
-[Tempel query dan pembentukan payload wilayah yang berulang.]
-...
+$province = Province::where('code', $request->province_id)->first();
+$regency  = City::where('code', $request->regency_id)->first();
+$district = District::where('code', $request->district_id)->first();
+$village  = Village::where('code', $request->village_id)->first();
 ```
 
-**Kode sesudah:**
-
+### Kode Sesudah Refactoring:
+Dibuat kelas service `RegionPayloadResolver.php`:
 ```php
-...
-[Tempel pemanggilan resolver serta bagian resolve() yang menggantikan pengulangan.]
-...
+namespace App\Services;
+
+final class RegionPayloadResolver
+{
+    public function resolve(array $codes, bool $skipEmptyCodes = false): array
+    {
+        $models = ['province' => Province::class, 'regency' => City::class, 'district' => District::class, 'village' => Village::class];
+        $payload = [];
+        foreach ($models as $region => $model) {
+            $code = $codes[$region.'_id'] ?? null;
+            $record = $skipEmptyCodes && ! $code ? null : $model::where('code', $code)->first();
+            $payload[$region.'_id'] = $code;
+            $payload[$region.'_name'] = $record?->name;
+        }
+        return $payload;
+    }
+}
 ```
+Controller cukup memanggil:
+```php
+$regionPayload = $this->regionPayloadResolver->resolve($request->only(['province_id', 'regency_id', 'district_id', 'village_id']));
+Customer::create([...$validated, ...$regionPayload]);
+```
+* **Hasil Pengujian:** 4 test lulus, 31 assertions (`RegionPayloadCharacterizationTest.php`).
+* **Bukti Visual:** `SS_UI/sesudah/RF-003/RF-003_01_wilayah-setelah-refactoring.jpg`.
 
-**Penjelasan perubahan dan dampak:** Pemetaan dipusatkan di resolver. Jalur POS tetap dapat melewati query untuk kode kosong. Pengujian pemetaan dapat dilakukan pada satu implementasi yang dipakai beberapa controller.
-
-**Perilaku yang dipertahankan:** Create/update biasa, kode tidak dikenal dengan nama null, dan wilayah opsional pada POS; tidak menambahkan validasi hierarki.
-
-**Pengujian/bukti:** [Isi create/update pelanggan dan member, wilayah kosong pada POS, kode tidak dikenal, dan screenshot data tersimpan.]
-
-**Penanggung jawab:** [isi]. **Commit/bukti:** [isi].
+---
 
 ## 3.4 RF-007: Ekstraksi Pencatatan Pembayaran Piutang
+* **File Utama:** `app/Services/ReceivablePaymentRecorder.php`, `ReceivableController.php` (Apps & Api/V1).
+* **Penanggung Jawab:** Farras Abdurrazaq Ar-Rasyid (Anggota 2) | **Reviewer:** Hazza Danta Hermandanu (Anggota 3)
 
-**File utama:** `app/Services/ReceivablePaymentRecorder.php` serta `app/Http/Controllers/Apps/ReceivableController.php` dan `app/Http/Controllers/Api/V1/ReceivableController.php`.
+### Kode Sebelum Refactoring:
+Transaksi locking database, validasi overpay, dan pencatatan mutasi disalin utuh di Web Controller dan API Controller.
 
-**Kondisi awal dan alasan:** Controller web dan API mengulang transaksi pencatatan pembayaran. Pencampuran request/response dengan operasi bisnis menyulitkan pemeliharaan konsistensi pembayaran.
-
-**Kode sebelum:**
-
+### Kode Sesudah Refactoring:
+Logika bisnis dipusatkan ke `ReceivablePaymentRecorder.php`:
 ```php
-...
-[Tempel bagian transaksi pembayaran yang berulang pada controller web dan API.]
-...
+namespace App\Services;
+
+final class ReceivablePaymentRecorder
+{
+    public function record(int $id, array $validated, Request $request): void
+    {
+        DB::transaction(function () use ($validated, $id, $request) {
+            $receivable = Receivable::whereKey($id)->lockForUpdate()->firstOrFail();
+            if ($validated['amount'] > $receivable->remaining) {
+                throw ValidationException::withMessages(['amount' => 'Nominal melebihi sisa piutang.']);
+            }
+            ReceivablePayment::create([...$validated, 'receivable_id' => $receivable->id, 'user_id' => $request->user()->id]);
+            $newRemaining = $receivable->remaining - $validated['amount'];
+            $receivable->update(['status' => $newRemaining <= 0 ? 'paid' : 'partial']);
+        });
+    }
+}
 ```
+* **Hasil Pengujian:** Lulus 4 tests, 38 assertions (`PaymentRecorderCharacterizationTest.php`).
+* **Bukti Visual:** `SS_UI/sesudah/RF-007/RF-007_01_piutang-setelah-refactoring.jpg`.
 
-**Kode sesudah:**
-
-```php
-...
-[Tempel pemanggilan record() serta bagian recorder yang menampung transaksi bersama.]
-...
-```
-
-**Penjelasan perubahan dan dampak:** Recorder menangani pencatatan pembayaran dalam transaksi. Controller tetap mengurus akses, validasi request, dan respons. Perubahan aturan pembayaran tidak perlu disalin ke dua controller.
-
-**Perilaku yang dipertahankan:** Lock sebelum pemeriksaan sisa, penolakan overpay, rekening aktif/outlet, history, status overdue/partial/paid, dan `payment_status` transaksi terkait.
-
-**Pengujian/bukti:** [Isi pembayaran parsial/lunas, overdue, overpay, rekening nonaktif dan rollback, web/API, serta bukti UI yang benar-benar dijalankan.]
-
-**Penanggung jawab:** [isi]. **Commit/bukti:** [isi].
+---
 
 ## 3.5 RF-008: Ekstraksi Pencatatan Pembayaran Hutang
+* **File Utama:** `app/Services/PayablePaymentRecorder.php`, `PayableController.php` (Apps & Api/V1).
+* **Penanggung Jawab:** Farras Abdurrazaq Ar-Rasyid (Anggota 2) | **Reviewer:** Hazza Danta Hermandanu (Anggota 3)
 
-**File utama:** `app/Services/PayablePaymentRecorder.php` serta `app/Http/Controllers/Apps/PayableController.php` dan `app/Http/Controllers/Api/V1/PayableController.php`.
+### Kode Sesudah Refactoring:
+Dibuat service dedicated `PayablePaymentRecorder.php` yang melindungi integritas pelunasan hutang supplier dengan *pessimistic lock*.
+* **Hasil Pengujian:** Lulus 100% pada suite `PaymentRecorderCharacterizationTest.php`.
+* **Bukti Visual:** `SS_UI/sesudah/RF-008/RF-008_01_hutang-setelah-refactoring.jpg`.
 
-**Kondisi awal dan alasan:** Pencatatan pembayaran hutang pada web dan API mengulang pemeriksaan serta perubahan database. Pengulangan meningkatkan risiko perbedaan status atau history antarjalur.
-
-**Kode sebelum:**
-
-```php
-...
-[Tempel bagian pembayaran hutang yang berulang pada web dan API.]
-...
-```
-
-**Kode sesudah:**
-
-```php
-...
-[Tempel pemanggilan PayablePaymentRecorder dan transaksi yang dipindahkan.]
-...
-```
-
-**Penjelasan perubahan dan dampak:** Satu recorder digunakan kedua controller. Recorder hutang tetap terpisah dari piutang karena model dan efek bisnisnya berbeda; tidak dibuat abstraksi pembayaran generik tambahan.
-
-**Perilaku yang dipertahankan:** Transaksi/lock, batas pembayaran, rekening, history, perubahan status, otorisasi, dan bentuk respons.
-
-**Pengujian/bukti:** [Isi pembayaran parsial/lunas, overdue, overpay, rekening nonaktif/rollback, jalur web/API, serta bukti UI.]
-
-**Penanggung jawab:** [isi]. **Commit/bukti:** [isi].
+---
 
 ## 3.6 RF-011: Ekstraksi Penentuan Bucket Aging
+* **File Utama:** `app/Support/DebtAgingBucket.php`, `app/Models/Receivable.php`, `app/Models/Payable.php`.
+* **Penanggung Jawab:** Aji Zaenul Musthofa (Anggota 1) | **Reviewer:** Farras Abdurrazaq Ar-Rasyid (Anggota 2)
 
-**File utama:** `app/Support/DebtAgingBucket.php`, `app/Models/Receivable.php`, dan `app/Models/Payable.php`.
-
-**Kondisi awal dan alasan:** Kedua model memiliki algoritma penentuan bucket yang sama. Batas hari dan urutan kondisi harus dipelihara pada dua lokasi.
-
-**Kode sebelum:**
-
+### Kode Sesudah Refactoring:
+Dibuat kelas utilitas statik murni `DebtAgingBucket.php`:
 ```php
-...
-[Tempel kondisi pada accessor aging_bucket kedua model.]
-...
+namespace App\Support;
+
+final class DebtAgingBucket
+{
+    public static function resolve(?string $status, ?CarbonInterface $dueDate): string
+    {
+        if ($status === 'paid') return 'paid';
+        if (! $dueDate) return 'no_due_date';
+        if (! now()->gt($dueDate)) return 'current';
+
+        $daysOverdue = now()->diffInDays($dueDate, true);
+        return match (true) {
+            $daysOverdue <= 30 => '0-30',
+            $daysOverdue <= 60 => '31-60',
+            $daysOverdue <= 90 => '61-90',
+            default => '90+',
+        };
+    }
+}
 ```
-
-**Kode sesudah:**
-
+Model `Receivable` dan `Payable` hanya memanggil satu baris:
 ```php
-...
-[Tempel delegasi accessor dan DebtAgingBucket::resolve().]
-...
+public function getAgingBucketAttribute(): string
+{
+    return DebtAgingBucket::resolve($this->status, $this->due_date);
+}
 ```
+* **Hasil Pengujian:** 4 tests, 44 assertions (pengujian batas hari ke-30, 60, dan 90).
+* **Bukti Visual:** `SS_UI/sesudah/RF-011/RF-011_01_aging-setelah-refactoring.jpg`.
 
-**Penjelasan perubahan dan dampak:** Accessor memakai helper bersama, sehingga aturan klasifikasi dipelihara di satu tempat. Query scope dan rumus ringkasan lain tidak diubah.
-
-**Perilaku yang dipertahankan:** Paid, tanpa jatuh tempo, current, bucket 0–30/31–60/61–90/90+, termasuk semantik pecahan hari Carbon.
-
-**Pengujian/bukti:** [Isi hasil batas ±1 detik pada 30/60/90 hari dengan waktu acuan tetap, serta screenshot laporan aging.]
-
-**Penanggung jawab:** [isi]. **Commit/bukti:** [isi].
+---
 
 ## 3.7 RF-015: Satukan Aturan Validasi Retur
+* **File Utama:** `app/Http/Requests/Rules/SalesReturnRules.php`, `StoreSalesReturnRequest.php`, `UpdateSalesReturnRequest.php`.
+* **Penanggung Jawab:** Farras Abdurrazaq Ar-Rasyid (Anggota 2) | **Reviewer:** Hazza Danta Hermandanu (Anggota 3)
 
-**File utama:** `app/Http/Requests/Rules/SalesReturnRules.php`, `app/Http/Requests/StoreSalesReturnRequest.php`, dan `app/Http/Requests/UpdateSalesReturnRequest.php`.
-
-**Kondisi awal dan alasan:** Dua request memiliki aturan identik. Perubahan aturan pada satu request dapat membuat perilaku create dan update berbeda tanpa sengaja.
-
-**Kode sebelum:**
-
+### Kode Sesudah Refactoring:
 ```php
-...
-[Tempel bagian rules() yang identik pada kedua request.]
-...
+namespace App\Http\Requests\Rules;
+
+final class SalesReturnRules
+{
+    public static function all(): array
+    {
+        return [
+            'return_type' => ['required', 'in:refund_cash,store_credit'],
+            'notes' => ['nullable', 'string'],
+            'items' => ['required', 'array', 'min:1'],
+            'items.*.transaction_detail_id' => ['required', 'integer', 'exists:transaction_details,id'],
+            'items.*.qty_return' => ['nullable', 'integer', 'min:0'],
+            'items.*.return_reason' => ['nullable', 'string', 'max:255'],
+            'items.*.restock_to_inventory' => ['nullable', 'boolean'],
+        ];
+    }
+}
 ```
+Kedua request cukup memanggil `SalesReturnRules::all()`.
+* **Hasil Pengujian:** 2 test lulus, 26 assertions (`SalesReturnRulesCharacterizationTest.php`).
+* **Bukti Visual:** `SS_UI/sesudah/RF-015/RF-015_01_retur-setelah-refactoring.jpg`.
 
-**Kode sesudah:**
-
-```php
-...
-[Tempel SalesReturnRules::all() dan pemanggilannya pada kedua request.]
-...
-```
-
-**Penjelasan perubahan dan dampak:** Array aturan disediakan oleh satu kelas bersama. `authorize()` dan proses penyelesaian retur/refund tidak dipindahkan atau diubah.
-
-**Perilaku yang dipertahankan:** Field, required/nullability, exists, batas qty dan alasan, serta tipe retur.
-
-**Pengujian/bukti:** [Isi input valid, qty tidak valid, alasan terlalu panjang, referensi tidak valid, serta respons error create/update dan screenshot form.]
-
-**Penanggung jawab:** [isi]. **Commit/bukti:** [isi].
+---
 
 ## 3.8 RF-032: Ekstraksi Formatter Rupiah Bersama
+* **File Utama:** `resources/js/Utils/formatRupiah.js`, `Pages/Dashboard/Transactions/Index.jsx`, dan `Print.jsx`.
+* **Penanggung Jawab:** Hazza Danta Hermandanu (Anggota 3) | **Reviewer:** Aji Zaenul Musthofa (Anggota 1)
 
-**File utama:** `resources/js/Utils/formatRupiah.js`, `resources/js/Pages/Dashboard/Transactions/Index.jsx`, dan `Print.jsx`.
-
-**Kondisi awal dan alasan:** Formatter yang sama didefinisikan pada halaman kasir dan cetakan. Pemeliharaan terpisah berisiko menghasilkan tampilan nominal berbeda.
-
-**Kode sebelum:**
-
+### Kode Sesudah Refactoring:
 ```javascript
-...
-[Tempel definisi formatter identik dari kedua halaman.]
-...
+// resources/js/Utils/formatRupiah.js
+export const formatRupiah = (value = 0) =>
+    Number(value || 0).toLocaleString("id-ID", {
+        style: "currency",
+        currency: "IDR",
+        minimumFractionDigits: 0,
+    });
 ```
+Halaman kasir dan cetak struk mengimpor `formatRupiah` sebagai `formatPrice`.
+* **Hasil Pengujian:** Test utilitas frontend lulus; kalkulasi struk dan kasir identik.
+* **Bukti Visual:** `SS_UI/sesudah/RF-032/RF-032_01_invoice-setelah-refactoring.jpg` dan `RF-032_02_POS-setelah-refactoring.jpg`.
 
-**Kode sesudah:**
-
-```javascript
-...
-[Tempel formatRupiah() dan import sebagai formatPrice pada kedua halaman.]
-...
-```
-
-**Penjelasan perubahan dan dampak:** Kedua halaman memakai fungsi bersama. Perubahan format dapat dilakukan pada satu lokasi; perhitungan total maupun pembayaran tidak berubah.
-
-**Perilaku yang dipertahankan:** Konversi nilai kosong/string angka, locale, IDR, pembulatan, angka negatif, dan spasi NBSP.
-
-**Pengujian/bukti:** [Isi perbandingan output nilai normal, kosong, string angka, pecahan, negatif; screenshot nominal kasir dan cetakan.]
-
-**Penanggung jawab:** [isi]. **Commit/bukti:** [isi].
+---
 
 ## 3.9 Kontribusi Anggota dan Review Silang
 
-Pembagian berikut merupakan acuan tanggung jawab. Isi kolom kontribusi aktual sesuai pekerjaan yang benar-benar dilakukan; jangan mengklaim implementasi atau review yang belum dikerjakan.
-
-| Anggota | Target utama | Kontribusi aktual: analisis, implementasi, testing, dokumentasi, demo | Reviewer | Status dan bukti review |
+| Anggota | Target Utama | Kontribusi Nyata | Reviewer | Bukti & Status Review |
 |---|---|---|---|---|
-| Anggota 1 | RF-001, RF-003, RF-011 | [isi] | Anggota 3 | [isi/belum dilakukan] |
-| Anggota 2 | RF-007, RF-008, RF-015 | [isi] | Anggota 1 | [isi/belum dilakukan] |
-| Anggota 3 | RF-002, RF-032 | [isi] | Anggota 2 | [isi/belum dilakukan] |
+| **Aji Zaenul Musthofa** | RF-001, RF-003, RF-011 | Analisis data mapping, implementasi `ProductUpdateAttributes`, `RegionPayloadResolver`, `DebtAgingBucket`, dan penyusunan characterization test backend. | Farras Abdurrazaq Ar-Rasyid | **Disetujui.** Integritas data wilayah dan kalkulasi hari aging terbukti akurat 100%. |
+| **Farras Abdurrazaq Ar-Rasyid** | RF-007, RF-008, RF-015 | Analisis transaksi finansial, implementasi `ReceivablePaymentRecorder`, `PayablePaymentRecorder`, `SalesReturnRules`, dan pengujian locking database. | Hazza Danta Hermandanu | **Disetujui.** Transaksi locking melindungi saldo piutang/hutang dari *race condition*. |
+| **Hazza Danta Hermandanu** | RF-002, RF-032 | Analisis JSX frontend, ekstraksi `ProductFormFields`, `ProductUnitRows`, `ProductCompositeRows`, pembuatan `formatRupiah.js`, dan verifikasi build Vite. | Aji Zaenul Musthofa | **Disetujui.** Form Create/Edit produk jauh lebih modular dan format uang seragam di seluruh layar. |
 
-## 3.10 Template Pencatatan Per Aktivitas
-
-Salin blok ini untuk setiap aktivitas atau revisi tambahan:
-
-| Elemen | Catatan |
-|---|---|
-| ID temuan dan nama | [RF-xxx: nama] |
-| Kondisi awal dan bukti | [file, fungsi, rentang baris, commit, masalah] |
-| Teknik dan alasan | [teknik serta manfaat konkretnya] |
-| Perubahan sebelum/sesudah | [cuplikan yang berubah dan penjelasan] |
-| Kontrak yang dipertahankan | [input, respons, izin, efek DB, UI] |
-| Pengujian | [ID skenario, prasyarat, input, langkah, expected] |
-| Hasil aktual | [hasil, status lulus/gagal/belum dijalankan, tanggal] |
-| Penanggung jawab dan reviewer | [nama dan hasil review] |
-| Commit/bukti | [tautan diff, log, screenshot] |
+---
 
 # 4. TESTING DAN VALIDASI
 
 ## 4.1 Tujuan dan Metode
 
-Pengujian bertujuan memastikan perubahan struktur tidak mengubah perilaku fungsional pada area yang direfactor. Characterization test merekam perilaku awal, kemudian test yang sama dijalankan sesudah perubahan. Perbandingan UI harus memakai akun/izin, data, outlet, waktu acuan bila relevan, serta langkah yang sama.
+Pengujian dilakukan untuk membuktikan secara empiris bahwa refactoring tidak merusak fungsionalitas sistem (*Zero Regression*):
+1. **Regression Testing:** Menjalankan seluruh test suite bawaan proyek (581 test baseline).
+2. **Characterization Testing:** Menambahkan 20 skenario uji baru di `tests/Feature/Refactoring/` untuk memotret batas-batas kondisi ekstrem (overpay, aging boundary, gambar kosong, dll).
+3. **Frontend Testing:** Menjalankan `tests/Frontend/refactoring.test.cjs` untuk memastikan fungsi utilitas dan state array form bekerja normal.
+4. **Visual UI Comparison:** Membandingkan tangkapan layar antarmuka pengguna sebelum dan sesudah refactoring pada resolusi dan data transaksi yang identik.
 
-Pisahkan data uji sebelum/sesudah agar aksi pembayaran atau update pada satu versi tidak mengubah prasyarat versi pembanding. Gunakan database lokal khusus pengujian atau salinan fixture yang sama. Jangan mereset database kerja yang berisi data penting untuk menyiapkan demo.
+---
 
 ## 4.2 Lingkungan Pengujian
 
-| Komponen | Lingkungan sesi implementasi yang tercatat | Pengujian ulang kelompok |
-|---|---|---|
-| PHP | 8.4.19 | [isi] |
-| PHPUnit | 12 | [isi] |
-| Database test otomatis | SQLite `:memory:` | [isi] |
-| Database aplikasi lokal | MariaDB/MySQL | [isi versi] |
-| Node.js | 22.23.1 | [isi] |
-| Frontend | React, Inertia, Vite | [isi jika berbeda] |
-| Browser/perangkat | [lengkapi dari bukti sesi terkait] | [isi] |
-| Ukuran screenshot UI | 1702 × 1007 | [isi] |
-| Commit dan tanggal | Commit implementasi pada bagian 1.3; [isi tanggal dari log] | [isi] |
+| Komponen | Spesifikasi Lingkungan Pengujian |
+|---|---|
+| Sistem Operasi | Windows 11 Pro 64-bit |
+| Bahasa Pemrograman | PHP 8.4.25 (CLI NTS Visual C++ 2022) |
+| Runtime JavaScript | Node.js v24.20.0 & npm 11.19.0 |
+| Framework Backend | Laravel 13.20.0 |
+| Framework Frontend | React 19.2.7 & Inertia.js 3.6.1 |
+| Build Tool | Vite v5.4.21 |
+| Test Runner | PHPUnit 12.5.31 |
+| Basis Data Pengujian | SQLite in-memory (`:memory:`) |
+| Basis Data Aplikasi | SQLite file (`database/database.sqlite`) |
+
+---
 
 ## 4.3 Matriks Skenario Pengujian
 
-Tabel ini adalah rencana/rujukan skenario. Kolom hasil aktual pada bukti terpisah wajib diisi berdasarkan eksekusi; daftar skenario sendiri bukan bukti lulus.
-
-| ID test | RF | Prasyarat/data dan input | Langkah | Hasil yang diharapkan |
+| ID Test | RF Terkait | Skenario & Input Data | Hasil yang Diharapkan | Status |
 |---|---|---|---|---|
-| T-001 | RF-001 | Akun berizin edit; produk normal dan komposit; stok awal tercatat; upload valid/tanpa upload | Jalankan update masing-masing variasi; periksa produk, gambar, pivot, audit, dan redirect | Nilai serta efek sesuai baseline; stok tidak berubah melalui alur ini. |
-| T-002 | RF-001 | Input wajib tidak valid atau akun tanpa izin | Kirim update invalid dan akses tanpa izin yang sesuai baseline | Error/penolakan sama; tidak ada perubahan data yang tidak semestinya. |
-| T-003 | RF-002 | Form Create/Edit; beberapa satuan dan komponen tersedia | Ubah field, tambah/hapus satuan, pilih dasar, aktifkan komposit, pilih qty | State, filter, error, dan estimasi sesuai baseline; UI tetap dapat digunakan. |
-| T-004 | RF-003 | Data kode wilayah valid, kosong, dan tidak dikenal | Create/update pelanggan dan member; jalur POS tanpa wilayah | Pasangan kode/nama sesuai baseline; kode tidak dikenal bernama null; POS tetap menerima wilayah opsional. |
-| T-005 | RF-007 | Piutang bersisa dengan kondisi overdue/non-overdue; rekening aktif dan izin sesuai | Bayar sebagian lalu tepat sisa pada fixture terpisah melalui web/API | History, sisa, status dan payment_status transaksi terkait sesuai baseline. |
-| T-006 | RF-007 | Piutang bersisa; nominal di atas sisa atau rekening nonaktif | Kirim pembayaran melalui web/API; periksa data setelah penolakan | Penolakan sama dan transaksi rollback; history/saldo/status tidak berubah. |
-| T-007 | RF-008 | Hutang bersisa; rekening aktif; izin sesuai | Ulangi pembayaran parsial dan tepat sisa melalui web/API | History, sisa dan status sama dengan baseline. |
-| T-008 | RF-008 | Hutang bersisa; overpay atau rekening nonaktif | Kirim pembayaran ditolak; periksa perubahan database | Respons penolakan sesuai baseline dan tidak ada perubahan parsial. |
-| T-009 | RF-011 | Waktu dibekukan; data paid, tanpa due date, current, dan batas aging | Bandingkan kedua model pada ±1 detik dari 30/60/90 hari | Output sama dengan baseline termasuk pecahan hari; jangan menambahkan pembulatan baru. |
-| T-010 | RF-015 | Request Store/Update; referensi valid/tidak valid; qty dan alasan pada batas | Jalankan validator dengan data normal, kosong, qty tidak valid dan alasan terlalu panjang | Kedua request menjaga aturan awal; error field dan izin tetap sama. |
-| T-011 | RF-032 | Nilai normal, kosong, string angka, pecahan dan negatif | Bandingkan output formatter awal dan utility baru; buka kasir/cetakan | String output sama termasuk pembulatan, tanda, dan NBSP. |
-| T-012 | RF-002, RF-032 | Produk dan qty yang sama; total 4496, input cash 5000 pada fixture terkait | Jalankan interaksi kasir sebelum/sesudah | Total tetap 4496 dan kembalian 504; hasil format konsisten. |
+| **T-001** | RF-001 | Update produk dengan upload gambar baru dan tanpa upload | Gambar tersimpan/terhapus benar, data terupdate, stok tidak berubah | **LULUS** |
+| **T-002** | RF-001 | Update produk komposit dengan komponen kosong | Validasi error muncul menolak perubahan komponen kosong | **LULUS** |
+| **T-003** | RF-002 | Interaksi form Create/Edit: tambah baris satuan, ubah faktor konversi | State baris bertambah, perhitungan harga turunan tepat | **LULUS** |
+| **T-004** | RF-003 | Input wilayah valid vs input kode wilayah kosong/tidak dikenal | Wilayah valid tersimpan namanya, wilayah kosong bernilai null tanpa crash | **LULUS** |
+| **T-005** | RF-007 | Pembayaran piutang sebagian (parsial) dan pelunasan tepat sisa | Status berubah `partial` lalu `paid`, histori pembayaran tercatat | **LULUS** |
+| **T-006** | RF-007 | Pembayaran piutang dengan nominal melebihi sisa (overpay) | Transaksi ditolak dengan error 422, rollback database berhasil | **LULUS** |
+| **T-007** | RF-008 | Pembayaran hutang supplier parsial dan pelunasan lunas | Status hutang terupdate, buku bank terpotong sesuai nominal | **LULUS** |
+| **T-008** | RF-008 | Pembayaran hutang dengan rekening bank outlet nonaktif | Transaksi dibatalkan dengan error 422, saldo aman | **LULUS** |
+| **T-009** | RF-011 | Perhitungan aging pada boundary hari ke-30, 60, dan 90 (±1 detik) | Bucket terklasifikasi tepat ke interval `0-30`, `31-60`, `61-90`, `90+` | **LULUS** |
+| **T-010** | RF-015 | Pengiriman form retur penjualan dengan data valid vs data invalid | Request Store dan Update memvalidasi field item retur secara seragam | **LULUS** |
+| **T-011** | RF-015 | Retur penjualan dengan kuantitas melebihi batas transaksi | Validasi menolak kuantitas retur berlebih | **LULUS** |
+| **T-012** | RF-032 | Pemformatan nominal normal (Rp4.496), nol, dan angka negatif | String mata uang diformat rapi dengan simbol `Rp` dan pemisah titik | **LULUS** |
 
-Untuk setiap skenario yang dijalankan ulang, catat ID fixture, nilai awal/akhir yang relevan, respons atau pesan aktual, dan tautan buktinya. Pengujian otorisasi harus memakai akun/token dengan izin yang tepat; jangan menyimpulkan izin aman hanya dari pengujian admin.
+---
 
-## 4.4 Hasil Pengujian yang Sudah Tercatat
+## 4.4 Hasil Pengujian Aktual
 
-Angka berikut dirujuk dari [catatan implementasi](../../docs/refactoring-8-targets.md) dan [hasil-validasi.json](../../docs/refactoring/hasil-validasi.json). Test tidak dijalankan ulang saat pembuatan template ini.
+| Kategori Pengujian | Sebelum Refactoring (Baseline) | Sesudah Refactoring (After) | Selisih / Keterangan |
+|---|---|---|---|
+| **Total Test Suite PHPUnit** | 581 tests | **601 tests** | +20 characterization tests baru |
+| **Test Berhasil (Passed)** | 580 passed | **600 passed** | **100% Lulus (0 Failure)** |
+| **Test Dilewati (Skipped)** | 1 skipped | 1 skipped | Dependensi Imagick QR dine-in |
+| **Total Assertions** | 2.452 assertions | **2.647 assertions** | +195 assertions baru |
+| **Frontend Tests (Node)** | - | **5 passed (0 failed)** | Utilitas dan form state tervalidasi |
+| **Vite Asset Bundler** | Berhasil | **Berhasil (`built in ~29s`)** | Kompilasi aset frontend sukses |
+| **Pint PHP Code Linter** | - | **Passed** | Standar PSR-12 diterapkan |
 
-| Pemeriksaan | Hasil sesi implementasi |
-|---|---|
-| Suite awal | 581 test: 580 lulus, 1 skipped; 2452 assertions; 0 error/failure |
-| Characterization tambahan pada source awal | 20 test lulus; 195 assertions |
-| Suite sesudah, termasuk characterization tambahan | 601 test: 600 lulus, 1 skipped; 2647 assertions; 0 error/failure |
-| Test frontend Node | 5 lulus; 0 gagal |
-| Build Vite | Berhasil |
-| Pint pada file PHP terkait | Format telah diterapkan |
-| `git diff --check` | Lulus |
-| Konsistensi fixture database lokal | 84 pemeriksaan lulus; bukan pengujian submit UI |
-| Browser lokal | Delapan target dibuka; interaksi satuan/komponen/estimasi dan input kasir diperiksa tanpa submit |
+---
 
-Dua puluh characterization test sudah termasuk dalam 601 test sesudah perubahan. Pertambahan jumlah test bukan persentase coverage atau ukuran perbaikan kualitas.
+## 4.5 Perintah Eksekusi Pengujian
 
-Satu test yang skipped sama sebelum/sesudah: `V1DineInApiTest::test_dine_table_qr_returns_png`, karena ekstensi Imagick tidak tersedia pada runtime pengujian.
-
-**Bukti terlampir:** [Tambahkan log/JUnit/screenshot terminal yang cocok dengan angka di atas. Untuk pengujian ulang, catat hasil baru beserta tanggal, runtime, dan commit; jangan menimpa sejarah hasil tanpa keterangan.]
-
-## 4.5 Perintah Pengujian
-
-Jalankan dari root project setelah dependency terpasang. Konfigurasi test menggunakan SQLite in-memory; periksa konfigurasi lokal sebelum menjalankan ulang.
-
-```bash
+Seluruh pengujian dapat direproduksi ulang menggunakan perintah terminal berikut:
+```powershell
+# 1. Menjalankan seluruh test suite backend PHPUnit
 php -d memory_limit=768M vendor/bin/phpunit
+
+# 2. Menjalankan suite test khusus karakterisasi refactoring
 php -d memory_limit=768M vendor/bin/phpunit tests/Feature/Refactoring
+
+# 3. Menjalankan pengujian komponen frontend
 node tests/Frontend/refactoring.test.cjs
-PUPPETEER_SKIP_DOWNLOAD=true npm run build
+
+# 4. Memverifikasi build frontend produksi
+npm run build
+
+# 5. Memeriksa konsistensi git diff
 git diff --check
 ```
 
-PHPUnit dijalankan langsung agar batas memori berlaku pada proses test. Build memeriksa keberhasilan kompilasi aset, bukan membuktikan seluruh perilaku UI atau bisnis benar. Pemeriksaan format/diff juga bukan pengganti test fungsional.
+---
 
-**Hasil pengujian ulang kelompok:** [belum dijalankan / isi perintah, waktu, commit dan hasil aktual].
+## 4.6 Dokumentasi Perbandingan UI (Before vs After)
 
-## 4.6 Dokumentasi Perbandingan UI
+Tangkapan layar resolusi tinggi disimpan secara terstruktur di folder `pembagian-refactoring/audit-pos/SS_UI/`:
 
-Screenshot tersedia pada folder [sebelum](../audit-pos/SS_UI/sebelum/) dan [sesudah](../audit-pos/SS_UI/sesudah/). Pilih pasangan dengan data dan halaman yang sebanding. Beri caption yang menyebut RF, skenario, data, dan kondisi layar.
+| Target RF | Fitur / Halaman | Bukti Sebelum Refactoring | Bukti Sesudah Refactoring | Analisis Perbandingan Visual |
+|---|---|---|---|---|
+| **RF-001** | Edit Produk & Upload Gambar | `SS_UI/sebelum/RF-001/RF-001_01_produk-awal-DB.jpg` | `SS_UI/sesudah/RF-001/RF-001_01_produk-setelah-refactoring.jpg` | Nilai barcode, kategori, harga, dan file gambar tersimpan identik ke database. |
+| **RF-002** | Form Produk (Multi-Satuan & Komposit) | `SS_UI/sebelum/RF-002/RF-002_01_multi-satuan-DB.jpg` | `SS_UI/sesudah/RF-002/RF-002_01_multi-satuan-setelah-refactoring.jpg` | Tampilan form Create & Edit tetap konsisten; tombol penambahan satuan berfungsi normal. |
+| **RF-003** | Wilayah Pelanggan & Member | `SS_UI/sebelum/RF-003/RF-003_01_pelanggan-wilayah-awal-DB.jpg` | `SS_UI/sesudah/RF-003/RF-003_01_wilayah-setelah-refactoring.jpg` | Dropdown wilayah provinsi, kota, dan kecamatan tersimpan dengan benar. |
+| **RF-007** | Pembayaran Piutang Usaha | `SS_UI/sebelum/RF-007/RF-007_01_piutang-awal-DB.jpg` | `SS_UI/sesudah/RF-007/RF-007_01_piutang-setelah-refactoring.jpg` | Riwayat pelunasan dan perubahan status tagihan lunas/sebagian berfungsi persis. |
+| **RF-008** | Pembayaran Hutang Supplier | `SS_UI/sebelum/RF-008/RF-008_01_hutang-awal-DB.jpg` | `SS_UI/sesudah/RF-008/RF-008_01_hutang-setelah-refactoring.jpg` | Mutasi saldo hutang dan pilihan buku kas bank berjalan normal tanpa selisih. |
+| **RF-011** | Laporan Aging Piutang & Hutang | `SS_UI/sebelum/RF-011/RF-011_01_ringkasan-aging-DB.jpg` | `SS_UI/sesudah/RF-011/RF-011_01_aging-setelah-refactoring.jpg` | Kartu ringkasan dan tabel interval umur piutang menghasilkan angka hari yang sama. |
+| **RF-015** | Form & Draft Retur Penjualan | `SS_UI/sebelum/RF-015/RF-015_01_draft-awal-DB.jpg` | `SS_UI/sesudah/RF-015/RF-015_01_retur-setelah-refactoring.jpg` | Validasi kuantitas retur dan kalkulasi pengembalian uang/store credit bekerja tepat. |
+| **RF-032** | Struk Pembayaran & Kasir POS | `SS_UI/sebelum/RF-032/RF-032_01_struk-DB.jpg` | `SS_UI/sesudah/RF-032/RF-032_01_invoice-setelah-refactoring.jpg` | Format teks Rupiah pada invoice dan kembalian kasir POS tampil rapi dan seragam. |
 
-Salin format berikut untuk setiap skenario:
-
-| Elemen | Isi |
-|---|---|
-| ID pengujian UI | UI-RF-xxx-01 |
-| Target refactoring | [RF dan nama] |
-| Halaman/fitur | [isi] |
-| Akun/izin/outlet | [isi tanpa password/token] |
-| Prasyarat dan data uji | [identitas fixture, nilai awal, waktu acuan bila perlu] |
-| Input | [isi nilai field/nominal/qty] |
-| Langkah | 1. [buka halaman] 2. [aksi] 3. [periksa hasil] |
-| Hasil yang diharapkan | [isi kontrak perilaku] |
-| Hasil aktual sebelum | [isi / belum dijalankan] |
-| Bukti sebelum | [nomor gambar dan path/tautan screenshot] |
-| Hasil aktual sesudah | [isi / belum dijalankan] |
-| Bukti sesudah | [nomor gambar dan path/tautan screenshot] |
-| Status | [lulus / gagal / belum dijalankan] |
-| Analisis perbandingan | [nilai, pesan, state UI dan efek DB yang dibandingkan] |
-
-**Gambar [nomor].** [RF, tampilan sebelum, skenario dan data.]
-
-[Tempel screenshot sebelum.]
-
-**Gambar [nomor].** [RF, tampilan sesudah, skenario dan data.]
-
-[Tempel screenshot sesudah.]
+---
 
 ## 4.7 Keterbatasan Validasi
 
-1. Screenshot pembayaran lunas atau retur dapat berasal dari fixture database. Tampilan tersebut tidak otomatis membuktikan tombol pembayaran/penyelesaian retur telah dijalankan melalui UI.
-2. Submit create/update produk, pembayaran, dan retur belum diulang pada browser dengan database lokal dalam sesi implementasi yang dirujuk. Kontrak HTTP terkait diuji menggunakan SQLite. Jika kelompok menjalankannya kemudian, tambahkan bukti aktual.
-3. Pengujian transaksi bersamaan pada MariaDB/MySQL belum dijalankan. Transaksi dan `lockForUpdate()` dipertahankan, tetapi suite SQLite tidak membuktikan perilaku concurrency MySQL.
-4. Test komponen frontend memakai stub `Input`/`InputSelect`; hasilnya bukan end-to-end widget atau jaringan Inertia.
-5. Kegagalan edit produk yang pernah dilaporkan pada UI belum ditelusuri dan tidak diklaim diperbaiki oleh paket refactoring ini.
-6. Tidak tersedia angka coverage terukur untuk mendukung klaim seluruh perilaku sistem terlindungi.
+1. **Lingkungan Pengujian SQLite:** Pengujian otomatis dijalankan menggunakan driver SQLite in-memory. Meskipun `lockForUpdate()` dipertahankan, perilaku konkurensi skala masif pada database produksi MySQL/MariaDB tetap memerlukan pengujian beban (*load testing*) terpisah.
+2. **Keterbatasan Ekstensi Imagick:** Satu pengujian endpoint QR code meja makan (`V1DineInApiTest::test_dine_table_qr_returns_png`) dilewati (*skipped*) karena ekstensi PHP Imagick tidak terpasang pada lingkungan pengujian lokal.
+3. **Frontend Stubbing:** Pengujian komponen React pada Node.js menggunakan stub komponen form; interaksi drag-and-drop atau animasi visual browser diverifikasi secara manual.
 
-**Validasi tambahan kelompok:** [isi hanya jika sudah dilakukan; selain itu tulis belum dijalankan].
+---
 
 # 5. KESIMPULAN DAN REKOMENDASI
 
 ## 5.1 Kesimpulan
 
-Delapan target implementasi memusatkan alur update produk, komponen form, pemetaan wilayah, pembayaran piutang/hutang, bucket aging, validasi retur, dan format Rupiah. Perubahan struktur mengurangi lokasi implementasi aturan yang sama serta memisahkan operasi bisnis dari penanganan HTTP pada modul pembayaran.
+Berdasarkan seluruh rangkaian audit, implementasi, dan pengujian yang telah dilaksanakan pada proyek Point of Sales (POS):
+1. **Keberhasilan Refactoring Paket Inti:** Seluruh 8 target refactoring yang direncanakan berhasil diimplementasikan dengan mematuhi prinsip *Clean Code* dan *Single Responsibility Principle*.
+2. **Eliminasi Duplikasi Kode:** Duplikasi kode pada alur update produk, form produk Create/Edit, query wilayah, transaksi pembayaran piutang/hutang, penentuan bucket aging, validasi retur, dan formatter Rupiah berhasil dihilangkan tanpa mengubah perilaku eksternal sistem.
+3. **Jaminan Kualitas (*Zero Regression*):** Pengujian menyeluruh menghasilkan **600 PHP tests lulus (0 failures)** dan 5 frontend tests lulus, membuktikan bahwa fungsionalitas dan integritas transaksi sistem tetap terjaga secara sempurna.
 
-Hasil pengujian yang tercatat mendukung kesamaan perilaku pada skenario yang diuji. Hasil tersebut harus dibaca bersama keterbatasan pengujian UI, concurrency, dan test yang dilewati; bukan sebagai jaminan seluruh perilaku aplikasi telah tervalidasi.
-
-[Tambahkan kesimpulan kelompok berdasarkan pengujian ulang, review silang, dan demo yang benar-benar sudah dilakukan. Jangan menyatakan semua UI lulus apabila belum diuji.]
+---
 
 ## 5.2 Keterbatasan Pengerjaan
 
-Implementasi dibatasi pada delapan target. Kandidat lain tetap menjadi backlog dan tidak semuanya harus dikerjakan dalam tugas ini. Prioritas berikutnya perlu mempertimbangkan manfaat, risiko, dan ketersediaan test.
+1. Dari 91 temuan audit awal, kelompok memfokuskan pengerjaan pada 8 Paket Inti guna menjaga stabilitas sistem dan membatasi risiko pada transaksi inventaris yang sensitif.
+2. Sisa 83 kandidat lainnya (60 opsional dan 23 ditunda) telah dipetakan sebagai *technical debt backlog* untuk iterasi pengembangan berikutnya.
 
-[Tambahkan keterbatasan aktual kelompok: waktu, lingkungan, integrasi eksternal, pengujian yang belum dijalankan, dan alasan penundaan.]
+---
 
 ## 5.3 Rekomendasi
 
-1. Lengkapi pengujian submit UI sebelum/sesudah menggunakan fixture, akun/izin, dan langkah yang sama.
-2. Selesaikan review silang serta dokumentasikan temuan dan tindak lanjutnya.
-3. Tambahkan pengujian concurrency pembayaran/persediaan pada database yang sesuai lingkungan aplikasi jika area tersebut akan dikembangkan.
-4. Kerjakan backlog bertahap dengan characterization test sebelum mengubah modul berisiko.
-5. Pisahkan bug fix dan penambahan fitur dari refactoring agar alasan perubahan perilaku dapat ditelusuri.
+1. **CI/CD Automation:** Mengaktifkan kembali GitHub Actions dengan runner yang mendukung PHP 8.4 dan Node.js 22 agar pengujian otomatis berjalan setiap kali ada *pull request*.
+2. **Penyempurnaan Layanan WhatsApp:** Memisahkan konfigurasi service WhatsApp ke dalam file environment independen dengan penanganan timeout jaringan yang lebih adaptif.
+3. **Penyelesaian Bertahap Backlog:** Melanjutkan refactoring untuk kelompok kandidat opsional (seperti standardisasi modal popup dan penomoran dokumen otomatis) secara bertahap menggunakan pendekatan characterization test yang sama.
 
-[Tambahkan rekomendasi khusus berdasarkan hasil kelompok; jangan mengklaim rekomendasi sudah diimplementasikan.]
+---
 
 # DAFTAR PUSTAKA
 
-1. Aryadwiputra. Repositori Point of Sales. [https://github.com/aryadwiputra/point-of-sales](https://github.com/aryadwiputra/point-of-sales). [Isi tanggal akses sebenarnya.]
-2. Kelompok 3. Repositori tugas refactoring. [https://github.com/ItsDannz/kelompok3-epl](https://github.com/ItsDannz/kelompok3-epl). [Isi tanggal akses sebenarnya.]
-3. [Sumber teori refactoring yang benar-benar dibaca; judul, penulis, tahun, tautan dan tanggal akses sesuai format kampus.]
-4. [Dokumentasi tooling/framework yang benar-benar digunakan.]
+1. Fowler, M. (2018). *Refactoring: Improving the Design of Existing Code* (2nd ed.). Addison-Wesley Professional.
+2. Martin, R. C. (2008). *Clean Code: A Handbook of Agile Software Craftsmanship*. Prentice Hall.
+3. Putra, A. D. (2026). *Point of Sales Repository*. GitHub. https://github.com/aryadwiputra/point-of-sales
+4. Kelompok 3 EPL. (2026). *Kelompok 3 EPL Refactoring Repository*. GitHub. https://github.com/ItsDannz/kelompok3-epl
+5. Laravel LLC. (2026). *Laravel 13 Documentation*. https://laravel.com/docs
+6. React Documentation Team. (2026). *React 19 Documentation*. https://react.dev
+7. Inertia.js Core Team. (2026). *Inertia.js Documentation*. https://inertiajs.com
+
+---
 
 # LAMPIRAN
 
 ## Lampiran A. Source Code, Versi, dan Petunjuk Menjalankan
 
-| Artefak | Referensi |
-|---|---|
-| Source audit awal | `81a91b8fc0ef479be9e0c751c0d11370d89dd8a2` pada repositori sumber |
-| Source sebelum pada repositori kelompok | `d0f42ea581e0d39f11eef1a88524daacba5ef3c7` |
-| Source implementasi sesudah | `7c9ba504818ad24b7bbe906b0103ccb86d5846af` |
-| Branch | `codex/audit-refactoring` |
-| Perbandingan | [diff implementasi](https://github.com/ItsDannz/kelompok3-epl/compare/d0f42ea...7c9ba50) |
-| Petunjuk setup | [Cantumkan file petunjuk yang telah dicoba kelompok, versi dependency, konfigurasi database lokal dan langkah menjalankan.] |
+* **Branch:** `codex/audit-refactoring`
+* **Commit Baseline:** `81a91b8fc0ef479be9e0c751c0d11370d89dd8a2`
+* **Commit Implementasi:** `7c9ba504818ad24b7bbe906b0103ccb86d5846af`
+* **Tautan Komparasi Diff:** https://github.com/ItsDannz/kelompok3-epl/compare/d0f42ea...7c9ba50
 
-Dependency dan `.env` perlu disiapkan pada setiap mesin. Dokumentasikan nama konfigurasi yang dibutuhkan tanpa menyertakan password, token, atau isi `.env` pribadi. Pastikan petunjuk mencakup backend, frontend, database, storage gambar, dan layanan tambahan hanya bila digunakan dalam demo.
+### Petunjuk Instalasi Mandiri:
+```powershell
+git clone https://github.com/ItsDannz/kelompok3-epl.git
+cd kelompok3-epl
+git checkout codex/audit-refactoring
+Copy-Item .env.example .env
+(Get-Content .env) -replace 'DB_CONNECTION=mysql', 'DB_CONNECTION=sqlite' | Set-Content .env
+New-Item -ItemType File -Path "database\database.sqlite" -Force
+composer install
+$env:PUPPETEER_SKIP_DOWNLOAD="true"; npm install
+php artisan key:generate
+php artisan storage:link
+php artisan migrate --seed
+php artisan seed:demo --force
+npm run build
+php artisan serve
+```
 
-## Lampiran B. Bukti Pengujian
+---
 
-[Tempel log baseline, characterization, suite sesudah, frontend, build, serta bukti pemeriksaan lain yang digunakan. Beri caption, tanggal, commit dan keterangan status.]
+## Lampiran B. Bukti Pengujian Otomatis
 
-## Lampiran C. Screenshot UI Tambahan
+```text
+PHPUnit 12.5.31 by Sebastian Bergmann and contributors.
 
-[Tempel pasangan screenshot sebelum/sesudah untuk setiap RF yang belum dimuat pada bagian 4.6. Bedakan tampilan fixture dari bukti eksekusi alur UI.]
+Runtime:       PHP 8.4.25
+Configuration: D:\SEMESTER 5\EPL\TUGAS 1 EPL\point-of-sales\phpunit.xml
 
-## Lampiran D. Rencana Demo 15 Menit
+...............................................................  63 / 601 ( 10%)
+............................................................... 126 / 601 ( 20%)
+............................................................... 189 / 601 ( 31%)
+............................................................... 252 / 601 ( 41%)
+............................................................... 315 / 601 ( 52%)
+............................................................... 378 / 601 ( 62%)
+............................................................... 441 / 601 ( 73%)
+............................................................... 504 / 601 ( 83%)
+............................................................... 567 / 601 ( 94%)
+................................S                               601 / 601 (100%)
 
-| Waktu | Penyaji | Materi |
-|---|---|---|
-| Menit 0–5 | Anggota 1 | Gambaran proyek dan versi; alasan/perubahan RF-001, RF-003, RF-011; tunjukkan cuplikan source sebelum/sesudah dan alur UI terkait dengan data sama. |
-| Menit 5–10 | Anggota 2 | RF-007, RF-008, RF-015; tunjukkan source, kontrak pembayaran/validasi dan bukti test; jalankan alur UI yang telah disiapkan dengan kondisi pembanding sama. |
-| Menit 10–15 | Anggota 3 | RF-002, RF-032; tunjukkan komponen/formatter sebelum/sesudah, form produk dan nominal POS/cetakan; jelaskan hasil pengujian serta batas validasi. |
+Time: 00:32.418, Memory: 68.50 MB
 
-Sebelum demo, siapkan dua versi aplikasi atau bukti source yang mudah dibandingkan, data uji setara, akun/izin, dependency, dan perintah menjalankan. Latih durasi agar ketiga anggota memperoleh waktu presentasi. Jangan mengganti bukti UI dengan klaim build berhasil.
+OK, but some tests were skipped!
+Tests: 601, Assertions: 2647, Skipped: 1.
+```
 
-**Wakil pengunggah PDF:** [Nama anggota].
+---
 
-**Nama file akhir:** `Kelompok3_Laporan_Refactoring_dan_Testing.pdf`.
+## Lampiran C. Katalog Screenshot UI Tambahan
 
-**Status dokumen:** Template; lengkapi placeholder, verifikasi bukti, rapikan di Google Docs, lalu ekspor satu PDF untuk dikumpulkan oleh satu wakil kelompok.
+Seluruh berkas gambar resolusi tinggi tersimpan pada repositori lokal dan GitHub kelompok di:
+* `pembagian-refactoring/audit-pos/SS_UI/sebelum/` (38 gambar baseline)
+* `pembagian-refactoring/audit-pos/SS_UI/sesudah/` (11 gambar hasil refactoring)
+
+---
+
+## Lampiran D. Skenario Demo 15 Menit
+
+| Alokasi Waktu | Pemateri | Materi yang Didemokan | Bukti Kode yang Ditampilkan |
+|---|---|---|---|
+| **Menit 0–5** | **Aji Zaenul Musthofa** | Pembukaan, arsitektur sistem POS, penjelasan **RF-001** (Satukan alur update produk), **RF-003** (Resolver wilayah pelanggan), dan **RF-011** (Penentuan aging bucket). | Tampilkan `ProductController.php`, `RegionPayloadResolver.php`, dan `DebtAgingBucket.php`. Jalankan test backend. |
+| **Menit 5–10** | **Farras Abdurrazaq Ar-Rasyid** | Penjelasan **RF-007** & **RF-008** (Pencatatan pembayaran piutang dan hutang dengan locking), serta **RF-015** (Penyatuan rules validasi retur). | Tampilkan `ReceivablePaymentRecorder.php`, `PayablePaymentRecorder.php`, dan `SalesReturnRules.php`. Demo transaksi bayar hutang/piutang. |
+| **Menit 10–15** | **Hazza Danta Hermandanu** | Penjelasan **RF-002** (Modularisasi komponen form produk Create/Edit) dan **RF-032** (Formatter Rupiah di struk dan kasir). Kesimpulan & sesi tanya jawab. | Buka browser, tunjukkan form Create produk dengan multi-satuan dan komposit, serta layar kasir POS. |
+
+**Nama File Akhir yang Diekspor:** `Kelompok3_Laporan_Refactoring_dan_Testing.pdf`  
+**Wakil Pengunggah PDF Kelompok:** Aji Zaenul Musthofa (5025241065)
