@@ -97,4 +97,14 @@ Arsip `baseline-81a91b8.tar.gz` dibuat dengan git archive HEAD, tidak berisi .en
 4a8a3d13ff2d2d9ab93ef9eb5fab50cabd771dea6c98634840beaa699e803fa5
 ```
 
-Belum ada versi source sesudah refactoring. Simpan hash commit baseline untuk membandingkan diff, bukan hanya membandingkan dua folder yang bisa berubah tanpa riwayat.
+## Verifikasi Sesudah Refactoring (Commit 7c9ba50)
+
+Seluruh delapan target Paket Inti telah diimplementasikan pada commit `7c9ba504818ad24b7bbe906b0103ccb86d5846af` dan diverifikasi dengan hasil sebagai berikut:
+
+- **PHPUnit Backend:** **600 passed, 1 skipped** (`V1DineInApiTest::test_dine_table_qr_returns_png` karena Imagick); **2.647 assertions; 0 failures**.
+- **Characterization Tests Baru:** 20 test tambahan di `tests/Feature/Refactoring/` lulus 100%.
+- **Frontend Test (Node.js):** 5 unit tests di `tests/Frontend/refactoring.test.cjs` lulus 100%.
+- **Build Frontend:** `npm run build` sukses menghasilkan bundel aset di `public/build/`.
+- **Linting & Code Style:** `vendor/bin/pint` telah dijalankan pada berkas PHP baru.
+- **Tangkapan Layar UI:** Seluruh perbandingan sebelum dan sesudah refactoring tersimpan pada folder `audit-pos/SS_UI/sebelum/` dan `audit-pos/SS_UI/sesudah/`.
+- **Integritas Transaksi & Data:** Konsistensi stok aggregate, pergerakan saldo kasir, pencatatan mutasi piutang/hutang, dan kalkulasi aging terbukti identik sebelum dan sesudah refactoring.
