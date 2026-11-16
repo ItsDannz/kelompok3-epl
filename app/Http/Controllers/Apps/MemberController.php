@@ -2,12 +2,15 @@
 
 namespace App\Http\Controllers\Apps;
 
+// RF-003: Ekstraksi resolver wilayah.
+
 use App\Http\Controllers\Controller;
 use App\Models\Customer;
 use App\Models\CustomerVoucher;
 use App\Models\Transaction;
 use App\Services\CustomerSegmentationService;
 use App\Services\LoyaltyService;
+use App\Services\RegionPayloadResolver;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use Inertia\Inertia;
@@ -20,7 +23,8 @@ class MemberController extends Controller
 {
     public function __construct(
         protected readonly LoyaltyService $loyaltyService,
-        protected readonly CustomerSegmentationService $segmentationService
+        protected readonly CustomerSegmentationService $segmentationService,
+        protected readonly RegionPayloadResolver $regionPayloadResolver
     ) {}
 
     public function index(Request $request)
@@ -218,21 +222,7 @@ class MemberController extends Controller
 
     protected function resolveRegionPayload(array $validated): array
     {
-        $province = Province::where('code', $validated['province_id'])->first();
-        $regency = City::where('code', $validated['regency_id'])->first();
-        $district = District::where('code', $validated['district_id'])->first();
-        $village = Village::where('code', $validated['village_id'])->first();
-
-        return [
-            'province_id' => $validated['province_id'],
-            'province_name' => $province?->name,
-            'regency_id' => $validated['regency_id'],
-            'regency_name' => $regency?->name,
-            'district_id' => $validated['district_id'],
-            'district_name' => $district?->name,
-            'village_id' => $validated['village_id'],
-            'village_name' => $village?->name,
-        ];
+        return $this->regionPayloadResolver->resolve($validated);
     }
 
     protected function memberPayloadFromRequest(Request $request, ?Customer $customer = null): array

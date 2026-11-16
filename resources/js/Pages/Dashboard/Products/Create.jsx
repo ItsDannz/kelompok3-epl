@@ -1,21 +1,20 @@
+// RF-002: Ekstraksi komponen form produk bersama.
 import React, { useState } from "react";
 import DashboardLayout from "@/Layouts/DashboardLayout";
 import { Head, useForm, usePage, Link } from "@inertiajs/react";
 import Button from "@/Components/Dashboard/Button";
 import Input from "@/Components/Dashboard/Input";
-import Textarea from "@/Components/Dashboard/TextArea";
-import InputSelect from "@/Components/Dashboard/InputSelect";
+import ProductFormFields from "@/Components/Dashboard/Products/ProductFormFields";
+import ProductUnitRows from "@/Components/Dashboard/Products/ProductUnitRows";
+import ProductCompositeRows from "@/Components/Dashboard/Products/ProductCompositeRows";
 import toast from "react-hot-toast";
 import {
     IconPackage,
     IconDeviceFloppy,
     IconArrowLeft,
     IconPhoto,
-    IconBarcode,
     IconCurrencyDollar,
-    IconTrash,
     IconPackages,
-    IconRulerMeasure,
 } from "@tabler/icons-react";
 
 export default function Create({ categories, products, units = [] }) {
@@ -52,90 +51,6 @@ export default function Create({ categories, products, units = [] }) {
         setData("is_composite", checked);
         if (checked) setData("units", []);
     };
-
-    const addUnitRow = () => {
-        const firstUnused = units.find(
-            (u) => !data.units.some((row) => row.unit_id === u.id)
-        );
-        if (!firstUnused) return;
-        setData("units", [
-            ...data.units,
-            {
-                unit_id: firstUnused.id,
-                is_base: data.units.length === 0,
-                conversion_factor: data.units.length === 0 ? 1 : "",
-                sell_price: "",
-                barcode: "",
-            },
-        ]);
-    };
-
-    const updateUnitRow = (index, field, value) => {
-        const rows = data.units.map((r, i) =>
-            i === index ? { ...r, [field]: value } : r
-        );
-        if (field === "is_base" && value) {
-            rows.forEach((r, i) => {
-                if (i !== index) r.is_base = false;
-            });
-        }
-        setData("units", rows);
-    };
-
-    const removeUnitRow = (index) => {
-        setData("units", data.units.filter((_, i) => i !== index));
-    };
-
-    const availableUnits = (selectedIndex) =>
-        units.filter(
-            (u) =>
-                !data.units.some(
-                    (r, i) => i !== selectedIndex && r.unit_id === u.id
-                )
-        );
-
-    const addComponent = () => {
-        setData("components", [
-            ...data.components,
-            { component_product_id: "", qty: 1 },
-        ]);
-    };
-
-    const updateComponent = (index, field, value) => {
-        const components = data.components.map((c, i) =>
-            i === index ? { ...c, [field]: value } : c
-        );
-        setData("components", components);
-    };
-
-    const removeComponent = (index) => {
-        setData(
-            "components",
-            data.components.filter((_, i) => i !== index)
-        );
-    };
-
-    const availableProducts = (selectedIndex) =>
-        products.filter(
-            (p) =>
-                !p.is_composite &&
-                !data.components.some(
-                    (c, i) =>
-                        i !== selectedIndex &&
-                        c.component_product_id === p.id
-                )
-        );
-
-    const estimatedSellPrice = data.is_composite
-        ? data.components.reduce((total, c) => {
-              const product = products.find(
-                  (p) => p.id === Number(c.component_product_id)
-              );
-              return product
-                  ? total + product.sell_price * (Number(c.qty) || 0)
-                  : total;
-          }, 0)
-        : data.sell_price;
 
     const handleImageChange = (e) => {
         const file = e.target.files[0];
@@ -218,69 +133,19 @@ export default function Create({ categories, products, units = [] }) {
                     {/* Right Column - Form */}
                     <div className="lg:col-span-2 space-y-6">
                         {/* Basic Info */}
-                        <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 p-5">
-                            <h3 className="text-sm font-semibold text-slate-700 dark:text-slate-300 mb-4 flex items-center gap-2">
-                                <IconBarcode size={18} />
-                                Informasi Dasar
-                            </h3>
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                <div className="md:col-span-2">
-                                    <InputSelect
-                                        label="Kategori"
-                                        data={categories}
-                                        selected={selectedCategory}
-                                        setSelected={setSelectedCategoryHandler}
-                                        placeholder="Pilih kategori"
-                                        errors={errors.category_id}
-                                        searchable={true}
-                                        displayKey="name"
-                                    />
-                                </div>
-                                <Input
-                                    type="text"
-                                    label="Barcode"
-                                    value={data.barcode}
-                                    onChange={(e) =>
-                                        setData("barcode", e.target.value)
-                                    }
-                                    errors={errors.barcode}
-                                    placeholder="Masukkan kode produk"
-                                />
-                                <Input
-                                    type="text"
-                                    label="SKU"
-                                    value={data.sku}
-                                    onChange={(e) => setData("sku", e.target.value)}
-                                    errors={errors.sku}
-                                    placeholder="Masukkan SKU unik"
-                                />
-                                <Input
-                                    type="text"
-                                    label="Nama Produk"
-                                    value={data.title}
-                                    onChange={(e) =>
-                                        setData("title", e.target.value)
-                                    }
-                                    errors={errors.title}
-                                    placeholder="Masukkan nama produk"
-                                />
-                                <div className="md:col-span-2">
-                                    <Textarea
-                                        label="Deskripsi"
-                                        placeholder="Deskripsi produk (opsional)"
-                                        errors={errors.description}
-                                        onChange={(e) =>
-                                            setData(
-                                                "description",
-                                                e.target.value
-                                            )
-                                        }
-                                        value={data.description}
-                                        rows={3}
-                                    />
-                                </div>
-                            </div>
-                        </div>
+                        <ProductFormFields
+                            data={data}
+                            setData={setData}
+                            errors={errors}
+                            categories={categories}
+                            selectedCategory={selectedCategory}
+                            onCategoryChange={setSelectedCategoryHandler}
+                            placeholders={{
+                                barcode: "Masukkan kode produk",
+                                sku: "Masukkan SKU unik",
+                                title: "Masukkan nama produk",
+                            }}
+                        />
 
                         {/* Pricing & Stock */}
                         <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 p-5">
@@ -473,271 +338,23 @@ export default function Create({ categories, products, units = [] }) {
 
                         {/* Units */}
                         {!data.is_composite && (
-                            <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 p-5">
-                                <div className="flex items-center justify-between mb-4">
-                                    <h3 className="text-sm font-semibold text-slate-700 dark:text-slate-300 flex items-center gap-2">
-                                        <IconRulerMeasure size={18} />
-                                        Satuan
-                                    </h3>
-                                    <button
-                                        type="button"
-                                        onClick={addUnitRow}
-                                        disabled={
-                                            data.units.length >= units.length
-                                        }
-                                        className="text-sm text-primary-600 hover:text-primary-700 font-medium disabled:opacity-40"
-                                    >
-                                        + Tambah Satuan
-                                    </button>
-                                </div>
-                                {errors.units && (
-                                    <p className="text-sm text-danger-600 mb-2">
-                                        {errors.units}
-                                    </p>
-                                )}
-                                {data.units.length === 0 && (
-                                    <p className="text-sm text-slate-500">
-                                        Satuan dasar otomatis dibuat jika tidak
-                                        ditambahkan. Tambahkan satuan (box, kg,
-                                        dll) untuk penjualan multi-satuan.
-                                    </p>
-                                )}
-                                <div className="space-y-3">
-                                    {data.units.map((row, index) => (
-                                        <div
-                                            key={index}
-                                            className="flex items-end gap-3"
-                                        >
-                                            <div className="flex-1">
-                                                <InputSelect
-                                                    data={availableUnits(index)}
-                                                    selected={
-                                                        units.find(
-                                                            (u) =>
-                                                                u.id ===
-                                                                row.unit_id
-                                                        ) || null
-                                                    }
-                                                    setSelected={(value) =>
-                                                        updateUnitRow(
-                                                            index,
-                                                            "unit_id",
-                                                            value?.id ?? ""
-                                                        )
-                                                    }
-                                                    placeholder="Pilih satuan"
-                                                    errors={
-                                                        errors[
-                                                            `units.${index}.unit_id`
-                                                        ]
-                                                    }
-                                                    searchable={true}
-                                                    displayKey="code"
-                                                />
-                                            </div>
-                                            <div className="w-36">
-                                                <Input
-                                                    type="number"
-                                                    min="0.0001"
-                                                    step="0.0001"
-                                                    value={
-                                                        row.conversion_factor
-                                                    }
-                                                    onChange={(e) =>
-                                                        updateUnitRow(
-                                                            index,
-                                                            "conversion_factor",
-                                                            e.target.value
-                                                        )
-                                                    }
-                                                    errors={
-                                                        errors[
-                                                            `units.${index}.conversion_factor`
-                                                        ]
-                                                    }
-                                                    placeholder="Konversi"
-                                                    disabled={row.is_base}
-                                                />
-                                            </div>
-                                            <div className="w-40">
-                                                <Input
-                                                    type="number"
-                                                    min="0"
-                                                    value={row.sell_price}
-                                                    onChange={(e) =>
-                                                        updateUnitRow(
-                                                            index,
-                                                            "sell_price",
-                                                            e.target.value
-                                                        )
-                                                    }
-                                                    errors={
-                                                        errors[
-                                                            `units.${index}.sell_price`
-                                                        ]
-                                                    }
-                                                    placeholder="Harga jual"
-                                                />
-                                            </div>
-                                            <div className="w-44">
-                                                <Input
-                                                    type="text"
-                                                    value={row.barcode}
-                                                    onChange={(e) =>
-                                                        updateUnitRow(
-                                                            index,
-                                                            "barcode",
-                                                            e.target.value
-                                                        )
-                                                    }
-                                                    errors={
-                                                        errors[
-                                                            `units.${index}.barcode`
-                                                        ]
-                                                    }
-                                                    placeholder="Barcode (opsional)"
-                                                />
-                                            </div>
-                                            <label className="flex items-center gap-1 pb-3 text-xs text-slate-600 dark:text-slate-300 whitespace-nowrap">
-                                                <input
-                                                    type="checkbox"
-                                                    checked={row.is_base}
-                                                    onChange={(e) =>
-                                                        updateUnitRow(
-                                                            index,
-                                                            "is_base",
-                                                            e.target.checked
-                                                        )
-                                                    }
-                                                    className="rounded border-slate-300 text-primary-600 focus:ring-primary-500"
-                                                />
-                                                Dasar
-                                            </label>
-                                            <button
-                                                type="button"
-                                                onClick={() =>
-                                                    removeUnitRow(index)
-                                                }
-                                                className="p-2.5 rounded-xl text-danger-600 hover:bg-danger-50 dark:hover:bg-danger-950/30 transition-colors"
-                                            >
-                                                <IconTrash size={18} />
-                                            </button>
-                                        </div>
-                                    ))}
-                                </div>
-                            </div>
+                            <ProductUnitRows
+                                data={data}
+                                setData={setData}
+                                errors={errors}
+                                units={units}
+                            />
                         )}
 
                         {/* Composite Components */}
                         {data.is_composite && (
-                            <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 p-5">
-                                <div className="flex items-center justify-between mb-4">
-                                    <h3 className="text-sm font-semibold text-slate-700 dark:text-slate-300 flex items-center gap-2">
-                                        <IconPackages size={18} />
-                                        Komponen Paket
-                                    </h3>
-                                    <button
-                                        type="button"
-                                        onClick={addComponent}
-                                        className="text-sm text-primary-600 hover:text-primary-700 font-medium"
-                                    >
-                                        + Tambah Komponen
-                                    </button>
-                                </div>
-                                {errors.components && (
-                                    <p className="text-sm text-danger-600 mb-2">
-                                        {errors.components}
-                                    </p>
-                                )}
-                                {data.components.length === 0 && (
-                                    <p className="text-sm text-slate-500">
-                                        Belum ada komponen. Stok dan harga jual
-                                        dihitung otomatis dari komponen.
-                                    </p>
-                                )}
-                                <div className="space-y-3">
-                                    {data.components.map((component, index) => (
-                                        <div
-                                            key={index}
-                                            className="flex items-end gap-3"
-                                        >
-                                            <div className="flex-1">
-                                                <InputSelect
-                                                    data={availableProducts(
-                                                        index
-                                                    )}
-                                                    selected={
-                                                        products.find(
-                                                            (p) =>
-                                                                p.id ===
-                                                                Number(
-                                                                    component.component_product_id
-                                                                )
-                                                        ) || null
-                                                    }
-                                                    setSelected={(
-                                                        value
-                                                    ) =>
-                                                        updateComponent(
-                                                            index,
-                                                            "component_product_id",
-                                                            value?.id ?? ""
-                                                        )
-                                                    }
-                                                    placeholder="Pilih produk komponen"
-                                                    errors={
-                                                        errors[
-                                                            `components.${index}.component_product_id`
-                                                        ]
-                                                    }
-                                                    searchable={true}
-                                                    displayKey="title"
-                                                />
-                                            </div>
-                                            <div className="w-28">
-                                                <Input
-                                                    type="number"
-                                                    min="1"
-                                                    value={component.qty}
-                                                    onChange={(e) =>
-                                                        updateComponent(
-                                                            index,
-                                                            "qty",
-                                                            e.target.value
-                                                        )
-                                                    }
-                                                    errors={
-                                                        errors[
-                                                            `components.${index}.qty`
-                                                        ]
-                                                    }
-                                                    placeholder="Qty"
-                                                />
-                                            </div>
-                                            <button
-                                                type="button"
-                                                onClick={() =>
-                                                    removeComponent(index)
-                                                }
-                                                className="p-2.5 rounded-xl text-danger-600 hover:bg-danger-50 dark:hover:bg-danger-950/30 transition-colors"
-                                            >
-                                                <IconTrash size={18} />
-                                            </button>
-                                        </div>
-                                    ))}
-                                </div>
-                                {data.is_composite && estimatedSellPrice > 0 && (
-                                    <p className="mt-4 text-sm text-slate-500 dark:text-slate-400">
-                                        Estimasi harga jual dari komponen:{" "}
-                                        <span className="font-semibold text-slate-700 dark:text-slate-200">
-                                            Rp{" "}
-                                            {estimatedSellPrice.toLocaleString(
-                                                "id-ID"
-                                            )}
-                                        </span>
-                                    </p>
-                                )}
-                            </div>
+                            <ProductCompositeRows
+                                data={data}
+                                setData={setData}
+                                errors={errors}
+                                products={products}
+                                className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 p-5"
+                            />
                         )}
 
                         {/* Submit */}

@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Apps;
 
+// RF-003: Ekstraksi resolver wilayah.
+
 use App\Http\Controllers\Controller;
 use App\Models\Customer;
 use App\Models\CustomerSegment;
@@ -9,6 +11,7 @@ use App\Models\CustomerVoucher;
 use App\Models\Transaction;
 use App\Services\CustomerSegmentationService;
 use App\Services\LoyaltyService;
+use App\Services\RegionPayloadResolver;
 use Carbon\Carbon;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -24,7 +27,8 @@ class CustomerController extends Controller
 {
     public function __construct(
         private readonly LoyaltyService $loyaltyService,
-        private readonly CustomerSegmentationService $segmentationService
+        private readonly CustomerSegmentationService $segmentationService,
+        private readonly RegionPayloadResolver $regionPayloadResolver
     ) {}
 
     /**
@@ -87,10 +91,9 @@ class CustomerController extends Controller
             'village_id' => 'required|string',
         ]);
 
-        $province = Province::where('code', $request->province_id)->first();
-        $regency = City::where('code', $request->regency_id)->first();
-        $district = District::where('code', $request->district_id)->first();
-        $village = Village::where('code', $request->village_id)->first();
+        $regionPayload = $this->regionPayloadResolver->resolve($request->only([
+            'province_id', 'regency_id', 'district_id', 'village_id',
+        ]));
 
         // create customer
         Customer::create([
@@ -98,14 +101,7 @@ class CustomerController extends Controller
             'name' => $request->name,
             'no_telp' => $request->no_telp,
             'address' => $request->address,
-            'province_id' => $request->province_id,
-            'province_name' => $province?->name,
-            'regency_id' => $request->regency_id,
-            'regency_name' => $regency?->name,
-            'district_id' => $request->district_id,
-            'district_name' => $district?->name,
-            'village_id' => $request->village_id,
-            'village_name' => $village?->name,
+            ...$regionPayload,
         ]);
 
         // redirect
@@ -132,29 +128,17 @@ class CustomerController extends Controller
         ]);
 
         try {
-            $provinceCode = $validated['province_id'] ?? null;
-            $regencyCode = $validated['regency_id'] ?? null;
-            $districtCode = $validated['district_id'] ?? null;
-            $villageCode = $validated['village_id'] ?? null;
-
-            $province = $provinceCode ? Province::where('code', $provinceCode)->first() : null;
-            $regency = $regencyCode ? City::where('code', $regencyCode)->first() : null;
-            $district = $districtCode ? District::where('code', $districtCode)->first() : null;
-            $village = $villageCode ? Village::where('code', $villageCode)->first() : null;
+            $regionPayload = $this->regionPayloadResolver->resolve(
+                $validated,
+                skipEmptyCodes: true,
+            );
 
             $customer = Customer::create([
                 ...$this->resolveLoyaltyPayload($request),
                 'name' => $validated['name'],
                 'no_telp' => $validated['no_telp'],
                 'address' => $validated['address'],
-                'province_id' => $provinceCode,
-                'province_name' => $province?->name,
-                'regency_id' => $regencyCode,
-                'regency_name' => $regency?->name,
-                'district_id' => $districtCode,
-                'district_name' => $district?->name,
-                'village_id' => $villageCode,
-                'village_name' => $village?->name,
+                ...$regionPayload,
             ]);
 
             return response()->json([
@@ -232,10 +216,9 @@ class CustomerController extends Controller
             'village_id' => 'required|string',
         ]);
 
-        $province = Province::where('code', $request->province_id)->first();
-        $regency = City::where('code', $request->regency_id)->first();
-        $district = District::where('code', $request->district_id)->first();
-        $village = Village::where('code', $request->village_id)->first();
+        $regionPayload = $this->regionPayloadResolver->resolve($request->only([
+            'province_id', 'regency_id', 'district_id', 'village_id',
+        ]));
 
         // update customer
         $customer->update([
@@ -243,14 +226,7 @@ class CustomerController extends Controller
             'name' => $request->name,
             'no_telp' => $request->no_telp,
             'address' => $request->address,
-            'province_id' => $request->province_id,
-            'province_name' => $province?->name,
-            'regency_id' => $request->regency_id,
-            'regency_name' => $regency?->name,
-            'district_id' => $request->district_id,
-            'district_name' => $district?->name,
-            'village_id' => $request->village_id,
-            'village_name' => $village?->name,
+            ...$regionPayload,
         ]);
 
         // redirect

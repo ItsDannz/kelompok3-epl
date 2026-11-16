@@ -1,3 +1,5 @@
+// RF-032: Ekstraksi formatter Rupiah bersama.
+import { formatRupiah as formatPrice } from "@/Utils/formatRupiah";
 import React, { useEffect, useMemo, useState } from "react";
 import { Head, Link, router, usePage } from "@inertiajs/react";
 import {
@@ -58,12 +60,6 @@ export default function Print({ transaction }) {
         return () => clearInterval(timer);
     }, [showQris, transaction?.invoice, liveStatus]);
 
-    const formatPrice = (price = 0) =>
-        Number(price || 0).toLocaleString("id-ID", {
-            style: "currency",
-            currency: "IDR",
-            minimumFractionDigits: 0,
-        });
 
     const formatDateTime = (value) =>
         new Date(value).toLocaleString("id-ID", {

@@ -1,3 +1,5 @@
+// RF-032: Ekstraksi formatter Rupiah bersama.
+import { formatRupiah as formatPrice } from "@/Utils/formatRupiah";
 import React, {
     useEffect,
     useMemo,
@@ -40,12 +42,6 @@ import {
     IconWallet,
 } from "@tabler/icons-react";
 
-const formatPrice = (value = 0) =>
-    Number(value || 0).toLocaleString("id-ID", {
-        style: "currency",
-        currency: "IDR",
-        minimumFractionDigits: 0,
-    });
 
 const roundUpToNearest = (value, step) =>
     Math.ceil(value / step) * step;

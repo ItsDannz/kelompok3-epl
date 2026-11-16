@@ -2,6 +2,9 @@
 
 namespace App\Models;
 
+// RF-011: Ekstraksi penentuan bucket aging.
+
+use App\Support\DebtAgingBucket;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -59,26 +62,7 @@ class Receivable extends Model
 
     public function getAgingBucketAttribute(): string
     {
-        if ($this->status === 'paid') {
-            return 'paid';
-        }
-
-        if (! $this->due_date) {
-            return 'no_due_date';
-        }
-
-        if (! now()->gt($this->due_date)) {
-            return 'current';
-        }
-
-        $daysOverdue = now()->diffInDays($this->due_date, true);
-
-        return match (true) {
-            $daysOverdue <= 30 => '0-30',
-            $daysOverdue <= 60 => '31-60',
-            $daysOverdue <= 90 => '61-90',
-            default => '90+',
-        };
+        return DebtAgingBucket::resolve($this->status, $this->due_date);
     }
 
     public function scopeOverdue($query)

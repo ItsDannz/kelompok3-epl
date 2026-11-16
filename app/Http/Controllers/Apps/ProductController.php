@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Apps;
 
+// RF-001: Satukan alur update produk.
+
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Product;
@@ -212,59 +214,17 @@ class ProductController extends Controller
             ]);
         }
 
-        // check image update
-        if ($request->file('image')) {
+        $attributes = $this->productUpdateAttributes($request);
 
-            // remove old image
+        if ($request->file('image')) {
             Storage::disk('local')->delete('public/products/'.basename($product->image));
 
-            // upload new image
             $image = $request->file('image');
             $image->storeAs('public/products', $image->hashName());
-
-            // update product with new image
-            $product->update([
-                'image' => $image->hashName(),
-                'barcode' => $request->barcode,
-                'sku' => $request->sku,
-                'title' => $request->title,
-                'description' => $request->description,
-                'category_id' => $request->category_id,
-                'buy_price' => $request->buy_price,
-                'sell_price' => $request->sell_price,
-                'min_stock' => $request->min_stock ?? 0,
-                'max_stock' => $request->max_stock ?? 0,
-                'tax_type' => $request->input('tax_type', 'exclusive'),
-                'tax_rate' => $request->input('tax_rate', 11.00),
-                'is_composite' => $request->boolean('is_composite'),
-            ]);
-
-            if ($request->boolean('is_composite')) {
-                $this->syncComponents($product, $request->input('components'));
-            } else {
-                $this->syncUnits($product, $request->input('units'));
-            }
-
-            $this->logProductUpdate($product, $before);
-
-            return to_route('products.index');
+            $attributes = ['image' => $image->hashName(), ...$attributes];
         }
 
-        // update product without image
-        $product->update([
-            'barcode' => $request->barcode,
-            'sku' => $request->sku,
-            'title' => $request->title,
-            'description' => $request->description,
-            'category_id' => $request->category_id,
-            'buy_price' => $request->buy_price,
-            'sell_price' => $request->sell_price,
-            'min_stock' => $request->min_stock ?? 0,
-            'max_stock' => $request->max_stock ?? 0,
-            'tax_type' => $request->input('tax_type', 'exclusive'),
-            'tax_rate' => $request->input('tax_rate', 11.00),
-            'is_composite' => $request->boolean('is_composite'),
-        ]);
+        $product->update($attributes);
 
         if ($request->boolean('is_composite')) {
             $this->syncComponents($product, $request->input('components'));
@@ -274,7 +234,6 @@ class ProductController extends Controller
 
         $this->logProductUpdate($product, $before);
 
-        // redirect
         return to_route('products.index');
     }
 
@@ -442,5 +401,23 @@ class ProductController extends Controller
             'stock',
             'category_id',
         ]);
+    }
+
+    private function productUpdateAttributes(Request $request): array
+    {
+        return [
+            'barcode' => $request->barcode,
+            'sku' => $request->sku,
+            'title' => $request->title,
+            'description' => $request->description,
+            'category_id' => $request->category_id,
+            'buy_price' => $request->buy_price,
+            'sell_price' => $request->sell_price,
+            'min_stock' => $request->min_stock ?? 0,
+            'max_stock' => $request->max_stock ?? 0,
+            'tax_type' => $request->input('tax_type', 'exclusive'),
+            'tax_rate' => $request->input('tax_rate', 11.00),
+            'is_composite' => $request->boolean('is_composite'),
+        ];
     }
 }

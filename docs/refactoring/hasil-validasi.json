@@ -1,0 +1,110 @@
+{
+  "baseline_commit": "81a91b8fc0ef479be9e0c751c0d11370d89dd8a2",
+  "branch": "codex/refactor-8-targets",
+  "commit_after": "Commit refactoring yang memuat file ini; lihat git log -1 -- docs/refactoring/hasil-validasi.json.",
+  "phpunit_before": {
+    "tests": 581,
+    "assertions": 2452,
+    "errors": 0,
+    "failures": 0,
+    "skipped": 1,
+    "seconds": 50.552793
+  },
+  "characterization_before": {
+    "tests": 20,
+    "assertions": 195,
+    "errors": 0,
+    "failures": 0,
+    "skipped": 0,
+    "seconds": 2.544337
+  },
+  "phpunit_after": {
+    "tests": 601,
+    "assertions": 2647,
+    "errors": 0,
+    "failures": 0,
+    "skipped": 1,
+    "seconds": 61.803979
+  },
+  "frontend_unit_tests": {
+    "tests": 5,
+    "passed": 5,
+    "failed": 0,
+    "command": "node tests/Frontend/refactoring.test.cjs",
+    "limitation": "Input/InputSelect di-stub; bukan pengujian submit UI."
+  },
+  "build": "pass",
+  "fixture_consistency_checks": 84,
+  "skipped_test": "V1DineInApiTest::test_dine_table_qr_returns_png; ext-imagick tidak tersedia, sama sebelum/sesudah.",
+  "ui_screenshots": 12,
+  "viewport": "1702 x 1007",
+  "ui_submit_tests": "Tidak dijalankan pada DB lokal; pengujian HTTP berjalan dalam SQLite in-memory.",
+  "mysql_concurrency": "Belum diuji dengan transaksi bersamaan; lockForUpdate dan batas transaksi dipertahankan.",
+  "package_lock_existing_change_preserved": true,
+  "groups": {
+    "RF-001": {
+      "name": "Satukan alur update produk",
+      "files": {
+        "app/Http/Controllers/Apps/ProductController.php": "e2e77a92cdf26bd61e19eae749bbc4a550cb28fb3e82bf6dcebde879f88c54cd"
+      }
+    },
+    "RF-002": {
+      "name": "Ekstraksi komponen form produk bersama",
+      "files": {
+        "resources/js/Components/Dashboard/Products/ProductFormFields.jsx": "220974c1492ecbfa966bc2a7dac0e3d8387ef56667f2ae47516f295f26c56bb3",
+        "resources/js/Components/Dashboard/Products/ProductUnitRows.jsx": "8474036557f923e7ac952123be2aeaaab3add5d7b7683cb1000dd6015f7f8d43",
+        "resources/js/Components/Dashboard/Products/ProductCompositeRows.jsx": "9f2d3e9031dfb0e4c87f9d8cd30ea8b949ca8e812f3bfd175cefd95c64b1575e",
+        "resources/js/Pages/Dashboard/Products/Create.jsx": "4fb15df0c6a8d30831d5f3bb276a1b4c27e84f06e015184095b9baceff1f8576",
+        "resources/js/Pages/Dashboard/Products/Edit.jsx": "d55b14e17102d1275728eed09e72ef63aeaf3fbdd00fa4b571ae065fc8b5c210"
+      }
+    },
+    "RF-003": {
+      "name": "Ekstraksi resolver wilayah",
+      "files": {
+        "app/Services/RegionPayloadResolver.php": "5c4c9d983079bd75227dd19d1fb40446f839fc2bc2ba18f53064d373a1a1b12d",
+        "app/Http/Controllers/Apps/CustomerController.php": "25ce4585ccd1ebaef4a5bab3b3a8413884028bab1f7e58e810b959d9cb620583",
+        "app/Http/Controllers/Apps/MemberController.php": "869b1344d0c6019665f9e19f408006a412f2a23050385dbc46fa33b354ebbd5d"
+      }
+    },
+    "RF-007": {
+      "name": "Ekstraksi pencatatan pembayaran piutang",
+      "files": {
+        "app/Services/ReceivablePaymentRecorder.php": "6ccf0cdf1b6ea024d908675ad5372ec3cbe89ae450abede7be54617b96c94487",
+        "app/Http/Controllers/Apps/ReceivableController.php": "5f1fb4dbc655cab0651d60d384e09bdd0939c2714ad0e23d92dda533c49bfe9c",
+        "app/Http/Controllers/Api/V1/ReceivableController.php": "a9d462403b700cde6747c6b9818113203389c4c61b3ad346f515ee5633699285"
+      }
+    },
+    "RF-008": {
+      "name": "Ekstraksi pencatatan pembayaran hutang",
+      "files": {
+        "app/Services/PayablePaymentRecorder.php": "81a42f6e7a153254bcba4bdf0d9a870c57edac26df2f0e3a26195bf063b147ef",
+        "app/Http/Controllers/Apps/PayableController.php": "349cbbe4d0e2a8efd78cb324c3138bffc9066eea14ac188a9969f67ac78e023d",
+        "app/Http/Controllers/Api/V1/PayableController.php": "6b58157733327064fddbbdee930a97a839570323dbc1dc8c175ae574c636a3a8"
+      }
+    },
+    "RF-011": {
+      "name": "Ekstraksi penentuan bucket aging",
+      "files": {
+        "app/Support/DebtAgingBucket.php": "62a3c7b01988c865b89e3490e0de30356683caecda0d08871b1cedc2e0fd45fc",
+        "app/Models/Receivable.php": "592722c361303dd72ab452314bb904b7b108d109890f15a65074f48335d5ab3b",
+        "app/Models/Payable.php": "d2f6f4b58fb3465d4b6b6e0224fb1dfc8083a6618a608f7ae0bc403f0c34b891"
+      }
+    },
+    "RF-015": {
+      "name": "Satukan aturan validasi retur",
+      "files": {
+        "app/Http/Requests/Rules/SalesReturnRules.php": "8ccb59f436c70a9ea13b898e264bfad1eaec629837124fed2f37e064a6e3cc87",
+        "app/Http/Requests/StoreSalesReturnRequest.php": "a8e14e16bb297ce434f33d18d5d63683af9945f2e0cec0c8efcb8fb9d1d84be5",
+        "app/Http/Requests/UpdateSalesReturnRequest.php": "75cfcbed067e20dca494bfd1ad5cf6e9ada68d8ed27dcfcedde6f79edc6dd16b"
+      }
+    },
+    "RF-032": {
+      "name": "Ekstraksi formatter Rupiah bersama",
+      "files": {
+        "resources/js/Utils/formatRupiah.js": "a1fb08f5bb95bd43f9fb6fb1b340026a89a7edea9a0817eeae3fc1c9dabbf33f",
+        "resources/js/Pages/Dashboard/Transactions/Index.jsx": "711a6530d17bf0c09c1756ba3835d5506b68d9463681c0b7448ff7889d39b89f",
+        "resources/js/Pages/Dashboard/Transactions/Print.jsx": "aac0157afab41d91a7ca067ff831e7354b32d46144d9a2c2ec3dd0aac607e2a5"
+      }
+    }
+  }
+}
